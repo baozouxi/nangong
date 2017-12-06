@@ -34,12 +34,19 @@
 	type:"post",
 	cache:false,
 	url:url,
-    datatype: "json",
+    dataType: 'json',
 	data:data,
-	error:function(){alert("\u670d\u52a1\u5668\u9519\u8bef\uff0c\u64cd\u4f5c\u5931\u8d25");},
+	error:function(xhr){
+
+		if ( xhr.status == 422) {
+			alert('账号密码错误');
+			return;
+		}
+
+		alert("\u670d\u52a1\u5668\u9519\u8bef\uff0c\u64cd\u4f5c\u5931\u8d25");
+	},
 	success:function(dataJson)
 	{
-		alert(dataJson);
 		switch(dataJson.status)
 		{
 			case "0":

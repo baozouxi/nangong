@@ -45,9 +45,16 @@ class LoginController extends Controller
         return 'username';
     }
 
-    public function authenticated()
+
+    public function authenticated(\Illuminate\Http\Request $request, $user)
     {
-        return json_encode(['status' => '1']);
+       return json_encode(['status'=>'1']);
+    }
+
+
+    public function messages()
+    {
+        return ['username' => '用户名不存在'];
     }
 
 
