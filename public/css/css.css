@@ -2,7 +2,7 @@
 body{font-size:12px;font-family: "Microsoft YaHei" !important;color:#000000;background:#ebebed;margin:0 auto;padding:0px;}
 *{margin:0;padding:0;font-family: "Microsoft YaHei"}
 input[type="text"],input[type="password"]{outline:none;}
-input[type="button"], input[type="submit"], input[type="reset"] {  -webkit-appearance: none;  }  
+input[type="button"], input[type="submit"], input[type="reset"] {  -webkit-appearance: none;  }
 
 a{text-decoration:none;color:#303132;outline:none;}
 a:active{star:expression(this.onFocus=this.blur());}
@@ -152,7 +152,7 @@ input{ outline:none;}
 .youshi li.line {width:1px;height:76px;display:inline-block;background:#ebebeb;float:left;}
 .youshi li span {width:180px;float:left;font-size:20px;color:#303132;line-height:28px;margin-top:16px;}
 .youshi li p {width:190px;float:left;font-size:14px;color:#303132;line-height:21px;}
-.888888 {width:auto;height:auto;float:left;}
+.a888888 {width:auto;height:auto;float:left;}
 
 .banner_cz{width: 1000px; margin:20px auto 0; min-width: 1000px;overflow: hidden;height: 250px;background: url(../images/banner_cz.jpg) no-repeat center center;}
 .banner_cz a.czzx{background:rgb(3,92,175) url(../images/gamejt.png) no-repeat 186px center ;display: block;width: 253px;height: 80px;margin-top: 85px; margin-left: 30px;}

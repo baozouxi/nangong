@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\Authenticated;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Request;
 
 class LoginController extends Controller
@@ -39,7 +41,6 @@ class LoginController extends Controller
     }
 
 
-
     public function username()
     {
         return 'username';
@@ -48,7 +49,9 @@ class LoginController extends Controller
 
     public function authenticated(\Illuminate\Http\Request $request, $user)
     {
-       return json_encode(['status'=>'1']);
+
+        Event::fire(new Authenticated($user));
+        return json_encode(['status' => '1', 'info' => '登录成功']);
     }
 
 

@@ -1,0 +1,16 @@
+﻿.loading { height:30px; line-height:30px; text-align:center; }
+.loading span { background:url(../images/loading.gif) no-repeat left center; padding-left:23px; display:inline-block; }
+
+/*分页*/
+.pagination {height:34px; line-height:34px; width:100%; text-align:center; color: #ff0000; padding:0;margin: 20px auto 28px;overflow: hidden;float: left;}
+.pagination span { display:inline-block; width:30px; height:30px; line-height:30px; margin:0 2px; background-color:#014b93; color:#fff; border:solid 1px #014b93; font-size:12px; border-radius:50%; }
+.pagination a{ display:inline-block; width:30px; height:30px; line-height:30px; color:#444444; border:1px solid #ccc; margin:0 2px; text-decoration:none; background-color:#ddd;  font-size:12px; border-radius:50%;  }
+.pagination a:hover {color:#fff; background-color:#014b93; border:solid 1px #014b93; }
+.pagination a.first { background:url(../images/first.png) no-repeat center center #ddd; }
+.pagination a.first:hover { background:url(../images/first_on.png) no-repeat center center #014b93; }
+.pagination a.prev { background:url(../images/prev.png) no-repeat center center #ddd; }
+.pagination a.prev:hover { background:url(../images/prev_on.png) no-repeat center center #014b93; }
+.pagination a.next { background:url(../images/next.png) no-repeat center center #ddd; }
+.pagination a.next:hover { background:url(../images/next_on.png) no-repeat center center #014b93; }
+.pagination a.last { background:url(../images/end.png) no-repeat center center #ddd; }
+.pagination a.last:hover { background:url(../images/end_on.png) no-repeat center center #014b93; }
