@@ -33,7 +33,7 @@
         <div class="logo"><a href="/"><img src="{{ asset('picture/logo.png') }}" alt=""></a></div>
         <div class="gg">刘晓明在872355期红包接龙中夺得运气王!</div>
         @if(Auth::check())
-            <div class="user" id="userpanel"><span>欢迎您，{{ Auth::user()->username }}</span><span>账户余额：<i>￥0.50</i></span><a href="{{ route('account.recharge') }}">充值</a><a href="/user/profile/themoney.html">提现</a><a href="/user/message/index?v1">消息中心 <i>4</i></a><a class="logout" href="#">退出</a></div>
+            <div class="user" id="userpanel"><span>欢迎您，{{ Auth::user()->username }}</span><span>账户余额：<i>￥0.50</i></span><a href="{{ route('account.recharge') }}">充值</a><a href="{{ route('account.withdraw') }}">提现</a><a href="/user/message/index?v1">消息中心 <i>4</i></a><a class="logout" href="#">退出</a></div>
         @else
             <div class="user" id="userpanel"> <span>欢迎您，新用户！请先 </span><a href="{{ route('login') }}">登录</a><a href="{{ route('register') }}">注册</a> </div>
         @endif

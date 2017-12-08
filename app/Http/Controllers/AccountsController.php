@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 class AccountsController extends Controller
 {
 
+    //个人中心
     public function user()
     {
         $user_id = \Auth::user()->id;
@@ -24,26 +25,39 @@ class AccountsController extends Controller
         return view('account.user', compact('lastLogin', 'capital'));
     }
 
+    //充值中心
     public function recharge()
     {
         return view('account.recharge');
     }
 
+    //提现
+    public function withdraw()
+    {
+        return view('account.withdraw');
+    }
 
+
+    //财务记录
     public function capitalLog()
     {
         return view('account.capital-log');
     }
 
-
+    //代理中心
     public function agency()
     {
         return view('account.agency');
     }
 
+
+    //安全中心
     public function safe()
     {
         return view('account.safe');
     }
+
+
+
 
 }

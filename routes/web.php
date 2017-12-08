@@ -21,17 +21,19 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::group(['prefix' => '/account'], function () {
-        Route::get('/user', 'AccountsController@user')->name('account.user');
-        Route::get('/recharge', 'AccountsController@recharge')->name('account.recharge');
-        Route::get('/capital-log', 'AccountsController@capitalLog')->name('account.capital_log');
-        Route::get('/agency', 'AccountsController@agency')->name('account.agency');
-        Route::get('/safe', 'AccountsController@safe')->name('account.safe');
+        Route::get('/user', 'AccountsController@user')->name('account.user'); //个人中心
+        Route::get('/recharge', 'AccountsController@recharge')->name('account.recharge'); //充值
+        Route::get('/withdraw', 'AccountsController@withdraw')->name('account.withdraw'); //提现
+        Route::get('/capital-log', 'AccountsController@capitalLog')->name('account.capital_log'); //财务记录
+        Route::get('/agency', 'AccountsController@agency')->name('account.agency'); //代理中心
+        Route::get('/safe', 'AccountsController@safe')->name('account.safe'); // 安全中心
     });
 
 
     Route::group(['prefix' => '/game'], function () {
         Route::get('/last-open-codes', 'GamesController@getLastCodes')->name('lastOpenCodes');
         Route::get('/last-open-codes-list', 'GamesController@getLastCodeList')->name('lastOpenCodeList');
+        Route::get('/last10', 'GamesController@getLast10')->name('last10');
         Route::get('/open-time', 'GamesController@getOpenTime')->name('openTime'); //开奖时间
         Route::get('/pc28', 'GamesController@pc28')->name('pc28');
     });

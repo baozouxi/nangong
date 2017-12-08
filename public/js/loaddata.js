@@ -597,7 +597,7 @@ function prevgetopencode(){
 function get_expect_list_10(){
     $.ajax({
         type: 'get',
-        url: "/game/last-open-codes-list?"+Math.random(),
+        url: "/game/last10?"+Math.random(),
         datatype: "json",
         ache:false,
         async: false,

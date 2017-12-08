@@ -63,7 +63,7 @@ function game2(){
     //document.getElementById("idmoney").innerHTML="";
     document.getElementById("hongbao").style.display = "none";
     document.getElementById("hongbao_bg").style.display = "none";
-    location.href="game/pc28?time=2.5";
+    location.href="/game/pc28?time=2.5";
 }
 
 function cakenogame(){

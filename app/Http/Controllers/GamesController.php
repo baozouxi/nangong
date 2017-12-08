@@ -21,11 +21,9 @@ class GamesController extends Controller
 
     public function getLastCodes()
     {
-        $arr = json_decode('{"full_expect":"860267","open_code":"01,02,16,17,18,20,22,25,27,31,35,36,37,39,52,57,73,74,75,80+02","open_time":"2017-12-07 16:55:00","open_time_stamp":1512636900,"num1":"4","num2":"6","num3":"2","str_num":"4,6,2","sum":12,"num4":12,"ptype1":"\u5c0f\u53cc","ptype2":"\u5c0f","ptype3":"\u53cc","ptype5":"","add_time":1512636911,"expect":"860267","sign":"true","referer":"","state":"fail"}', true);
-
+        $arr = json_decode('{"full_expect":"860369","open_code":"01,02,16,17,18,20,22,25,27,31,35,36,37,39,52,57,73,74,75,80+02","open_time":"2017-12-07 16:55:00","open_time_stamp":1512636900,"num1":"4","num2":"6","num3":"2","str_num":"4,6,2","sum":12,"num4":12,"ptype1":"\u5c0f\u53cc","ptype2":"\u5c0f","ptype3":"\u53cc","ptype5":"","add_time":1512636911,"expect":"860369","sign":"true","referer":"","state":"fail"}', true);
 
         return $arr;
-
 
     }
 
@@ -33,10 +31,10 @@ class GamesController extends Controller
     public function getOpenTime()
     {
         $res_arr = [
-            'currExpect' => "97363",
-            'currFullExpect' => "860273",
-            'lastExpect' => "97362",
-            'lastFullExpect' => "860273",
+            'currExpect' => "97465",
+            'currFullExpect' => "860370",
+            'lastExpect' => "97464",
+            'lastFullExpect' => "860369",
             'referer' => "",
             'remainTime' => 159,
             'sign' => "true",
@@ -57,6 +55,9 @@ class GamesController extends Controller
 
     public function getLast10()
     {
+        $str = '[{"num1":"8","num2":"4","num3":"6","num4":"18","expect":"860368","ptype1":"\u5927\u53cc","ptype2":"\u5927","ptype3":"\u53cc","ptype5":""},{"num1":"0","num2":"2","num3":"8","num4":"10","expect":"860367","ptype1":"\u5c0f\u53cc","ptype2":"\u5c0f","ptype3":"\u53cc","ptype5":""},{"num1":"2","num2":"7","num3":"7","num4":"16","expect":"860366","ptype1":"\u5927\u53cc","ptype2":"\u5927","ptype3":"\u53cc","ptype5":"\u5bf9\u5b50"},{"num1":"7","num2":"3","num3":"6","num4":"16","expect":"860365","ptype1":"\u5927\u53cc","ptype2":"\u5927","ptype3":"\u53cc","ptype5":""},{"num1":"5","num2":"2","num3":"6","num4":"13","expect":"860364","ptype1":"\u5c0f\u5355","ptype2":"\u5c0f","ptype3":"\u5355","ptype5":""},{"num1":"3","num2":"3","num3":"1","num4":"7","expect":"860363","ptype1":"\u5c0f\u5355","ptype2":"\u5c0f","ptype3":"\u5355","ptype5":"\u5bf9\u5b50"},{"num1":"5","num2":"9","num3":"2","num4":"16","expect":"860362","ptype1":"\u5927\u53cc","ptype2":"\u5927","ptype3":"\u53cc","ptype5":""},{"num1":"9","num2":"3","num3":"1","num4":"13","expect":"860361","ptype1":"\u5c0f\u5355","ptype2":"\u5c0f","ptype3":"\u5355","ptype5":""},{"num1":"1","num2":"3","num3":"7","num4":"11","expect":"860360","ptype1":"\u5c0f\u5355","ptype2":"\u5c0f","ptype3":"\u5355","ptype5":""},{"num1":"6","num2":"9","num3":"6","num4":"21","expect":"860359","ptype1":"\u5927\u5355","ptype2":"\u5927","ptype3":"\u5355","ptype5":"\u5bf9\u5b50"}]';
+        $arr = json_decode($str);
+        return json_encode($arr);
 
     }
 
