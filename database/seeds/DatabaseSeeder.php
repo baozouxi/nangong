@@ -12,6 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(UsersSeeder::class);
+        $games = [['name' => \App\Game\Pc28::NAME]];
+
+        array_map(function ($game) {
+            \App\Game::create($game);
+        }, $games);
+
+
+        $this->call(UsersSeeder::class);
+
     }
 }

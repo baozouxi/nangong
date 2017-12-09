@@ -11,13 +11,29 @@ namespace App\Game;
 
 interface GameInterface
 {
+
+    //游戏名
+
+
     /**
      * 开奖算法
      * @param $code 开奖结果
-     * @return mixed
+     * @return float 奖励倍数
      *
      */
     public function lottery($code);
 
+
+    /**
+     * 获取开奖结果
+     * @return string 开奖网址
+     */
+    public function getCodes();
+
+    /**
+     * 返回游戏名
+     * @return string
+     */
+    public function name();
 
 }

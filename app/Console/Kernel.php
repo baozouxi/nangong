@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\User;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Faker\Generator as Faker;
 
 class Kernel extends ConsoleKernel
 {
@@ -19,13 +21,16 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('inspire')
-                  ->everyMinute();
+//         $schedule->command('inspire')
+//                  ->everyMinute();
+        $schedule->call(function () {
+            factory('App\User', 1)->create();
+        })->everyMinute();
     }
 
     /**
@@ -35,7 +40,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

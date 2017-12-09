@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -19,6 +18,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $request = \Requests::request('http://cp.360.cn/');
+        dd(mb_convert_encoding($request->body, 'utf-8', 'gbk'));
+
         return view('home');
     }
 }
