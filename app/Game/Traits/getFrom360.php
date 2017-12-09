@@ -12,14 +12,19 @@ namespace App\Game\Traits;
 trait getFrom360
 {
 
+
     /**
-     * 解析360彩票的字符串
+     *
      * @param $body
+     * @return array 解析结果
      */
     protected function parse($body)
     {
-        $str = substr(strpos(''), 500);
+        $codes = [];
 
+        $str = substr($body, strpos($body, '<dl class="kl8-lastestnum" bcnt="103" ubcnt="76">'), 500);
+
+        return $codes;
     }
 
 }

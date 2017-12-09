@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Authenticated' => [
             'App\Listeners\AuthenticatedListener', //监听登录成功
         ],
+        'App\Events\GotCodes' => [
+            'App\Listeners\GotCodesListener', //监听获取开奖结果成功
+        ],
     ];
 
     /**

@@ -66,13 +66,14 @@ class Game
     {
         $codes = [];
         foreach ($this->games as $game) {
-            $codes[$game->name()] = $game->getCodes();
+            $current_codes = $game->getCodes();
+            if (!empty($current_codes)) {
+                $codes[$game->name()] = $current_codes;
+            }
         }
 
         return $codes;
     }
-
-
 
 
 }
