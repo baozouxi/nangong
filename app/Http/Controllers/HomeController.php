@@ -20,8 +20,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $b='asdasd';
+        $as='asdasd';
 
-        app()->make(Game::class)->getCodes();
 
         return view('home');
     }

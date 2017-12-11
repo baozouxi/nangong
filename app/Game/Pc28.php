@@ -14,7 +14,7 @@ use App\Game\Traits\GetFrom360;
 
 class Pc28 implements GameInterface
 {
-    Const URL = 'http://www.bwlc.net/';
+    Const CODE_URL = 'http://www.bwlc.net/';
     Const NAME = '北京幸运28';
 
     use GetFrom360, CheckOpen;
@@ -22,13 +22,13 @@ class Pc28 implements GameInterface
 
     public function lottery($code)
     {
-        // TODO: Implement lottery() method.
+
     }
 
 
     public function getCodes()
     {
-        $request = \Requests::request(self::URL);
+        $request = \Requests::request(self::CODE_URL);
 
         $result = $this->parse($request->body);
 
@@ -43,6 +43,9 @@ class Pc28 implements GameInterface
     {
         return self::NAME;
     }
+
+
+
 
 
 

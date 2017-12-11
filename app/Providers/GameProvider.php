@@ -27,7 +27,8 @@ class GameProvider extends ServiceProvider
     {
         $this->app->singleton(Game::class, function () {
             $games = [];
-            array_push($games, new Pc28());
+            $pc28 = new Pc28();
+            $games[$pc28->name()] = $pc28;
             return new Game($games);
         });
     }

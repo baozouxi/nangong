@@ -65,6 +65,22 @@ class Game
     }
 
 
+    public function getGame($name)
+    {
+        if ($this->gameExist($name)) {
+            return $this->games[$name];
+        }
+
+        throw new GameException('游戏'.$name.'尚未添加');
+    }
+
+
+    public function gameExist($name)
+    {
+            return isset($this->games[$name]);
+    }
+
+
     /**
      * 获取所有游戏开奖结果
      * @return array 结果数组
@@ -89,7 +105,6 @@ class Game
         }
         return $codes;
     }
-
 
 
 }
