@@ -18,6 +18,8 @@ class CreateOpenCodesTable extends Migration
             $table->timestamps();
             $table->dateTime('open_time')->comment('开奖时间');
             $table->string('codes')->comment('开奖号码');
+            $table->integer('actionNo')->unsigned()->comment('期号');
+            $table->integer('game_id')->unsigned()->comment('游戏ID');
         });
     }
 

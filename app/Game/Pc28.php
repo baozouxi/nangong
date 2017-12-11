@@ -9,25 +9,32 @@
 namespace App\Game;
 
 
-use App\Game\Traits\getFrom360;
+use App\Game\Traits\CheckOpen;
+use App\Game\Traits\GetFrom360;
 
 class Pc28 implements GameInterface
 {
-    Const URL = 'http://cp.360.cn/kl8/?menu&r_a=JZFvaq';
+    Const URL = 'http://www.bwlc.net/';
     Const NAME = '北京幸运28';
 
-    use getFrom360;
+    use GetFrom360, CheckOpen;
+
 
     public function lottery($code)
     {
         // TODO: Implement lottery() method.
     }
 
+
     public function getCodes()
     {
         $request = \Requests::request(self::URL);
 
-        return $this->parse($request->body);
+        $result = $this->parse($request->body);
+
+        $this->checkOpen($result);
+
+        return $result;
 
     }
 
@@ -36,6 +43,7 @@ class Pc28 implements GameInterface
     {
         return self::NAME;
     }
+
 
 
 }

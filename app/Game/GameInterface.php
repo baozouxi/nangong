@@ -26,7 +26,7 @@ interface GameInterface
 
     /**
      * 获取开奖结果
-     * @return string 开奖网址
+     * @return array 开奖结果
      */
     public function getCodes();
 
@@ -35,5 +35,7 @@ interface GameInterface
      * @return string
      */
     public function name();
+
+
 
 }

@@ -8,6 +8,9 @@
 
 namespace App\Game;
 
+use App\Events\GotCodes;
+use Illuminate\Support\Facades\Log;
+
 
 /**
  * 策略模式
@@ -41,7 +44,7 @@ class Game
      */
     public function addGame(GameInterface $game)
     {
-        return array_push($game);
+        return array_push($this->games, $game);
     }
 
 
@@ -56,6 +59,11 @@ class Game
         return $games;
     }
 
+    public function getGames()
+    {
+        return $this->games;
+    }
+
 
     /**
      * 获取所有游戏开奖结果
@@ -64,16 +72,24 @@ class Game
      */
     public function getCodes()
     {
-        $codes = [];
-        foreach ($this->games as $game) {
-            $current_codes = $game->getCodes();
-            if (!empty($current_codes)) {
-                $codes[$game->name()] = $current_codes;
-            }
-        }
+        try {
+            $codes = [];
+            foreach ($this->games as $game) {
+                $current_codes = $game->getCodes();
+                $name = $game->name();
+                if (!empty($current_codes)) {
 
+                    event(new GotCodes($name, $current_codes)); //获取成功 触发事件
+
+                    $codes[$name] = $current_codes;
+                }
+            }
+        } catch (GameException $exception) {
+            Log::error($exception->getMessage());
+        }
         return $codes;
     }
+
 
 
 }

@@ -2,10 +2,13 @@
 
 namespace App\Console;
 
+use App\Game\Game;
+use App\Game\GameException;
 use App\User;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,11 +29,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//         $schedule->command('inspire')
-//                  ->everyMinute();
-        $schedule->call(function () {
-            factory('App\User', 1)->create();
-        })->everyMinute();
+
+        $schedule->command('caiji')->everyMinute();
+
     }
 
     /**

@@ -15,17 +15,17 @@ class GotCodes
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $name;
-    public $codes;
+    public $result;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($name, array $codes)
+    public function __construct($name, $result)
     {
         $this->name = $name;
-        $this->codes = $codes;
+        $this->result = $result;
     }
 
     /**

@@ -31,11 +31,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::group(['prefix' => '/game'], function () {
+
         Route::get('/last-open-codes', 'GamesController@getLastCodes')->name('lastOpenCodes');
-        Route::get('/last-open-codes-list', 'GamesController@getLastCodeList')->name('lastOpenCodeList');
+        Route::get('/{game}/last-open-codes-list', 'GamesController@getLastCodeList')->name('lastOpenCodeList');
         Route::get('/last10', 'GamesController@getLast10')->name('last10');
-        Route::get('/open-time', 'GamesController@getOpenTime')->name('openTime'); //开奖时间
+        Route::get('/{game}/open-time', 'GamesController@getOpenTime')->name('openTime'); //开奖时间
         Route::get('/pc28', 'GamesController@pc28')->name('pc28');
+        Route::get('/pc28/play', 'GamesController@pc28Play')->name('pc28Play');
     });
 
 });

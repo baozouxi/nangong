@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 
+
 @section('main')
     <div class="w1000">
         <div class="banner">
             <div class="fullSlide">
                 <div class="bd">
                     <ul>
-                        <li style="background:url({{ asset('images/banner1.jpg') }}) #fff center center no-repeat;"></li>
-                        <li style="background:url({{ asset('images/banner2.jpg') }}) #fff center center no-repeat;"></li>
-                        <li style="background:url({{ asset('images/banner0.jpg') }}) #fff center center no-repeat;"></li>
+                        <li style="background:url(themes/simplebootx/Public/images/banner1.jpg) #fff center center no-repeat;"></li>
+                        <li style="background:url(themes/simplebootx/Public/images/banner2.jpg) #fff center center no-repeat;"></li>
+                        <li style="background:url(themes/simplebootx/Public/images/banner0.jpg) #fff center center no-repeat;"></li>
                     </ul>
                 </div>
                 <div class="hd">
@@ -31,66 +32,70 @@
     <div class="main">
         <div class="w1000">
             <div class="gameone" id='gameone'>
-                <li><a href="javascript:;" onclick="hbgame();"><img src="picture/gameone3.jpg" alt=""><i></i>
+                <li><a href="javascript:;" onclick="hbgame();"><img src="themes/simplebootx/Public/images/gameone3.jpg"
+                                                                    alt=""><i></i>
                         <div class="zz"></div>
                     </a></li>
-                <li><a href="javascript:;" onclick="cakenogame();"><img src="picture/gameone4.jpg" alt=""><i></i>
+                <li><a href="javascript:;" onclick="cakenogame();"><img
+                                src="themes/simplebootx/Public/images/gameone4.jpg" alt=""><i></i>
                         <div class="zz"></div>
                     </a></li>
-                <li><a href="#"><img src="picture/gameone2.jpg" alt="">
+                <li><a href="index.html#"><img src="themes/simplebootx/Public/images/gameone2.jpg" alt="">
                         <div class="zz"></div>
                     </a></li>
-                <li><a href="#"><img src="picture/gameone5.jpg" alt="">
+                <li><a href="index.html#"><img src="themes/simplebootx/Public/images/gameone5.jpg" alt="">
                         <div class="zz"></div>
                     </a></li>
-                <li><a href="#"><img src="picture/gameone7.jpg" alt="">
+                <li><a href="index.html#"><img src="themes/simplebootx/Public/images/gameone7.jpg" alt="">
                         <div class="zz"></div>
                     </a></li>
-                <li><a href="#"><img src="picture/gameone1.jpg" alt="">
+                <li><a href="index.html#"><img src="themes/simplebootx/Public/images/gameone1.jpg" alt="">
                         <div class="zz"></div>
                     </a></li>
-                <li><a href="#"><img src="picture/gameone6.jpg" alt="">
+                <li><a href="index.html#"><img src="themes/simplebootx/Public/images/gameone6.jpg" alt="">
                         <div class="zz"></div>
                     </a></li>
-                <li><a href="#"><img src="picture/gameone8.jpg" alt=""><i></i>
+                <li><a href="index.html#"><img src="themes/simplebootx/Public/images/gameone8.jpg" alt=""><i></i>
                         <div class="zz"></div>
                     </a></li>
-                <li><a href="#"><img src="picture/gameone9.jpg" alt="">
+                <li><a href="index.html#"><img src="themes/simplebootx/Public/images/gameone9.jpg" alt="">
                         <div class="zz"></div>
                     </a></li>
             </div>
             <div class="huodong">
-                <div class="picbox"><a href="javascript:;"><img src="picture/huodong.jpg" alt=""></a></div>
+                <div class="picbox"><a href="javascript:;"><img src="themes/simplebootx/Public/images/huodong.jpg"
+                                                                alt=""></a></div>
                 <ul>
-                    <li><a href="/portal/index/show/id/96.html" target="_blank"> 北京2.0倍 加拿大2.0倍玩法 赔率改动
+                    <li><a href="http://ng077.com/portal/index/show/id/96.html" target="_blank"> 北京2.0倍 加拿大2.0倍玩法 赔率改动
                             <span>2017-09-15</span></a></li>
-                    <li><a href="/portal/index/show/id/95.html" target="_blank"> 加拿大2.7倍玩法调整为2.8倍玩法
+                    <li><a href="http://ng077.com/portal/index/show/id/95.html" target="_blank"> 加拿大2.7倍玩法调整为2.8倍玩法
                             <span>2017-03-17</span></a></li>
-                    <li><a href="/portal/index/show/id/94.html" target="_blank"> 2016-12-11日起提现将收取手续费
+                    <li><a href="http://ng077.com/portal/index/show/id/94.html" target="_blank"> 2016-12-11日起提现将收取手续费
                             <span>2016-12-10</span></a></li>
-                    <li><a href="/portal/index/show/id/93.html" target="_blank"> 南宫国际幸运争霸赛9069完美结束
+                    <li><a href="http://ng077.com/portal/index/show/id/93.html" target="_blank"> 南宫国际幸运争霸赛9069完美结束
                             <span>2016-12-04</span></a></li>
-                    <li><a href="/portal/index/show/id/92.html" target="_blank"> 南宫国际幸运争霸赛9068完美结束
+                    <li><a href="http://ng077.com/portal/index/show/id/92.html" target="_blank"> 南宫国际幸运争霸赛9068完美结束
                             <span>2016-12-02</span></a></li>
-                    <li><a href="/portal/index/show/id/91.html" target="_blank"> 南宫国际幸运争霸赛9067完美结束
+                    <li><a href="http://ng077.com/portal/index/show/id/91.html" target="_blank"> 南宫国际幸运争霸赛9067完美结束
                             <span>2016-11-30</span></a></li>
-                    <li><a href="/portal/index/show/id/90.html" target="_blank"> 南宫国际幸运争霸赛9066完美结束
+                    <li><a href="http://ng077.com/portal/index/show/id/90.html" target="_blank"> 南宫国际幸运争霸赛9066完美结束
                             <span>2016-11-27</span></a></li>
-                    <li><a href="/portal/index/show/id/89.html" target="_blank"> 南宫国际幸运争霸赛9065完美结束
+                    <li><a href="http://ng077.com/portal/index/show/id/89.html" target="_blank"> 南宫国际幸运争霸赛9065完美结束
                             <span>2016-11-25</span></a></li>
-                    <li><a href="/portal/index/show/id/88.html" target="_blank"> 南宫国际幸运争霸赛9064完美结束
+                    <li><a href="http://ng077.com/portal/index/show/id/88.html" target="_blank"> 南宫国际幸运争霸赛9064完美结束
                             <span>2016-11-23</span></a></li>
-                    <li><a href="/portal/index/show/id/87.html" target="_blank"> 南宫国际幸运争霸赛9063完美结束
+                    <li><a href="http://ng077.com/portal/index/show/id/87.html" target="_blank"> 南宫国际幸运争霸赛9063完美结束
                             <span>2016-11-20</span></a></li>
                 </ul>
             </div>
             <div class="gametwo">
-                <li><a href="javascript:;" onclick="hbgame();"><img src="picture/gametwo1.jpg" alt=""><span>进入游戏</span></a>
-                </li>
-                <li><a href="javascript:;" onclick="cakenogame();"><img src="picture/gametwo2.jpg"
-                                                                        alt=""><span>进入游戏</span></a></li>
-                <li><a href="javascript:;"><img src="picture/gametwo3.jpg" alt=""><span>进入游戏</span></a></li>
-                <li class="last"><a href="javascript:;"><img src="picture/gametwo4.jpg" alt=""><span>进入游戏</span></a>
+                <li><a href="javascript:;" onclick="hbgame();"><img src="themes/simplebootx/Public/images/gametwo1.jpg"
+                                                                    alt=""><span>进入游戏</span></a></li>
+                <li><a href="javascript:;" onclick="cakenogame();"><img
+                                src="themes/simplebootx/Public/images/gametwo2.jpg" alt=""><span>进入游戏</span></a></li>
+                <li><a href="javascript:;"><img src="themes/simplebootx/Public/images/gametwo3.jpg"
+                                                alt=""><span>进入游戏</span></a></li>
+                <li class="last"><a href="javascript:;"><img src="themes/simplebootx/Public/images/gametwo4.jpg" alt=""><span>进入游戏</span></a>
                 </li>
             </div>
             <div class="youshi">
@@ -108,12 +113,9 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/online.js') }}"></script>
 @endsection
 
-
 @push('scripts')
-
     <script>
         var kflist = {
             "3": [{
@@ -145,7 +147,6 @@
         };
         var appdownload = null
     </script>
-    <script src="{{ asset('js/online.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#gameone li a").mouseenter(function () {
@@ -158,3 +159,4 @@
         })
     </script>
 @endpush
+
