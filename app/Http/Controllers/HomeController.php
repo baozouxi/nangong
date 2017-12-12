@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Events\AwardPrizes;
 use App\Game\Game;
+use App\OpenCode;
 
 class HomeController extends Controller
 {
@@ -20,10 +22,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $b='asdasd';
-        $as='asdasd';
-
-
         return view('home');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\AwardPrizes;
 use App\Events\GotCodes;
 use App\Game;
 use App\Game\GameException;
@@ -24,14 +25,18 @@ class GotCodesListener
      * Handle the event.
      *
      * @param  GotCodes $event
+     *
      * @return void
      */
     public function handle(GotCodes $event)
     {
-        if (!$gameModel = Game::where('name', $event->name)->withCount(['openCodes' => function ($query) use ($event) {
-            return $query->where('actionNo',$event->result['actionNo']);
-        }])->firstOrFail()) {
-            throw new GameException('游戏' . $event->name . '在数据库中不存在');
+        if (!$gameModel = Game::where('name', $event->name)->withCount([
+            'openCodes' => function ($query) use ($event) {
+                return $query->where('actionNo', $event->result['actionNo']);
+            },
+        ])->firstOrFail()
+        ) {
+            throw new GameException('游戏'.$event->name.'在数据库中不存在');
         }
 
 
@@ -40,15 +45,18 @@ class GotCodesListener
             return;
         }
 
-
         if (!$gameModel->openCodes()->create([
             'open_time' => $event->result['open_time'],
-            'actionNo' => $event->result['actionNo'],
-            'codes' => $event->result['codes']
+            'actionNo'  => $event->result['actionNo'],
+            'codes'     => $event->result['codes'],
 
-        ])) {
-            throw new GameException('游戏' . $event->name . '第' . $event->result['actionNo'] . '开奖数据写入失败');
+        ])
+        ) {
+            throw new GameException('游戏'.$event->name.'第'
+                .$event->result['actionNo'].'开奖数据写入失败');
         }
+
+        event(new AwardPrizes($event->name, $event->result)); //派奖
 
 
     }

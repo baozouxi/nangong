@@ -15,5 +15,9 @@ class CapitalLog extends Model
     const  WITHDRAW = 2; //提现
 
 
+    public function capital()
+    {
+        return $this->belongsTo('App\Capital');
+    }
 
 }

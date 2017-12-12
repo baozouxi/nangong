@@ -19,6 +19,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\GotCodes' => [
             'App\Listeners\GotCodesListener', //监听获取开奖结果成功
         ],
+
+        'App\Events\AwardPrizes' => [
+            'App\Listeners\AwardPrizesListener', // 派奖事件
+        ],
     ];
 
     /**

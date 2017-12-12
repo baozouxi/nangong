@@ -73,7 +73,7 @@
                     <div class="yx_btn"><a href="javascript:void(0)"
                                            onclick="document.getElementById('lightyxgz').style.display='block';document.getElementById('fadeyxgz').style.display='block'"
                                            class="yxgz">游戏规则</a> <a
-                                href="http://ng077.com/user/game/pc28v20_betting.html"
+                                href="{{ route('pc28Play') }}"
                                 class="ingame">进入游戏</a></div>
                 </div>
                 <div class="d55445 txtScroll-top">

@@ -15,4 +15,9 @@ class Capital extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function logs()
+    {
+        return $this->hasMany('App\CapitalLog');
+    }
 }

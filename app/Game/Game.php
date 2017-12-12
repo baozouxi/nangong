@@ -8,6 +8,7 @@
 
 namespace App\Game;
 
+use App\Events\AwardPrizes;
 use App\Events\GotCodes;
 use Illuminate\Support\Facades\Log;
 
@@ -94,9 +95,7 @@ class Game
                 $current_codes = $game->getCodes();
                 $name = $game->name();
                 if (!empty($current_codes)) {
-
                     event(new GotCodes($name, $current_codes)); //获取成功 触发事件
-
                     $codes[$name] = $current_codes;
                 }
             }
@@ -104,6 +103,17 @@ class Game
             Log::error($exception->getMessage());
         }
         return $codes;
+    }
+
+
+
+    //计算开奖结果
+    public function lottery($name, $codes)
+    {
+        $game = $this->getGame($name);
+
+
+        return $game->lottery($codes);
     }
 
 

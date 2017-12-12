@@ -16,8 +16,8 @@ interface GameInterface
 
 
     /**
-     * 开奖算法
-     * @param $code 开奖结果
+     * 开奖结果
+     * @param $code 开奖号码
      * @return float 奖励倍数
      *
      */
@@ -25,8 +25,8 @@ interface GameInterface
 
 
     /**
-     * 获取开奖结果
-     * @return array 开奖结果
+     * 获取开奖号码
+     * @return array 开奖号码
      */
     public function getCodes();
 

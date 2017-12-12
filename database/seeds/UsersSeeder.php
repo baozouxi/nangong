@@ -11,6 +11,10 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 1)->create();
+        factory(App\User::class, 1)->create()->each(function($u){
+            $u->capital()->create([
+                'money' => 1000000.00,
+            ]);
+        });
     }
 }
