@@ -8,6 +8,7 @@ use App\OpenCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class GamesController extends Controller
 {
@@ -137,6 +138,36 @@ class GamesController extends Controller
             'referer' => '',
             'state'   => 'fail',
         ];
+
+    }
+
+
+
+    public function cancelBet(Bet $bet)
+    {
+        $result = [];
+        $result['status'] = 0;
+        $result['info'] = '取消失败';
+
+        if($bet->lotteried == 1) return $result;
+
+        try{
+            DB::transaction(function() use ($bet, &$result){
+                $money = $bet->money;
+                $bet->delete();
+                $capital = Auth::user()->capital;
+                $capital->money += $money;
+                $capital->save();
+
+                $result['status'] = 1;
+                $result['info'] = '取消下注成功';
+            });
+        }catch (\Throwable $e){
+            Log::info($e->getMessage());
+        }
+
+
+        return $result;
 
     }
 
@@ -327,6 +358,7 @@ class GamesController extends Controller
             $temp_arr['code'] = $bet->code;
             $temp_arr['betsMoney'] = $bet->money;
             $temp_arr['prizeMoney'] = $bet->profit;
+            $temp_arr['betid'] = $bet->id;
 
             if ($bet->lotteried == 1) {
                 $state = '1';

@@ -42,7 +42,10 @@
             <div class="user" id="userpanel"><span>欢迎您，新用户！请先 </span><a href="{{ route('login') }}">登录</a><a
                         href="http://ng077.com/user/register/index.html">注册</a></div>
         @else
-            <div class="user" id="userpanel"><span>欢迎您，baozouxi</span><span>账户余额：<i>￥{{ number_format(Auth::user()->capital->money, 2) }}</i></span><a href="/user/profile/pay.html">充值</a><a href="/user/profile/themoney.html">提现</a><a href="/user/message/index?v1">消息中心 <i>5</i></a><a href="#"  class="logout">退出</a></div>
+            <div class="user" id="userpanel">
+                <span>欢迎您，baozouxi</span><span>账户余额：<i>￥{{ number_format(Auth::user()->capital->money, 2) }}</i></span><a
+                        href="/user/profile/pay.html">充值</a><a href="/user/profile/themoney.html">提现</a><a
+                        href="/user/message/index?v1">消息中心 <i>5</i></a><a href="#" class="logout">退出</a></div>
         @endif
     </div>
 </div>
@@ -95,11 +98,13 @@
 
 <script>
     $(function () {
-        $('.logout').click(function () {
+        $('body').on('click', '.logout', function (event) {
+            event.preventDefault();
             $.post('{{ route('logout') }}', null, function () {
                 window.location = '/';
             });
         });
+
     });
 
 </script>

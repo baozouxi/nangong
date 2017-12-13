@@ -593,7 +593,7 @@ function getUserBetsListToday(page,game_id) {
                         if (val.planid > 0) {
                             html += '-';
                         } else {
-                            html += '<span onclick="javascript:cancelbet(' + val.betid + ',' + val.expect + ');return false;">取消</span>';
+                            html += '<span onclick="javascript:cancelbet(' + val.betid + ',' + val.expect + ', this);return false;">取消</span>';
                         }
                     }
                     if ("1" === val.state) {
@@ -779,7 +779,8 @@ function getBetsListCircle(game_id) {
 
 
 //取消下注
-function cancelbet(betid, expect) {
+function cancelbet(betid, expect,_this) {
+
     if (parseInt(betid) <= 0) {
         $.message({type: "error", content: "发生错误了", time: 1200});
         return false;
@@ -789,17 +790,14 @@ function cancelbet(betid, expect) {
         return false;
     }
     var url, data;
-    url = "/user/game/cancel_bet";
-    data = "betid=" + encodeURIComponent($.trim(betid));
-    data += "&expect=" + encodeURIComponent($.trim(expect));
-
-
+    url = "/game/bets/"+betid;
+    data = "_method=DELETE";
     $.ajax({
         type: "post",
         cache: false,
         url: url,
         data: data,
-        datatype: "json",
+        dataType: "json",
         success: function (dataJson) {
             switch (dataJson.status) {
                 case 0:
@@ -808,9 +806,12 @@ function cancelbet(betid, expect) {
                 case 1:
                     xztf = true;
                     $.message({type: "ok", content: dataJson.info, time: 3000});
+                    _this.parentNode.parentNode.parentNode.removeChild(_this.parentNode.parentNode);
+
                     getUserYingLoss(expect - 1);
                     getUserBetsListToday();
                     break;
+
             }
 
         }
