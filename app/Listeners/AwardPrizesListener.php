@@ -60,8 +60,7 @@ class AwardPrizesListener
                         $bet->save();
                     });
                 } catch (\Throwable $e) {
-
-                    dd($e->getMessage());
+                    Log::error($e->getMessage());
                 }
             }
         }
