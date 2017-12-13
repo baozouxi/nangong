@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @push('css')
+    <link rel="stylesheet" href="/themes/simplebootx/Public/css/page.css" type="text/css"/>
     <link rel="stylesheet" href="/themes/simplebootx/Public/css/game28.css" type="text/css"/>
     <link rel="stylesheet" href="/themes/simplebootx/Public/css/game28bet.css" type="text/css"/>
 @endpush
@@ -11,6 +12,7 @@
     <script src="/themes/simplebootx/Public/js/base.js"></script>
     <script type="text/javascript" src="/themes/simplebootx/Public/pc28v20js/loaddata.js"></script>
     <script type="text/javascript" src="/themes/simplebootx/Public/pc28v20js/json2.js"></script>
+    <script type="text/javascript" src="/themes/simplebootx/Public/js/page.js"></script>
 @endpush
 
 @section('main')
@@ -62,7 +64,7 @@
                         </div>
                         <div class="yx_btn"><a href="javascript:void(0)"
                                                onclick="document.getElementById('lightyxgz').style.display='block';document.getElementById('fadeyxgz').style.display='block'"
-                                               class="yxgz">游戏规则</a> <a href="http://ng077.com/user/game/pc28v20.html"
+                                               class="yxgz">游戏规则</a> <a href="{{ route('pc28') }}"
                                                                         class="lskj">历史开奖</a></div>
                     </div>
                     <div class="d55445 txtScroll-top">
@@ -152,7 +154,8 @@
                     </div>
                     <div class="querentouzhu">
                         <ul id="betall"></ul>
-                        <div id="tj_new"><span class="JKnum04">账户余额：0.00</span>
+                        <div id="tj_new">
+                            <span class="JKnum04">账户余额：{{ number_format(Auth::user()->capital->money,2)  }}</span>
                             <input type="submit" class="tj xz" value=""
                                    style="background:url(/themes/simplebootx/Public/images/tj_new.png) no-repeat  center center;"
                                    onclick="submitOK();return false;"> <span class="jk-z" id="jk-z"><i class="on"
@@ -167,7 +170,7 @@
                 <div class="tzfa">
                     <div class="title_box">
                         <div class="title">投注方案</div>
-                        <a href="http://ng077.com/user/game/pc28v20.html?v=1" class="qbjl">全部记录</a></div>
+                        <a href="{{ route('pc28') }}" class="qbjl">全部记录</a></div>
                     <ul id="userBetsListToday"></ul>
                     <div class="clear"></div>
                 </div>

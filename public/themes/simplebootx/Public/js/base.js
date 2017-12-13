@@ -74,7 +74,7 @@ $(function(){
 	//userpanel
 	if($("#userpanel").length>0)
 	{
-        $.post("/portal/index/ajax_get_user_info",function(data)
+        $.get("/account/user-info",function(data)
         {
             $("#userpanel").html(data);
         });

@@ -455,7 +455,7 @@ function checkdb(the,game_id) {
                     freset();
                     shownotbet();
                     getUserYingLoss(0);
-                    getUserBetsListToday();
+                    getUserBetsListToday(1,game_id);
                     break;
                 default:
                     break;
@@ -470,22 +470,22 @@ function checkdb(the,game_id) {
 //主程序
 function bwmain(game_id) {
     //倒计时
-    getUserYingLoss();
+    getUserYingLoss(0);
     loadopentime(game_id);
     getBetsListCircle(game_id);
-    getUserBetsListToday();
+    getUserBetsListToday(1,game_id);
 }
 
 
 //获取下注记录
-function getUserBetsListToday() {
+function getUserBetsListToday(page,game_id) {
     $.ajax({
-        url: "/user/game/getUserBetsListToday_20/t/" + Math.random(),
-        type: "post",
+        url: "/game/"+game_id+"/today-bets?page="+page,
+        type: "get",
         data: {
             //"expect": expect
         },
-        datatype: "json",
+        dataType: "json",
         async: false,
         success: function (dataJson) {
 
@@ -503,72 +503,73 @@ function getUserBetsListToday() {
                 html += '  <div class="qxxz">操作</div>';
                 html += '</li>';
 
+
                 $.each(dataJson.userbetList, function (idx, val) {
                     html += '<li style="border:none;">';
                     html += '<div class="ddh">' + val.billno + '</div>';
                     html += '<div class="xdsj">' + val.betsTimes + '</div>';
-                    html += '<div class="wf">';
-                    var ubetname;
-                    if (parseInt(val.bettype) <= 100) {
-                        html += '<div class="ck_num1">';
-                        html += '	<div class="quan">' + val.betnum + '</div>';
-                        //html += '	<div class="price">' + val.betsMoney + '</div>';
-                        html += '</div>';
-                    } else if (parseInt(val.bettype) >= 101 && parseInt(val.bettype) <= 104) {
-                        if (parseInt(val.bettype) == 101) {
-                            ubetname = '小';
-                        }
-                        if (parseInt(val.bettype) == 102) {
-                            ubetname = '大';
-                        }
-                        if (parseInt(val.bettype) == 103) {
-                            ubetname = '单';
-                        }
-                        if (parseInt(val.bettype) == 104) {
-                            ubetname = '双';
-                        }
-                        html += '<div class="ck_num1">';
-                        html += '	<div class="quan">' + ubetname + '</div>';
-                        //html += '	<div class="price">' + val.betsMoney + '</div>';
-                        html += '</div>';
-                    } else if (parseInt(val.bettype) >= 105 && parseInt(val.bettype) <= 110) {
-                        if (parseInt(val.bettype) == 105) {
-                            ubetname = '小单';
-                        }
-                        if (parseInt(val.bettype) == 106) {
-                            ubetname = '大单';
-                        }
-                        if (parseInt(val.bettype) == 107) {
-                            ubetname = '小双';
-                        }
-                        if (parseInt(val.bettype) == 108) {
-                            ubetname = '大双';
-                        }
-                        if (parseInt(val.bettype) == 109) {
-                            ubetname = '极小';
-                        }
-                        if (parseInt(val.bettype) == 110) {
-                            ubetname = '极大';
-                        }
-                        html += '<div class="ck_num2">';
-                        html += '	<div class="quan">' + ubetname + '</div>';
-                        //html += '	<div class="price">' + val.betsMoney + '</div>';
-                        html += '</div>';
-                    } else if (parseInt(val.bettype) >= 999) {
-                        if (parseInt(val.bettype) == 999) {
-                            ubetname = '猜数';
-                        }
-                        html += '<div class="ck_num2">';
-                        html += '	<div class="quan">' + val.betnum + '</div>';
-                        html += '	<div class="price">' + ubetname + '</div>';
-                        html += '</div>';
-                    }
+                    html += '<div class="wf">'+val.code;
+                    // var ubetname;
+                    // if (parseInt(val.bettype) <= 100) {
+                    //     html += '<div class="ck_num1">';
+                    //     html += '	<div class="quan">' + val.betnum + '</div>';
+                    //     //html += '	<div class="price">' + val.betsMoney + '</div>';
+                    //     html += '</div>';
+                    // } else if (parseInt(val.bettype) >= 101 && parseInt(val.bettype) <= 104) {
+                    //     if (parseInt(val.bettype) == 101) {
+                    //         ubetname = '小';
+                    //     }
+                    //     if (parseInt(val.bettype) == 102) {
+                    //         ubetname = '大';
+                    //     }
+                    //     if (parseInt(val.bettype) == 103) {
+                    //         ubetname = '单';
+                    //     }
+                    //     if (parseInt(val.bettype) == 104) {
+                    //         ubetname = '双';
+                    //     }
+                    //     html += '<div class="ck_num1">';
+                    //     html += '	<div class="quan">' + ubetname + '</div>';
+                    //     //html += '	<div class="price">' + val.betsMoney + '</div>';
+                    //     html += '</div>';
+                    // } else if (parseInt(val.bettype) >= 105 && parseInt(val.bettype) <= 110) {
+                    //     if (parseInt(val.bettype) == 105) {
+                    //         ubetname = '小单';
+                    //     }
+                    //     if (parseInt(val.bettype) == 106) {
+                    //         ubetname = '大单';
+                    //     }
+                    //     if (parseInt(val.bettype) == 107) {
+                    //         ubetname = '小双';
+                    //     }
+                    //     if (parseInt(val.bettype) == 108) {
+                    //         ubetname = '大双';
+                    //     }
+                    //     if (parseInt(val.bettype) == 109) {
+                    //         ubetname = '极小';
+                    //     }
+                    //     if (parseInt(val.bettype) == 110) {
+                    //         ubetname = '极大';
+                    //     }
+                    //     html += '<div class="ck_num2">';
+                    //     html += '	<div class="quan">' + ubetname + '</div>';
+                    //     //html += '	<div class="price">' + val.betsMoney + '</div>';
+                    //     html += '</div>';
+                    // } else if (parseInt(val.bettype) >= 999) {
+                    //     if (parseInt(val.bettype) == 999) {
+                    //         ubetname = '猜数';
+                    //     }
+                    //     html += '<div class="ck_num2">';
+                    //     html += '	<div class="quan">' + val.betnum + '</div>';
+                    //     html += '	<div class="price">' + ubetname + '</div>';
+                    //     html += '</div>';
+                    // }
 
                     html += '</div>';
                     var hm = "";
-                    if (val.planid > 0) {
-                        hm = "<span style='color: red;'>&nbsp;(合买)</span>";
-                    }
+                    // if (val.planid > 0) {
+                    //     hm = "<span style='color: red;'>&nbsp;(合买)</span>";
+                    // }
                     html += '<div class="qh">' + val.expect + hm + '</div>';
                     html += '<div class="tzje">' + val.betsMoney + '</div>';
                     if (val.prizeMoney > 0) {
@@ -603,10 +604,19 @@ function getUserBetsListToday() {
                     }
                     html += '</div>';
                     html += '</li>';
-
                 });
+                html += ' <div class="pagination"></div>';
                 //alert(html);
                 $("#userBetsListToday").html(html);
+
+                var count = Math.ceil(dataJson.count / dataJson.pageSize);
+                $(".pagination").pager({
+                    pagenumber:dataJson.page,
+                    pagecout:count,
+                    buttonClickCallback:function(page){
+                        getUserBetsListToday(page,game_id);
+                    }
+                });
 
             } else {
             }
@@ -811,9 +821,12 @@ function cancelbet(betid, expect) {
 
 //获取用户盈亏
 function getUserYingLoss(expect) {
+    if(expect == 0) return;
+
     $.ajax({
-        url: "/user/game/get_account_money/t/" + Math.random(),
-        datatype: "json",
+        url: "/account/money?expect=" + expect,
+        type: 'get',
+        dataType: "json",
         async: false,
         success: function (dataJson) {
             if (dataJson.sign === "true") {
@@ -909,7 +922,7 @@ function loadOpenCode(game_id, expect) {
                     $("#lottshow1").show();
                     $("#lottshow2").hide();
                     get_expect_list_10(game_id);
-                    getUserBetsListToday();
+                    getUserBetsListToday(1,game_id);
                 } else {
 
                 }

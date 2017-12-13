@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Bet;
 use App\Capital;
 use App\Login;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * 账户控制器
@@ -56,6 +58,38 @@ class AccountsController extends Controller
     {
         return view('account.safe');
     }
+
+
+    public function userInfo()
+    {
+        return '<span>欢迎您，baozouxi</span><span>账户余额：<i>￥'. number_format(Auth::user()->capital->money, 2).'</i></span><a href="/user/profile/pay.html">充值</a><a href="/user/profile/themoney.html">提现</a><a href="/user/message/index?v1">消息中心 <i>5</i></a><a href="#"  class="logout">退出</a>';
+    }
+
+
+    //盈亏
+    public function money(Request $request)
+    {
+        $expand = 0;
+        $get = 0;
+
+        $money = Auth::user()->capital->money;
+
+        $bets = Bet::where('user_id',Auth::user()->id)->where('actionNo',$request->input('expect'))->get();
+
+        foreach ($bets as $bet) {
+            $expand += $bet->money;
+            $get += $bet->profit;
+        }
+
+        $result = [];
+        $result['expect'] = 0;
+        $result['referer'] = '';
+        $result['sign'] = 'true';
+        $result['state'] = 'fail';
+        $result['userMoney'] = number_format(($money + $get - $expand), 2);
+        return $result;
+    }
+
 
 
 

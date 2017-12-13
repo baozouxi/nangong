@@ -1,14 +1,29 @@
-function get_tab_list(t,v,page){
+function get_tab_list(t,v,page,game_id){
     var url,data;
-    url="/user/game/get_tab_list/t/" + t + "/v/" + v + "/page/" + page;
+    switch (t){
+        case 1:
+            url="/game/"+game_id+"/bets?page=" + page;
+            break;
+        case 2:
+            url="/game/"+game_id+"/tab-list?page=" + page;
+            break;
+        case 3:
+            url="/game/"+game_id+"/fanshui?page=" + page;
+            break;
+        case 4:
+            url="/game/"+game_id+"/zoushi?page=" + page;
+            break;
+    }
+
+
     $("#tab-hd ul li").removeClass("on");
     var i = t -1;
     $("#tab-hd ul li").eq(i).addClass("on");
     $.ajax({
-        type:"post",
+        type:"get",
         cache:false,
         url:url,
-        datatype:"json",
+        dataType:"json",
         error:function(data){$.message({type:"error",content:'网络超时，请刷新页面后重试',time:3000});},
         beforeSend:function(){$("#tab-pal").html("<li class='loading'><span>正在加载数据, 请稍等......</span></li>");},
         success:function(data)
@@ -19,7 +34,7 @@ function get_tab_list(t,v,page){
                 pagenumber:data.page,
                 pagecout:count,
                 buttonClickCallback:function(page){
-                    get_tab_list(t,v,page);
+                    get_tab_list(t,v,page,game_id);
                 }
             });
 
@@ -66,5 +81,5 @@ $(function(){
             $(this).next(".ck_nr").toggle();
         }
     )
-    get_tab_list(t,v,page);
+    get_tab_list(t,v,page,game_id);
 });

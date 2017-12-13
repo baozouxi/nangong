@@ -17,9 +17,10 @@
     <script type="text/javascript" src="/themes/simplebootx/Public/js/gamepc28.js"></script>
     <script>
         var webroot = "/",
-            t = "2",
+            t = 2,
             v = "20",
-            page = 1;
+            page = 1,
+            game_id = {{ $game_id }};
     </script>
 @endpush
 
@@ -102,10 +103,10 @@
                 <div class="notice">
                     <div class="tab-hd" id="tab-hd">
                         <ul>
-                            <li onclick="get_tab_list(1,v,page)">投注方案</li>
-                            <li onclick="get_tab_list(2,v,page)">往期开奖</li>
-                            <li onclick="get_tab_list(3,v,page)">反水申请</li>
-                            <li onclick="get_tab_list(4,v,page)">开奖走势</li>
+                            <li onclick="get_tab_list(1,v,page, '{{ $game_id }}')">投注方案</li>
+                            <li onclick="get_tab_list(2,v,page, '{{ $game_id }}')">往期开奖</li>
+                            <li onclick="get_tab_list(3,v,page, '{{ $game_id }}')">反水申请</li>
+                            <li onclick="get_tab_list(4,v,page, '{{ $game_id }}')">开奖走势</li>
                         </ul>
                     </div>
                     <div class="tab-bd">

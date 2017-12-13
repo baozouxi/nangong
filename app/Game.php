@@ -14,8 +14,6 @@ class Game extends Model
         return $this->hasMany('App\OpenCode');
     }
 
-
-
     public function bets()
     {
         return $this->hasMany('App\Bet');
