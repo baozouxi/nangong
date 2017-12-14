@@ -1,18 +1,45 @@
 @extends('layouts.app')
 
 
+
+
 @push('css')
-    <link href="{{ asset('css/center.css') }}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('css/page.css') }}" type="text/css"/>
+    <link href="/themes/simplebootx/Public/css/center.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/themes/simplebootx/Public/css/page.css" type="text/css"/>
 @endpush
 
-@section('main')
 
+@push('init-scripts')
+    <script type="text/javascript" src="/themes/simplebootx/Public/js/page.js"></script>
+    <script>
+        var webroot = "/",
+            tsort = "1",
+            d = "1",
+            page = 1;
+    </script>
+@endpush
+
+
+
+@section('main')
+    <div class="banner_hyzx">
+        <div class="w1000">
+            <div class="uesr">
+                <div class="imgbox"><a href="index.html"><img src="/themes/simplebootx/Public/images/user.png"
+                                                              alt=""></a>
+                </div>
+                <div class="name_box">
+                    <div class="name"><span>{{ Auth::user()->username }}</span>
+                        <div class="uid">uid：{{ Auth::user()->id }}</div>
+                    </div>
+                    <div class="time">上次登录时间：{{ $lastLogin->login_time }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="main_nav">
         <div class="w1000">
-            <div class="navlist">
-                @include('account.nav')
-            </div>
+            @include('account.nav')
         </div>
     </div>
     <div class="main">
@@ -33,11 +60,11 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/online.js') }}"></script>
 @endsection
 
-@push('scripts')
 
+
+@push('scripts')
     <script>
         var kflist = {
             "3": [{
@@ -47,7 +74,7 @@
                 "cid": "1",
                 "ac": "3",
                 "value": "9001723",
-                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=7770992&amp;site=qq&amp;menu=yes",
+                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=9001723&amp;site=qq&amp;menu=yes",
                 "img": "",
                 "status": "1",
                 "remark": "",
@@ -69,7 +96,6 @@
         };
         var appdownload = null
     </script>
-    <script src="{{ asset('js/online.js') }}"></script>
     <script type="text/javascript">
         function get_finance_list(t, d, page) {
             var url, data;

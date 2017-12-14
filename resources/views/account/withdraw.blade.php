@@ -24,10 +24,10 @@
                 <div class="imgbox"><a href="themoney.html"><img src="/themes/simplebootx/Public/images/user.png"
                                                                  alt=""></a></div>
                 <div class="name_box">
-                    <div class="name"><span>baozouxi</span>
-                        <div class="uid">uid：9016</div>
+                    <div class="name"><span>{{ Auth::user()->username }}</span>
+                        <div class="uid">uid：{{ Auth::user()->id }}</div>
                     </div>
-                    <div class="time">上次登录时间：2017-12-14 13:47:53</div>
+                    <div class="time">上次登录时间：{{ $lastLogin->login_time }}</div>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 <div class="hyzx_zhye">
                     <div class="zhye_box">
                         <div class="title"><i class="zhyeicon"></i>账户余额</div>
-                        <div class="num">0.00 元</div>
+                        <div class="num">{{ number_format($capital->money, 2) }} 元</div>
                         <a href="http://ng077.com/user/profile/pay.html" class="cz">充值</a><a href="themoney.html"
                                                                                              class="tx">提现</a></div>
                     <div class="geren_infolist">
@@ -92,7 +92,7 @@
                                         <div class="name">提现金额</div>
                                         <input type="text" class="textin" name="t1" onkeyup="onlynum(this);" value="50">
                                         <div class="clear"></div>
-                                        <div class="tips">当前可提现金额：<span>0.00</span>元</div>
+                                        <div class="tips">当前可提现金额：<span>{{ number_format($capital->money, 2) }}</span>元</div>
                                     </li>
                                     <li>
                                         <div class="name">资金密码</div>

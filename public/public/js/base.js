@@ -130,7 +130,7 @@ function mb_cutstr(str, maxlen, dot) {
 }
 
 function strlen(str) {
-	return ($.browser.msie && str.indexOf('\n') != -1) ? str.replace(/\r?\n/g, '_').length : str.length;
+	return (str.indexOf('\n') != -1) ? str.replace(/\r?\n/g, '_').length : str.length;
 }
 
 //全选取消

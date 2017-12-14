@@ -1,21 +1,41 @@
 @extends('layouts.app')
-
 @push('css')
-    <link href="{{ asset('css/base2.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('css/center.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('dialog/skins/default.css') }}" rel="stylesheet" type="text/css"/>
-
+    <link href="/public/css/base2.css" rel="stylesheet" type="text/css"/>
+    <link href="/themes/simplebootx/Public/css/css.css" rel="stylesheet" type="text/css"/>
+    <link href="/themes/simplebootx/Public/css/center.css?v1" rel="stylesheet" type="text/css"/>
 @endpush
+
 
 @push('init-scripts')
-    <script src="{{ asset('dialog/jquery.artdialog.js') }}" language="javascript"></script>
-
+    <script type="text/javascript" src="/themes/simplebootx/Public/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="/themes/simplebootx/Public/js/anquan.js"></script>
+    <script src="/public/dialog/jquery.artDialog.js?skin=default" language="javascript"></script>
+    <script>
+        var webroot = "/";
+    </script>
 @endpush
+
 
 @section('main')
 
+
+    <div class="banner_hyzx">
+        <div class="w1000">
+            <div class="uesr">
+                <div class="imgbox"><a href="myagent.html"><img src="/themes/simplebootx/Public/images/user.png" alt=""></a>
+                </div>
+                <div class="name_box">
+                    <div class="name"><span>{{ Auth::user()->username }}</span>
+                        <div class="uid">uid：{{ Auth::user()->id }}</div>
+                    </div>
+                    <div class="time">上次登录时间：{{ $lastLogin->login_time }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="main_nav">
         <div class="w1000">
+
             @include('account.nav')
         </div>
     </div>
@@ -26,17 +46,7 @@
                                                                                      onclick="document.getElementById('light7').style.display='block';document.getElementById('fade7').style.display='block'"
                                                                                      class="tjzh">添加账户</a></div>
                 <div class="aqzx_zhlist" id="bank_list">
-                    <div class="aqzx_zhlist" id="bank_list">
-                        <li><span class="zhlx"><i class="bankicoall"
-                                                  style="background: url(/themes/simplebootx/Public/images/00001.png) no-repeat 0 0;"></i>工商银行</span><span
-                                    class="zhid">123131231321232312312312332</span><span class="zhname">asdas</span><a
-                                    href="javascript:;" onclick="del_bank_info(2771)" class="zhsc"></a></li>
-                        <li><span class="zhlx"><i class="bankicoall"
-                                                  style="background: url(/themes/simplebootx/Public/images/99999.png) no-repeat 0 0;"></i>支付宝</span><span
-                                    class="zhid">123456123456</span><span class="zhname">asdas</span><a
-                                    href="javascript:;" onclick="del_bank_info(2770)" class="zhsc"></a></li>
-                    </div>
-                    {{--<li class='loading'><span>正在加载数据, 请稍等......</span></li>--}}
+                    <li class='loading'><span>正在加载数据, 请稍等......</span></li>
                 </div>
             </div>
             <div class="aqzx_box mb70">
@@ -197,7 +207,7 @@
                                     <option value="您最熟悉的童年好友名字是?">您最熟悉的童年好友名字是?</option>
                                 </select>
                             </div>
-                            <script src="{{ asset('js/jqselect.js') }}" type="text/javascript"></SCRIPT>
+                            <script src="/themes/simplebootx/Public/js/jqselect.js" type="text/javascript"></SCRIPT>
                             <script type="text/javascript">
                                 jQuery(document).ready(function () {
                                     jQuery("#rid1").selectbox();
@@ -355,7 +365,7 @@
                         </ul>
                         <div class="clear"></div>
                         <div class="hzname">户主姓名</div>
-                        <span id="sp_hzname" class="hzname1">谭志立</span></div>
+                        <span id="sp_hzname" class="hzname1">asdas</span></div>
                     <div class="bd">
                         <ul class="passwordlist" style="margin-top:0px;padding-bottom:30px;">
                             <li class="clearfix">
@@ -455,7 +465,8 @@
                             <li>
                                 <div class="name">资金密码</div>
                                 <input type="password" class="textin c_passmoney2" name="passmoney2"
-                                       placeholder="请输入交易密码"></li>
+                                       placeholder="请输入交易密码">
+                            </li>
                         </ul>
                         <ul class="passwordlist" style="margin-top:0px;padding-bottom:30px;">
                             <li style="margin-top:0px;">
@@ -468,7 +479,8 @@
                             <li>
                                 <div class="name">资金密码</div>
                                 <input type="password" class="textin c_passmoney1" name="passmoney1"
-                                       placeholder="请输入交易密码"></li>
+                                       placeholder="请输入交易密码">
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -479,11 +491,9 @@
             <input type="submit" class="queren" name="bnt" value="确认绑定"></div>
         <div id="fade7" class="black_overlay"></div>
     </form>
-    <script src="{{ asset('js/online.js') }}"></script>
 @endsection
 
 @push('scripts')
-    <script type="text/javascript" src="{{ asset('js/anquan.js') }}"></script>
 
     <script>
         var kflist = {
@@ -494,7 +504,7 @@
                 "cid": "1",
                 "ac": "3",
                 "value": "9001723",
-                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=7770992&amp;site=qq&amp;menu=yes",
+                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=9001723&amp;site=qq&amp;menu=yes",
                 "img": "",
                 "status": "1",
                 "remark": "",
@@ -506,7 +516,7 @@
                 "name": "\u4ea4\u6d41\u7fa4\u2460",
                 "cid": "1",
                 "ac": "4",
-                "value": "111590831",
+                "value": "591811597",
                 "url": "",
                 "img": "",
                 "status": "1",

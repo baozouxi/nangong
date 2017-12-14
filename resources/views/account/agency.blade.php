@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
 @push('css')
-    <link href="{{ asset('css/center.css') }}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('css/page.css') }}" type="text/css"/>
+    <link href="/themes/simplebootx/Public/css/center.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/themes/simplebootx/Public/css/page.css" type="text/css"/>
 @endpush
 
-@push('init-scripts')
+
+
+@push('init-scrpit')
+    <script src="/public/js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/themes/simplebootx/Public/js/page.js"></script>
     <script>
         var webroot = "/",
             tsort = "1",
@@ -15,12 +19,28 @@
 @endpush
 
 
+
+
+
 @section('main')
+
+    <div class="banner_hyzx">
+        <div class="w1000">
+            <div class="uesr">
+                <div class="imgbox"><a href="myagent.html"><img src="/themes/simplebootx/Public/images/user.png" alt=""></a>
+                </div>
+                <div class="name_box">
+                    <div class="name"><span>{{ Auth::user()->username }}</span>
+                        <div class="uid">uid：{{ Auth::user()->id }}</div>
+                    </div>
+                    <div class="time">上次登录时间：{{ $lastLogin->login_time }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="main_nav">
         <div class="w1000">
-            <div class="navlist">
-                @include('account.nav')
-            </div>
+            @include('account.nav')
         </div>
     </div>
     <div class="main">
@@ -28,19 +48,19 @@
             <div class="hyzx_zhye">
                 <div class="zhye_box">
                     <div class="title"><i class="zhyeicon"></i>账户余额</div>
-                    <div class="num">0.50 元</div>
-                    <a href="/user/profile/pay.html" class="cz">充值</a><a href="/user/profile/themoney.html" class="tx">提现</a>
-                </div>
+                    <div class="num">{{ number_format($lastLogin->money, 2) }} 元</div>
+                    <a href="{{ route('account.recharge') }}" class="cz">充值</a><a
+                            href="{{ route('account.withdraw') }}" class="tx">提现</a></div>
                 <div class="geren_infolist">
                     <li class="clearfix">
                         <div class="title">玩家人数</div>
                         <i class="dlzhicon"></i>
-                        <div class="text">1 人</div>
+                        <div class="text">0 人</div>
                     </li>
                     <li class="clearfix">
                         <div class="title">推广链接</div>
                         <i class="tgljicon"></i>
-                        <div class="text" id="tgurl">http://www.ng177.com/sreg?suid=1749</div>
+                        <div class="text" id="tgurl">http://www.ng177.com/sreg?suid=9016</div>
                         <a href="javascript:;" class="fzlj"><span id="d_clip_button"
                                                                   data-clipboard-target="tgurl">复制链接</span></a></li>
                     <li class="clearfix">
@@ -71,111 +91,13 @@
                             <!--li  onclick="get_myagent_list(5,d,page,'')">彩票代理</li-->
                         </ul>
                     </div>
-                    <div class="tab-bd" id="tab-bd"><div class="tab-pal tab1">
-                            <div class="xydbbox">
-                                <div class="xydbtop">
-                                    <div class="histime"> <a href="" class="first">最近三天</a> <a href="">最近七天</a> <a href="">最近一个月</a> </div>
-                                    <div class="tktime"> <span>提款时间</span>
-                                        <div class="select000">
-                                            <div class="select">
-                                                <select id="rid1" style="display: none" name="rid">
-                                                    <option value="0" selected="selected">2016-01-01</option>
-                                                    <option value="1">2016-01-01</option>
-                                                    <option value="2">2016-02-01</option>
-                                                    <option value="3">2016-03-01</option>
-                                                    <option value="4">2016-04-01</option>
-                                                    <option value="7">2016-05-01</option>
-                                                    <option value="8">2016-06-01</option>
-                                                    <option value="9">2016-07-01</option>
-                                                    <option value="10">2016-08-01</option>
-                                                    <option value="10">2016-09-01</option>
-                                                    <option value="10">2016-10-01</option>
-                                                    <option value="10">2016-11-01</option>
-                                                    <option value="10">2016-12-01</option>
-                                                </select>
-                                            </div>
-
-
-                                        </div>
-                                        <span>-</span>
-                                        <div class="select000">
-                                            <div class="select">
-                                                <select id="rid" style="display: none" name="rid">
-                                                    <option value="0" selected="selected">2016-01-01</option>
-                                                    <option value="1">2016-01-01</option>
-                                                    <option value="2">2016-02-01</option>
-                                                    <option value="3">2016-03-01</option>
-                                                    <option value="4">2016-04-01</option>
-                                                    <option value="7">2016-05-01</option>
-                                                    <option value="8">2016-06-01</option>
-                                                    <option value="9">2016-07-01</option>
-                                                    <option value="10">2016-08-01</option>
-                                                    <option value="10">2016-09-01</option>
-                                                    <option value="10">2016-10-01</option>
-                                                    <option value="10">2016-11-01</option>
-                                                    <option value="10">2016-12-01</option>
-                                                </select>
-                                            </div>
-
-
-                                        </div>
-                                        <a href="" class="cx">查询</a> </div>
-                                </div>
-                                <div class="arrnum">
-                                    <li>
-                                        <div class="tit">充值量</div>
-                                        <span>0</span> </li>
-                                    <li>
-                                        <div class="tit">充值量</div>
-                                        <span>0</span> </li>
-                                    <li>
-                                        <div class="tit">充值量</div>
-                                        <span>0</span> </li>
-                                    <li>
-                                        <div class="tit">充值量</div>
-                                        <span>0</span> </li>
-                                    <li style="border:none;">
-                                        <div class="tit">充值量</div>
-                                        <span>0</span> </li>
-                                </div>
-                                <div class="danxuan">
-                                    <li>
-                                        <label>
-                                            <input type="radio" name="1" checked="checked">
-                                            <span>充值</span></label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="radio" name="1">
-                                            <span>提现</span></label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="radio" name="1">
-                                            <span>投注</span></label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="radio" name="1">
-                                            <span>返点</span></label>
-                                    </li>
-                                    <li style="width:90px;">
-                                        <label>
-                                            <input type="radio" name="1">
-                                            <span>新增用户</span></label>
-                                    </li>
-                                </div>
-                                <div class="imagebox"><img src="/themes/simplebootx/Public/images/biao.jpg" alt=""></div>
-                            </div>
-
-                        </div>
-                    </div>
+                    <div class="tab-bd" id="tab-bd"></div>
                     <div class="clear"></div>
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{{ asset('js/zeroclipboard.js') }}"></script>
+    <script type="text/javascript" src="/public/js/copy/ZeroClipboard.js"></script>
     <script type="text/javascript">
         // 定义一个新的复制对象
         var clip = new ZeroClipboard(document.getElementById("d_clip_button"), {
@@ -245,10 +167,12 @@
     </script>
     <br/>
     <br/>
-    <script src="{{ asset('js/online.js') }}"></script>
+
+
 @endsection
 
-@push('scripts')
+@push('scrpits')
+
     <script>
         var kflist = {
             "3": [{
@@ -258,7 +182,7 @@
                 "cid": "1",
                 "ac": "3",
                 "value": "9001723",
-                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=7770992&amp;site=qq&amp;menu=yes",
+                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=9001723&amp;site=qq&amp;menu=yes",
                 "img": "",
                 "status": "1",
                 "remark": "",
@@ -270,7 +194,7 @@
                 "name": "\u4ea4\u6d41\u7fa4\u2460",
                 "cid": "1",
                 "ac": "4",
-                "value": "111590831",
+                "value": "591811597",
                 "url": "",
                 "img": "",
                 "status": "1",

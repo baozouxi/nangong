@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::group(['prefix' => '/account'], function () {
+        Route::patch('/password', 'AccountsController@changePass')->name('account.changePass');
         Route::get('/user', 'AccountsController@user')->name('account.user'); //个人中心
         Route::get('/user-info', 'AccountsController@userInfo')->name('account.userInfo'); //个人信息
         Route::get('/recharge', 'AccountsController@recharge')->name('account.recharge'); //充值

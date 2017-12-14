@@ -36,7 +36,7 @@
 .hyzx_zhye .geren_infolist li i.yhicon{display: block;width: 18px;height: 18px;float: left;margin-left: 29px;margin-top: 11px;margin-right: 16px;background: url(../images/ljsricon.png) no-repeat center center;}
 .m_wnews{width:100%;position: relative;zoom: 1;height:33px;overflow: hidden;float: left;}
 
-.hyzx_zhye .geren_infolist li i.nobgimg{background: url(center.css) no-repeat center center;}
+.hyzx_zhye .geren_infolist li i.nobgimg{background: url(center.css?v1) no-repeat center center;}
 
 .hyzx_zhye .geren_infolist li .text{width: 200px;height: 39px;float: left;font-size: 14px;line-height: 39px;color: #5d7582;}
 .hyzx_zhye .geren_infolist li .name{width: 130px;height: 39px;float: left;line-height: 39px;text-align: center;font-size: 14px;color: #5d7582;}
