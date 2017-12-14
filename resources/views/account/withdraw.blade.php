@@ -1,22 +1,37 @@
 @extends('layouts.app')
 
-
 @push('css')
-    <link href="{{ asset('css/base.css') }}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}"/>
-    <link href="{{ asset('css/center.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="/themes/simplebootx/Public/css/center.css" rel="stylesheet" type="text/css"/>
 
 @endpush
-
 
 @push('init-scripts')
-    <script src="{{ asset('js/jquery.artdialog.js') }}" language="javascript"></script>
-    <script src="{{ asset('js/themoney.js') }}"></script>
+    <script src="/public/dialog/jquery.artDialog.js?skin=default" language="javascript"></script>
+    <script src="/themes/simplebootx/Public/js/themoney.js"></script>
 @endpush
+
+
+
 
 
 
 @section('main')
+
+
+    <div class="banner_hyzx">
+        <div class="w1000">
+            <div class="uesr">
+                <div class="imgbox"><a href="themoney.html"><img src="/themes/simplebootx/Public/images/user.png"
+                                                                 alt=""></a></div>
+                <div class="name_box">
+                    <div class="name"><span>baozouxi</span>
+                        <div class="uid">uid：9016</div>
+                    </div>
+                    <div class="time">上次登录时间：2017-12-14 13:47:53</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="main_nav">
         <div class="w1000">
             @include('account.nav')
@@ -29,23 +44,23 @@
                     <div class="zhye_box">
                         <div class="title"><i class="zhyeicon"></i>账户余额</div>
                         <div class="num">0.00 元</div>
-                        <a href="/user/profile/pay.html" class="cz">充值</a><a href="/user/profile/themoney.html"
-                                                                             class="tx">提现</a></div>
+                        <a href="http://ng077.com/user/profile/pay.html" class="cz">充值</a><a href="themoney.html"
+                                                                                             class="tx">提现</a></div>
                     <div class="geren_infolist">
                         <li><i class="telicon"></i>
                             <div class="text">13228595558</div>
-                            <a href="" class="xg"></a></li>
+                            <a href="themoney.html" class="xg"></a></li>
                         </li>
                         <li><i class="qqicon"></i>
                             <div class="text"></div>
-                            <a href="" class="xg"></a></li>
+                            <a href="themoney.html" class="xg"></a></li>
                         </li>
                         <li><i class="emailicon"></i>
                             <div class="text">123456123456</div>
                             <div class="name">asdas</div>
                         </li>
-                        <li style="border:none;height:38px;">
-                            <i class="yhicon" style="background: url(/images/00001.png) no-repeat center center;"></i>
+                        <li style="border:none;height:38px;"><i class="yhicon"
+                                                                style="background: url(/themes/simplebootx/Public/images/00001.png) no-repeat center center;"></i>
                             <div class="text">123131231321232312312312332</div>
                             <div class="name">asdas</div>
                         </li>
@@ -58,13 +73,13 @@
                             <ul>
                                 <li onclick="selthetype(2771);">
                                     <div class="title"><i class="bankicoall"
-                                                          style="background: url(/images/00001.png) no-repeat center center;"></i>工商银行
+                                                          style="background: url(/themes/simplebootx/Public/images/00001.png) no-repeat center center;"></i>工商银行
                                     </div>
                                     <div class="num">123131231321232312312312332 <span>asdas</span></div>
                                 </li>
                                 <li onclick="selthetype(2770);">
                                     <div class="title"><i class="bankicoall"
-                                                          style="background: url(/images/99999.png) no-repeat center center;"></i>支付宝
+                                                          style="background: url(/themes/simplebootx/Public/images/99999.png) no-repeat center center;"></i>支付宝
                                     </div>
                                     <div class="num">123456123456 <span>asdas</span></div>
                                 </li>
@@ -81,25 +96,22 @@
                                     </li>
                                     <li>
                                         <div class="name">资金密码</div>
-                                        <input type="password" class="textin" name="passmoney">
-                                    </li>
+                                        <input type="password" class="textin" name="passmoney"></li>
                                 </div>
                                 <input type="hidden" name="thetype" id="thetype" value="2771"/>
-                                <input type="submit" class="qrtx0000" name="bnt" value="确认提现">
-                            </ul>
+                                <input type="submit" class="qrtx0000" name="bnt" value="确认提现"></ul>
                         </div>
                     </div>
-                    <script type="text/javascript">jQuery(".slideTxtBox").slide({
-                            trigger: "click",
-                            delayTime: 0
-                        });</script>
+                    <script type="text/javascript">
+                        jQuery(".slideTxtBox").slide({trigger: "click", delayTime: 0});
+                    </script>
                 </div>
             </div>
         </div>
     </form>
-    <script src="{{ asset('js/online.js') }}"></script>
-@endsection
 
+
+@endsection
 @push('scripts')
 
     <script>
@@ -111,7 +123,7 @@
                 "cid": "1",
                 "ac": "3",
                 "value": "9001723",
-                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=7770992&amp;site=qq&amp;menu=yes",
+                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=9001723&amp;site=qq&amp;menu=yes",
                 "img": "",
                 "status": "1",
                 "remark": "",
@@ -131,5 +143,7 @@
                 "sort": "0"
             }]
         };
-        var appdownload = null</script>
+        var appdownload = null
+    </script>
+
 @endpush

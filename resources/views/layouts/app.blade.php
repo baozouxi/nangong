@@ -8,10 +8,10 @@
     <script>
         var webroot = "/";
     </script>
-    <link href="/public/css/base.css" rel="stylesheet" type="text/css"/>
     <meta name="keywords" content=""/>
     <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="/public/css/base.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/themes/simplebootx/Public/css/animate.min.css"/>
     <link href="/themes/simplebootx/Public/css/css.css" rel="stylesheet" type="text/css"/>
 
@@ -40,11 +40,11 @@
         <div class="gg">刘晓明在872355期红包接龙中夺得运气王!</div>
         @if(!Auth::check())
             <div class="user" id="userpanel"><span>欢迎您，新用户！请先 </span><a href="{{ route('login') }}">登录</a><a
-                        href="http://ng077.com/user/register/index.html">注册</a></div>
+                        href="{{ route('register') }}">注册</a></div>
         @else
             <div class="user" id="userpanel">
-                <span>欢迎您，baozouxi</span><span>账户余额：<i>￥{{ number_format(Auth::user()->capital->money, 2) }}</i></span><a
-                        href="/user/profile/pay.html">充值</a><a href="/user/profile/themoney.html">提现</a><a
+                <span>欢迎您，{{ Auth::user()->username }}</span><span>账户余额：<i>￥{{ number_format(Auth::user()->capital->money, 2) }}</i></span><a
+                        href="{{ route('account.recharge') }}">充值</a><a href="{{ route('account.withdraw') }}">提现</a><a
                         href="/user/message/index?v1">消息中心 <i>5</i></a><a href="#" class="logout">退出</a></div>
         @endif
     </div>

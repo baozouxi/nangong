@@ -1,9 +1,13 @@
 @extends('layouts.app')
-{{--充值--}}
+
+
 
 
 @push('css')
-    <link href="{{ asset('css/center.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="/themes/simplebootx/Public/css/center.css?v1.2" rel="stylesheet" type="text/css"/>
+    <script src="/themes/simplebootx/Public/js/base.js"></script>
+    <script src="/public/js/base.js" type="text/javascript"></script>
+
     <style>
         .inputrecharge {
             margin-top: 15px;
@@ -82,12 +86,17 @@
 @endpush
 
 
+@push('init-scripts')
+    <script src="/public/dialog/jquery.artDialog.js?skin=default" language="javascript"></script>
+
+@endpush
+
 
 
 @section('main')
     <div class="banner_cz">
-        <div class="w1000"><a href="/user/profile/pay.html" class="czzx"><span class="tit">充值中心</span><span class="en">Voucher Center</span></a>
-        </div>
+        <div class="w1000"><a href="pay.html" class="czzx"><span class="tit">充值中心</span><span
+                        class="en">Voucher Center</span></a></div>
     </div>
     <div class="main ovf ">
         <div class="w1000">
@@ -113,16 +122,14 @@
                                 <div class="yxuid">
                                     <div class="email" style="width:auto; margin-left:84px;">暂无支付<span class="name">&nbsp;&nbsp;&nbsp;暂无支付</span>
                                     </div>
-                                    <div class="tips">
-                                        请在转账附言中填写您的UID，您的UID是：9016
-                                    </div>
+                                    <div class="tips"> 请在转账附言中填写您的UID，您的UID是：9016</div>
                                 </div>
-                                <div class="zfbimg"><img src="/picture/zfbimg.png" alt=""></div>
+                                <div class="zfbimg"><img src="/themes/simplebootx/Public/images/zfbimg.png" alt="">
+                                </div>
                                 <div class="zfbline"></div>
                                 <div class="wx_tips">
                                     <div class="ts_tit">温馨提示：</div>
-                                    <p>
-                                        1. 请使用支付宝充值所需金额至以上账户，转账成功后将自动到账；
+                                    <p> 1. 请使用支付宝充值所需金额至以上账户，转账成功后将自动到账；
                                         <br> 2. 生成支付二维码之后请使用微信扫一扫功能进行扫码支付，支付成功后将自动到账；
                                         <br> 3. 使用转账方式充值，请在转账附言中填写您的UID，否则无法自动入账；
                                         <br> 4. 充值额度最低为50元；
@@ -136,7 +143,7 @@
                                 <div class="wxzzcz scanblock">
                                     <div class="title"><i class="wxicon1"></i>微信扫码在线支付</div>
                                     <div class="wxzzcz_nr">
-                                        <div class="imgbox"><img src="/picture/create_scan.png" class="qrcodesrc"
+                                        <div class="imgbox"><img src="/public/images/create_scan.png" class="qrcodesrc"
                                                                  style="width:160px;" alt=""></div>
                                         <div class="sys" style="margin-top:25px;">
                                             <div class="showpaymsg">
@@ -156,8 +163,7 @@
                                                 <form id="wxscan">
                                                     <input type="hidden" name="pt" value="1"/>
                                                     <input type="text" maxlength="9" class="checknum" name="fee"
-                                                           placeholder="请输入充值金额"/>
-                                                    <i>元</i>
+                                                           placeholder="请输入充值金额"/> <i>元</i>
                                                     <button type="button" class="doscanpay">获取支付码</button>
                                                 </form>
                                             </div>
@@ -169,18 +175,16 @@
                                 <div class="wxzzcz">
                                     <div class="title"><i class="wxicon1"></i>微信转账</div>
                                     <div class="yxuid">
-                                        <div class="email" style="width:auto; margin-left:84px;">微信名字：NG网站<span
-                                                    class="name">&nbsp;&nbsp;&nbsp;微信账号：ng59947</span></div>
-                                        <div class="tips">
-                                            因微信更换频繁，每次转账前请核对上分账号，请在转账附言中填写您的UID，您的UID是：9016
+                                        <div class="email" style="width:auto; margin-left:84px;">微信名字：情缘<span
+                                                    class="name">&nbsp;&nbsp;&nbsp;微信账号：xw535266</span>
                                         </div>
+                                        <div class="tips"> 因微信更换频繁，每次转账前请核对上分账号，请在转账附言中填写您的UID，您的UID是：9016</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="wx_tips">
                                 <div class="ts_tit">温馨提示：</div>
-                                <p>
-                                    1. 微信转账充值后，需要正确备注您的UID，收款后将自动到账；
+                                <p> 1. 微信转账充值后，需要正确备注您的UID，收款后将自动到账；
                                     <br> 2. 生成支付二维码之后请使用微信扫一扫功能进行扫码支付，支付成功后将自动到账；
                                     <br> 3. 二维码过期后请重新生成二维码，否则将充值失败；
                                     <br> 4. 充值额度最低为50元；
@@ -193,7 +197,7 @@
                                 <div class="wxzzcz scanblock">
                                     <div class="title"><i class="qqbag"></i>QQ钱包扫码在线支付</div>
                                     <div class="wxzzcz_nr">
-                                        <div class="imgbox"><img src="/picture/create_scan.png" class="qrcodesrc"
+                                        <div class="imgbox"><img src="/public/images/create_scan.png" class="qrcodesrc"
                                                                  style="width:160px;" alt=""></div>
                                         <div class="sys" style="margin-top:25px;">
                                             <div class="showpaymsg">
@@ -213,8 +217,7 @@
                                                 <form id="wxscan">
                                                     <input type="hidden" name="pt" value="2"/>
                                                     <input type="text" maxlength="9" class="checknum" name="fee"
-                                                           placeholder="请输入充值金额"/>
-                                                    <i>元</i>
+                                                           placeholder="请输入充值金额"/> <i>元</i>
                                                     <button type="button" class="doscanpay">获取支付码</button>
                                                 </form>
                                             </div>
@@ -227,14 +230,11 @@
                                 <div class="yxuid">
                                     <div class="email" style="width:auto; margin-left:84px;">账号：2532211169<span
                                                 class="name"> &nbsp;&nbsp;&nbsp;&nbsp; 姓名：ng</span></div>
-                                    <div class="tips">
-                                        请在转账附言中填写您的UID，您的UID是：9016
-                                    </div>
+                                    <div class="tips"> 请在转账附言中填写您的UID，您的UID是：9016</div>
                                 </div>
                                 <div class="wx_tips">
                                     <div class="ts_tit">温馨提示：</div>
-                                    <p>
-                                        1. 请使用财富通充值所需金额至以上账户，转账成功后将自动到账；
+                                    <p> 1. 请使用财富通充值所需金额至以上账户，转账成功后将自动到账；
                                         <br> 2. 生成支付二维码之后请使用微信扫一扫功能进行扫码支付，支付成功后将自动到账；
                                         <br> 3. 请在转账附言中填写您的UID，否则无法自动入账；
                                         <br> 4. 充值额度最低为50元；
@@ -243,15 +243,14 @@
                             </div>
                         </div>
                         <form id="bankpaydata" action="http://pay.taochawang.cc/index/bankpay"
-                              _action="/User/Profile/bankpay.html" method="post">
+                              _action="/user/profile/bankpay.html" method="post">
                             <input type="hidden" name="orderno" value=""/>
                             <div class="tab-pal">
                                 <div class="wyzf">
                                     <div class="title" style="margin:0"><i class="wyzficon1"></i>网银在线充值</div>
                                     <div class="wxzxcz_nr"><span>请输入充值金额</span>
                                         <input type="text" class="je checknum" name="fee" maxlength="10" value="50">
-                                        <input type="button" class="sc bankpay" value="跳转至网银充值">
-                                    </div>
+                                        <input type="button" class="sc bankpay" value="跳转至网银充值"></div>
                                     <div class="wx_tips">
                                         <div class="ts_tit">温馨提示：</div>
                                         <p>1. 输入充值金额之后点击跳转到网银支付页面，按照流程支付成功后将自动到账；
@@ -272,12 +271,9 @@
                                         <input type="text" class="jetext" name="t0_bank_zs" maxlength="10" value="50">
                                         <input type="hidden" name="t1_bank_zs" value="banktobank:招商银行账户转账">
                                         <input type="button" class="tjje" value="提交" id="submitbank1"
-                                               onclick="to_banktobank('1');">
-                                    </form>
+                                               onclick="to_banktobank('1');"></form>
                                     <div class="clear"></div>
-                                    <div class="jetips">
-                                        银行卡转账后在此提交您转账的金额，后联系客服QQ：9001723或直接联系客服转账充值
-                                    </div>
+                                    <div class="jetips"> 银行卡转账后在此提交您转账的金额，后联系客服QQ：9001723或直接联系客服转账充值</div>
                                 </div>
                                 <div class="title">建设银行账户</div>
                                 <div class="nr">
@@ -288,12 +284,9 @@
                                         <input type="text" class="jetext" name="t0_bank_zs" maxlength="10" value="50">
                                         <input type="hidden" name="t1_bank_zs" value="banktobank:建设银行账户转账">
                                         <input type="button" class="tjje" value="提交" id="submitbank4"
-                                               onclick="to_banktobank('4');">
-                                    </form>
+                                               onclick="to_banktobank('4');"></form>
                                     <div class="clear"></div>
-                                    <div class="jetips">
-                                        银行卡转账后在此提交您转账的金额，后联系客服QQ：9001723或直接联系客服转账充值
-                                    </div>
+                                    <div class="jetips"> 银行卡转账后在此提交您转账的金额，后联系客服QQ：9001723或直接联系客服转账充值</div>
                                 </div>
                                 <div class="wx_tips">
                                     <div class="ts_tit">温馨提示：</div>
@@ -309,8 +302,9 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{{ asset('js/pay.js') }}"></script>
 
+
+    <script type="text/javascript" src="/themes/simplebootx/Public/js/pay.js?v1"></script>
     <script>
         $(function () {
             //验证数字类型
@@ -333,7 +327,7 @@
                     return false;
                 }
                 $this.attr('disabled', true).text('正在获取支付码...');
-                $.post('/User/Profile/loadqrcode.html', form.serialize(), function (text) {
+                $.post('/user/profile/loadqrcode.html', form.serialize(), function (text) {
                     if (text.status == 1) {
                         block.find('.qrcodesrc').attr("src", "http://pan.baidu.com/share/qrcode?w=160&h=160&url=" + text.url);
                         block.find('.inputrecharge').hide();
@@ -371,21 +365,23 @@
         //查询回调
         function waitwxnotify(obj) {
             var interval = setInterval(function () {
-                $.get("/User/Profile/waitwxnotify.html", {orderno: obj.find('.orderno').text()}, function (text) {
+                $.get("/user/profile/waitwxnotify.html", {orderno: obj.find('.orderno').text()}, function (text) {
                     if (text.status == 1) {
                         clearInterval(interval);
                         obj.find('.doscanpay').text('支付成功');
                         $.message({content: "充值成功"});
                         setTimeout(function () {
-                            location.href = "/User/Center/index.html";
+                            location.href = "/user/center/index.html";
                         }, 1000);
                     }
                 })
             }, 3000);
         }
     </script>
-    <script src="{{ asset('js/online.js') }}"></script>
 @endsection
+
+
+
 
 
 @push('scripts')
@@ -399,7 +395,7 @@
                 "cid": "1",
                 "ac": "3",
                 "value": "9001723",
-                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=7770992&amp;site=qq&amp;menu=yes",
+                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=9001723&amp;site=qq&amp;menu=yes",
                 "img": "",
                 "status": "1",
                 "remark": "",
@@ -421,4 +417,6 @@
         };
         var appdownload = null
     </script>
+
+
 @endpush
