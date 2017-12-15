@@ -1,88 +1,92 @@
 @extends('layouts.app')
 
 
-
 @push('css')
+    <link href="/public/css/base.css" rel="stylesheet" type="text/css"/>
     <link href="/themes/simplebootx/Public/css/center.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/themes/simplebootx/Public/css/page.css" type="text/css"/>
+    <link href="/themes/simplebootx/Public/agent/user.css" rel="stylesheet" type="text/css"/>
+    <link href="/themes/simplebootx/Public/agent/proxy.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .my_game1 .yx_list li .yxmc,
+        .my_game1 .yx_list li.first .yxmc {
+            width: 15%;
+        }
 
+        .my_game1 .yx_list li .yl,
+        .my_game1 .yx_list li.first .yl {
+            width: 10%;
+        }
+
+        .my_game1 .yx_list li .gl,
+        .my_game1 .yx_list li.first .gl {
+            width: 15%;
+        }
+
+        .my_game1 .yx_list li .time,
+        .my_game1 .yx_list li.first .time {
+            width: 15%;
+        }
+    </style>
 @endpush
-
 
 @push('init-scripts')
-    <script src="/themes/simplebootx/Public/js/base.js"></script>
+
     <script type="text/javascript" src="/themes/simplebootx/Public/js/page.js"></script>
 @endpush
-
 
 
 @section('main')
     <div class="banner_hyzx">
         <div class="w1000">
             <div class="uesr">
-                <div class="imgbox"><a href="index.html"><img src="/themes/simplebootx/Public/images/user.png"
-                                                              alt=""></a>
+                <div class="imgbox"><a href="manage.html"><img src="/themes/simplebootx/Public/images/user.png" alt=""></a>
                 </div>
                 <div class="name_box">
-                    <div class="name"><span>{{ Auth::user()->username }}</span>
-                        <div class="uid">uid：{{ Auth::user()->id }}</div>
+                    <div class="name"><span>baozouxi</span>
+                        <div class="uid">uid：9016</div>
                     </div>
-                    <div class="time">上次登录时间：{{ $lastLogin->login_time }}</div>
+                    <div class="time">上次登录时间：2017-12-15 16:39:26</div>
                 </div>
             </div>
         </div>
     </div>
     <div class="main_nav">
         <div class="w1000">
-            <div class="navlist">
-                @include('account.nav')
 
-            </div>
+            @include('account.nav')
         </div>
     </div>
     <div class="main">
         <div class="w1000 clearfix">
-            <div class="hyzx_zhye">
-                <div class="zhye_box">
-                    <div class="title"><i class="zhyeicon"></i>账户余额</div>
-                    <div class="num">{{ number_format($capital->money, 2) }} 元</div>
-                    <a href="{{ route('account.recharge') }}" class="cz">充值</a><a
-                            href="{{ route('account.withdraw') }}" class="tx">提现</a></div>
-                <div class="geren_infolist">
-                    <li><i class="telicon"></i>
-                        <div class="text">{{ $phone }}</div>
-                        <a href="index.html" class="xg"></a></li>
-                    </li>
-                    <li><i class="qqicon"></i>
-                        <div class="text"></div>
-                        <a href="index.html" class="xg"></a></li>
-                    </li>
-                    <li><i class="emailicon"></i>
-                        <div class="text">123456123456</div>
-                        <div class="name">asdas</div>
-                    </li>
-                    <li style="border:none;height:38px;">
-                        @foreach($cards as $card)
-                            <i class="yhicon"
-                               style="background: url(/themes/simplebootx/Public/images/0000{{ $card->bank_id }}.png) no-repeat center center;"></i>
-                            <div class="text">{{ $card->number }}</div>
-                            <div class="name">{{ $bankName }}</div>
-                            @break
-                        @endforeach
-                    </li>
-                    </li>
+            <div class="right-side">
+                <div class="sidewrap merge-footer" style="min-height:auto;">
+                    <div class="content" id="user-proxy">
+                        <div class="body-row">
+                            <div class="statistical-info">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td width="20%">团队成员：<span class="boldtext">0人</span></td>
+                                        <td width="40%">团队余额：<span class="boldtext">0.00元（不包含自己）</span></td>
+                                        <td width="15%">当前返点：<span class="boldtext">%</span></td>
+                                        <td>总提成：<span class="boldtext">0.00元</span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="my_game1 mb40" style="height: 500px;">
-                <div class="title">财务记录</div>
-                <a href="{{ route('account.capital_log') }}" class="gdjl"><i class="gdjlicon"></i>更多记录</a>
+            <div class="my_game1 mb20" style="min-height:300px;">
+                <div class="title">团队成员</div>
+                <!--a href="/user/profile/money.html" class="gdjl"><i class="gdjlicon"></i>更多记录</a-->
                 <div class="yx_list"></div>
             </div>
             <div class="pagination" id="page_record_list"></div>
         </div>
     </div>
-    <br/>
-    <br/>
 
 @endsection
 
@@ -109,7 +113,7 @@
                 "name": "\u4ea4\u6d41\u7fa4\u2460",
                 "cid": "1",
                 "ac": "4",
-                "value": "111590831",
+                "value": "591811597",
                 "url": "",
                 "img": "",
                 "status": "1",
@@ -122,11 +126,12 @@
     <script type="text/javascript">
         function get_list_page(page) {
             var url, data;
-            url = "/account/money-logs?page=" + page;
+            url = "/team/load-manager";
             $.ajax({
                 type: "get",
                 cache: false,
                 url: url,
+                data: {page: page},
                 datatype: "json",
                 error: function (data) {
                     $.message({type: "error", content: '网络超时，请刷新页面后重试', time: 3000});
@@ -151,7 +156,7 @@
         }
 
         $(function () {
-            $(".navlist li a:eq(0)").addClass("current");
+            $(".navlist li a:eq(5)").addClass("current");
             get_list_page(1);
         });
     </script>

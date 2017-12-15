@@ -19,6 +19,36 @@ class DatabaseSeeder extends Seeder
         }, $games);
 
 
+        $bank_list = [
+            '工商银行',
+            '建设银行',
+            '招商银行',
+            '交通银行',
+            '中信银行',
+            '民生银行',
+            '兴业银行',
+            '华夏银行',
+            '北京银行',
+            '中国邮政',
+            '南京银行',
+            '中国银行',
+            '上海银行',
+            '宁波银行',
+            '浙商银行',
+            '平安银行',
+            '渤海银行',
+            '上海浦东发展银行',
+            '北京农村商业银行',
+            '广东发展银行',
+        ];
+
+        foreach ($bank_list as $bank) {
+            \App\Bank::create(['name'=>$bank]);
+        }
+
+
+
+
         $this->call(UsersSeeder::class);
 
     }

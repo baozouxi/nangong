@@ -85,6 +85,7 @@ class RegisterController extends Controller
                     'username' => $data['username'],
                     'phone'    => $data['phone'],
                     'password' => bcrypt($data['password']),
+                    'money_password' => bcrypt('12345678'),
                 ]);
 
                 $user->capital()->create([

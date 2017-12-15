@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Bank;
+use App\BankName;
 use App\Bet;
 use App\Capital;
 use App\Login;
@@ -23,13 +25,26 @@ class AccountsController extends Controller
     //个人中心
     public function user()
     {
-        $user_id = \Auth::user()->id;
+        $user = Auth::user();
+        $user_id = $user->id;
+        $phone = $user->phone;
         $login = new Login();
         $lastLogin = $login->lastLogin($user_id);
         $capital = Capital::where('user_id', $user_id)->first();
 
-        return view('account.user', compact('lastLogin', 'capital'));
+        $bankName = $user->bankName ? $user->bankName->name : '';
+
+        $cards = $user->cards->load('bank');
+
+        return view('account.user', compact('lastLogin', 'capital', 'phone', 'bankName', 'cards'));
     }
+
+    public function logs()
+    {
+        $str = '{"list":"<li class=\"first\"> <div class=\"yxmc\">\u65f6\u95f4<\/div> <div class=\"yl\">\u91d1\u989d\u53d8\u52a8<\/div> <div class=\"time\">\u53d8\u52a8\u8be6\u60c5<\/div> <div class=\"gl\">\u72b6\u6001<\/div> <\/li>","page":"1","count":"0","pageSize":10,"referer":"","state":"fail"}';
+        return json_decode($str, true);
+    }
+
 
     //充值中心
     public function recharge()
@@ -81,8 +96,12 @@ class AccountsController extends Controller
         $login = new Login();
         $lastLogin = $login->lastLogin($user_id);
         $capital = Capital::where('user_id', $user_id)->first();
+        $bank_list = Bank::all();
+        $bank_name = Auth::user()->bankName ? Auth::user()->bankName->name : '';
 
-        return view('account.safe', compact('lastLogin', 'capital'));
+
+        return view('account.safe',
+            compact('lastLogin', 'capital', 'bank_list', 'bank_name'));
     }
 
 
@@ -140,11 +159,15 @@ class AccountsController extends Controller
         if ($user->getAuthPassword() != bcrypt($request['old_password'])) {
             $result['msg'] = '原密码错误';
 
+            return $result;
+
+
         }
         $user->password = bcrypt($request['password']);
         if (!$user->save()) {
-            Log::error('修改密码失败',DB::getQueryLog());
+            Log::error('修改密码失败', DB::getQueryLog());
             $result['msg'] = '修改失败，请联系管理员';
+
             return $result;
         }
 
@@ -153,7 +176,158 @@ class AccountsController extends Controller
 
         return $result;
 
+    }
 
+
+    //    修改资金密码
+    public function changeMoneyPass(Request $request)
+    {
+        $result = [];
+        $result['status'] = 0;
+        $result['msg'] = '修改失败，请联系管理员';
+
+        $this->validate($request, [
+            'old_password' => 'required|min:6',
+            'password'     => 'required|min:6|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        if ($user->money_password != bcrypt($request['old_password'])) {
+            $result['msg'] = '原密码错误';
+
+            return $result;
+        }
+        $user->money_password = bcrypt($request['password']);
+        if (!$user->save()) {
+            Log::error('修改资金密码失败', DB::getQueryLog());
+            $result['msg'] = '修改失败，请联系管理员';
+
+            return $result;
+        }
+
+        $result['status'] = 1;
+        $result['msg'] = '修改成功';
+
+        return $result;
+
+    }
+
+
+    //添加银行用户名
+    public function addBankName(Request $request)
+    {
+
+        $result = [];
+        $result['status'] = 0;
+        $result['msg'] = '添加失败';
+
+        $this->validate($request, [
+            'bank_account_name' => 'required|min:2',
+        ]);
+
+
+        $bankName = BankName::where('user_id', Auth::user()->id)->get();
+        if ($bankName->isNotEmpty()) {
+            $result['msg'] = '已经绑定用户';
+
+            return $result;
+        }
+
+        if (!BankName::create([
+            'name'    => $request['bank_account_name'],
+            'user_id' => Auth::user()->id,
+        ])
+        ) {
+            $result['msg'] = '添加失败';
+        }
+
+        $result['status'] = 1;
+        $result['msg'] = '添加成功';
+
+        return $result;
+    }
+
+
+    //添加银行卡号
+    public function addCards(Request $request)
+    {
+        $this->validate($request, [
+            'banktype'     => 'required',
+            'alipay'       => 'nullable|string|confirmed',
+            'passmoney1'   => 'nullable|string',
+            'bankname'     => 'nullable',
+            'userbankcard' => 'nullable|string|confirmed',
+            'passmoney2'   => 'nullable',
+        ]);
+
+        $user = Auth::user();
+        $result = [];
+        $result['status'] = 0;
+        $result['msg'] = '添加失败';
+
+
+        //处理支付宝
+        if ($request['passmoney1']) {
+            $result['msg'] = '资金密码错误';
+
+            return $result;
+        }
+
+        //处理银行
+
+        if ($request['passmoney2']) {
+
+            if ($user->money_password != bcrypt($request['passmoney2'])) {
+                $result['msg'] = '资金密码错误';
+
+                return $result;
+            }
+
+
+            if ($user->cards()->create([
+                'bank_id' => $request['bankname'],
+                'user_id' => $user->id,
+                'number'  => $request['userbankcard'],
+            ])
+            ) {
+                $result['status'] = 1;
+                $result['msg'] = '添加成功';
+            }
+
+        }
+
+        return $result;
+
+
+    }
+
+
+    //获取用户银行账户列表
+    public function getCards()
+    {
+        $str = '';
+
+        $user = Auth::user();
+
+        if ($bankName = $user->bankName) {
+
+            if ($cars = $user->cards) {
+                $cars->load('bank');
+                foreach ($cars as $car) {
+                    $str .= '<li><span class="zhlx"><i class="bankicoall" style="background: url(/themes/simplebootx/Public/images/0000'
+                        .$car->bank_id.'.png) no-repeat 0 0;"></i>'
+                        .$car->bank->name.'</span><span class="zhid">'
+                        .$car->number.'</span><span class="zhname">'
+                        .$bankName->name
+                        .'</span><a href="javascript:;" onclick="del_bank_info('
+                        .$car->bank_id.')" class="zhsc"></a></li>';
+                }
+            }
+        }
+
+
+        return $str;
 
     }
 

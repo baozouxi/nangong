@@ -71,13 +71,13 @@
                         href="{{ route('account.agency') }}">代理中心</a> <a href="{{ route('account.safe') }}">安全中心</a>
             </div>
         </li>
-        <li><a href="/user/ltagent/index.html"><i class="navicon6"></i><span class="cn">团队代理</span><span
+        <li><a href="{{ route('team.index') }}"><i class="navicon6"></i><span class="cn">团队代理</span><span
                         class="en">team</span></a></li>
-        <li><a href="/portal/index/notice.html"><i class="navicon7"></i><span class="cn">系统公告</span><span class="en">discount</span></a>
+        <li><a href="#"><i class="navicon7"></i><span class="cn">系统公告</span><span class="en">discount</span></a>
             <div class="ssnav">
                 <div class="h14"></div>
-                <a href="/portal/index/notice/cid/31.html">最新公告</a> <a href="/portal/index/notice/cid/32.html">会员必读</a>
-                <a href="/portal/index/notice/cid/33.html">活动公告</a></div>
+                <a href="#">最新公告</a> <a href="#">会员必读</a>
+                <a href="#">活动公告</a></div>
         </li>
     </div>
 </div>

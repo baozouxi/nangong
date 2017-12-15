@@ -365,7 +365,7 @@
                         </ul>
                         <div class="clear"></div>
                         <div class="hzname">户主姓名</div>
-                        <span id="sp_hzname" class="hzname1">asdas</span></div>
+                        <span id="sp_hzname" class="hzname1">{{ $bank_name }}</span></div>
                     <div class="bd">
                         <ul class="passwordlist" style="margin-top:0px;padding-bottom:30px;">
                             <li class="clearfix">
@@ -374,27 +374,9 @@
                                     <div class="select">
                                         <select id="rid11" style="display: none" name="bankname">
                                             <option value="" selected="selected">- 请选择 -</option>
-                                            <option value="00001:工商银行">工商银行</option>
-                                            <option value="00002:建设银行">建设银行</option>
-                                            <option value="00003:招商银行">招商银行</option>
-                                            <option value="00004:交通银行">交通银行</option>
-                                            <option value="00005:中信银行">中信银行</option>
-                                            <option value="00006:民生银行">民生银行</option>
-                                            <option value="00007:兴业银行">兴业银行</option>
-                                            <option value="00008:农业银行">农业银行</option>
-                                            <option value="00009:华夏银行">华夏银行</option>
-                                            <option value="00010:北京银行">北京银行</option>
-                                            <option value="00011:中国邮政">中国邮政</option>
-                                            <option value="00012:南京银行">南京银行</option>
-                                            <option value="00013:中国银行">中国银行</option>
-                                            <option value="00014:上海银行">上海银行</option>
-                                            <option value="00015:宁波银行">宁波银行</option>
-                                            <option value="00016:浙商银行">浙商银行</option>
-                                            <option value="00017:平安银行">平安银行</option>
-                                            <option value="00018:渤海银行">渤海银行</option>
-                                            <option value="00019:上海浦东发展银行">上海浦东发展银行</option>
-                                            <option value="00020:北京农村商业银行">北京农村商业银行</option>
-                                            <option value="00021:广东发展银行">广东发展银行</option>
+                                            @foreach($bank_list as $bank)
+                                             <option value="{{ $bank->id }}">{{ $bank->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <script type="text/javascript">

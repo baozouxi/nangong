@@ -8,9 +8,9 @@ $(function(){
 //银行信息列表
 function get_bank_list(){
     $.ajax({
-        type:"post",
+        type:"get",
         cache:false,
-        url:"/user/profile/get_bank_list",
+        url:"/account/cards",
         success:function(data)
         {
             $("#bank_list").html(data);
@@ -202,10 +202,11 @@ function editpassmoney(the)
     }
 	
 	var url,data;
-	url="/user/profile/modify_tran_pass";
-	data="oldpass="+encodeURIComponent($.trim(the.oldpass.value));
+	url="/account/money-password";
+	data="old_password="+encodeURIComponent($.trim(the.oldpass.value));
 	data+="&password="+encodeURIComponent($.trim(the.password.value));
-    data+="&repassword="+encodeURIComponent($.trim(the.repassword.value));
+    data+="&password_confirmation="+encodeURIComponent($.trim(the.repassword.value));
+    data+="&_method=PATCH";
 
 	$.ajax({
 	type:"post",
@@ -245,7 +246,7 @@ function editnickname(the)
 	}
 	
 	var url,data;
-    url="/user/profile/bind_bank_account_name";
+    url="/account/bank-name";
 	data="bank_account_name="+encodeURIComponent($.trim(the.nickname.value));
 
 	$.ajax({
@@ -561,14 +562,14 @@ function editbankcard(the)
 	}
 	
 	var url,data;
-	url="/user/profile/add_bank_account";
+	url="/account/cards";
 	data="banktype="+encodeURIComponent($.trim(banktype));
 	data+="&alipay="+encodeURIComponent($.trim(the.alipay.value));
 	data+="&realipay="+encodeURIComponent($.trim(the.realipay.value));
 	data+="&passmoney1="+encodeURIComponent($.trim(the.passmoney1.value));
 	data+="&bankname="+encodeURIComponent($.trim(the.bankname.value));
 	data+="&userbankcard="+encodeURIComponent($.trim(the.userbankcard.value));
-	data+="&rebankcard="+encodeURIComponent($.trim(the.rebankcard.value));
+	data+="&userbankcard_confirmation="+encodeURIComponent($.trim(the.rebankcard.value));
 	data+="&passmoney2="+encodeURIComponent($.trim(the.passmoney2.value));
 	data+="&bankadd1="+encodeURIComponent($.trim(the.bankadd1.value));
 	data+="&bankadd2="+encodeURIComponent($.trim(the.bankadd2.value));

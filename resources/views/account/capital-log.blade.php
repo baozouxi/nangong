@@ -100,14 +100,14 @@
         function get_finance_list(t, d, page) {
             var url, data;
             tsort = t;
-            url = "/user/profile/get_finance_list/t/" + t + "/d/" + d + "/page/" + page;
+            url = "/account/money-logs?page" + page;
             $(".titbox a").removeClass("current");
             var i1 = t - 1;
             var i2 = d - 1;
             $(".tt1 a").eq(i1).addClass("current");
             $(".tt2 a").eq(i2).addClass("current");
             $.ajax({
-                type: "post",
+                type: "get",
                 cache: false,
                 url: url,
                 datatype: "json",
