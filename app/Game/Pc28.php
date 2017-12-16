@@ -159,7 +159,7 @@ class Pc28 implements GameInterface
 
     public function name()
     {
-        return self::NAME;
+        return static::NAME;
     }
 
 

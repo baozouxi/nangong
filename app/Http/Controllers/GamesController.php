@@ -38,6 +38,24 @@ class GamesController extends Controller
     }
 
 
+    //北京幸运28-2.5倍场
+    public function pc28v25(Request $request)
+    {
+        $game = Game::where('name', '北京幸运28-2.5倍场')->firstOrFail();
+
+        return view('game.pc28v25', ['game_id' => $game->id]);
+    }
+
+
+    //北京幸运28-2.5倍场 下注界面
+    public function pc28v25Play()
+    {
+        $game = Game::where('name', '北京幸运28-2.5倍场')->firstOrFail();
+
+        return view('game.pc28v25Play', ['game_id' => $game->id]);
+    }
+
+
     //submit bets
     public function bets(Game $game, Request $request)
     {
@@ -86,6 +104,9 @@ class GamesController extends Controller
             'tp108' => '大双',
             'tp109' => '极小',
             'tp110' => '极大',
+            'tp140' => '豹子',
+            'tp141' => '顺子',
+            'tp142' => '对子',
         ];
 
 
@@ -142,17 +163,18 @@ class GamesController extends Controller
     }
 
 
-
     public function cancelBet(Bet $bet)
     {
         $result = [];
         $result['status'] = 0;
         $result['info'] = '取消失败';
 
-        if($bet->lotteried == 1) return $result;
+        if ($bet->lotteried == 1) {
+            return $result;
+        }
 
-        try{
-            DB::transaction(function() use ($bet, &$result){
+        try {
+            DB::transaction(function () use ($bet, &$result) {
                 $money = $bet->money;
                 $bet->delete();
                 $capital = Auth::user()->capital;
@@ -162,7 +184,7 @@ class GamesController extends Controller
                 $result['status'] = 1;
                 $result['info'] = '取消下注成功';
             });
-        }catch (\Throwable $e){
+        } catch (\Throwable $e) {
             Log::info($e->getMessage());
         }
 
@@ -214,7 +236,21 @@ class GamesController extends Controller
         $result['ptype1'] = $lottery['daxiao'];
         $result['ptype2'] = $lottery['danshuang'];
         $result['ptype3'] = $lottery['zuhe'];
-        $result['ptype5'] = '';
+
+
+        if (isset($lottery['baozi'])) {
+            if ($lottery['baozi']) {
+                $result['ptype5'] = $lottery['baozi'];
+            } else {
+                if ($lottery['shunzi']) {
+                    $result['ptype5'] = $lottery['shunzi'];
+                } else {
+                    $result['ptype5'] = $lottery['duizi'];
+                }
+            }
+        }
+
+
         $result['state'] = 'fail';
 
         return $result;
@@ -306,6 +342,18 @@ class GamesController extends Controller
             $temp_arr['ptype2'] = $lottery['danshuang'];
             $temp_arr['ptype3'] = $lottery['zuhe'];
             $temp_arr['ptype5'] = $lottery['jizhi'];
+            if (isset($lottery['baozi'])) {
+                if ($lottery['baozi']) {
+                    $temp_arr['ptype5'] = $lottery['baozi'];
+                } else {
+                    if ($lottery['shunzi']) {
+                        $temp_arr['ptype5'] = $lottery['shunzi'];
+                    } else {
+                        $temp_arr['ptype5'] = $lottery['duizi'];
+                    }
+                }
+            }
+
             array_push($result, $temp_arr);
         }
 

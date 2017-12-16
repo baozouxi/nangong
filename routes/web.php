@@ -56,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{game}/open-time', 'GamesController@getOpenTime')->name('openTime'); //开奖时间
         Route::get('/pc28', 'GamesController@pc28')->name('pc28'); //北京幸运28欢迎界面
         Route::get('/pc28/play', 'GamesController@pc28Play')->name('pc28Play'); // 北京幸运28游戏界面
+        Route::get('/pc28v25', 'GamesController@pc28v25')->name('pc28v25'); //北京幸运28 2.5倍欢迎界面
+        Route::get('/pc28v25/play', 'GamesController@pc28v25Play')->name('pc28v25Play'); // 北京幸运28 2.5倍游戏界面
         Route::post('/{game}/bets', 'GamesController@bets')->name('dobets'); //下注
         Route::delete('/bets/{bet}', 'GamesController@cancelBet')->name('cancelBet'); //取消下注
         Route::get('/{game}/tab-list', 'GamesController@tabList')->name('tabList'); // 获取开奖历史

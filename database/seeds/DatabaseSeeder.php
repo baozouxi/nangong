@@ -12,7 +12,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $games = [['name' => \App\Game\Pc28::NAME]];
+        $games = [
+            ['name' => \App\Game\Pc28::NAME],
+            ['name' => \App\Game\Pc28v25::NAME],
+        ];
 
         array_map(function ($game) {
             \App\Game::create($game);
@@ -43,10 +46,8 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($bank_list as $bank) {
-            \App\Bank::create(['name'=>$bank]);
+            \App\Bank::create(['name' => $bank]);
         }
-
-
 
 
         $this->call(UsersSeeder::class);

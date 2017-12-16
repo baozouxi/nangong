@@ -10,6 +10,7 @@ use App\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -36,12 +37,15 @@ class AccountsController extends Controller
 
         $cards = $user->cards->load('bank');
 
-        return view('account.user', compact('lastLogin', 'capital', 'phone', 'bankName', 'cards'));
+        return view('account.user',
+            compact('lastLogin', 'capital', 'phone', 'bankName', 'cards'));
     }
 
     public function logs()
     {
-        $str = '{"list":"<li class=\"first\"> <div class=\"yxmc\">\u65f6\u95f4<\/div> <div class=\"yl\">\u91d1\u989d\u53d8\u52a8<\/div> <div class=\"time\">\u53d8\u52a8\u8be6\u60c5<\/div> <div class=\"gl\">\u72b6\u6001<\/div> <\/li>","page":"1","count":"0","pageSize":10,"referer":"","state":"fail"}';
+        $str
+            = '{"list":"<li class=\"first\"> <div class=\"yxmc\">\u65f6\u95f4<\/div> <div class=\"yl\">\u91d1\u989d\u53d8\u52a8<\/div> <div class=\"time\">\u53d8\u52a8\u8be6\u60c5<\/div> <div class=\"gl\">\u72b6\u6001<\/div> <\/li>","page":"1","count":"0","pageSize":10,"referer":"","state":"fail"}';
+
         return json_decode($str, true);
     }
 
@@ -156,7 +160,7 @@ class AccountsController extends Controller
 
         $user = Auth::user();
 
-        if ($user->getAuthPassword() != bcrypt($request['old_password'])) {
+        if (!Hash::check($request['old_password'], $user->getAuthPassword())) {
             $result['msg'] = '原密码错误';
 
             return $result;
@@ -193,7 +197,7 @@ class AccountsController extends Controller
 
         $user = Auth::user();
 
-        if ($user->money_password != bcrypt($request['old_password'])) {
+        if (!Hash::check($request['old_password'], $user->money_password)) {
             $result['msg'] = '原密码错误';
 
             return $result;
@@ -278,7 +282,7 @@ class AccountsController extends Controller
 
         if ($request['passmoney2']) {
 
-            if ($user->money_password != bcrypt($request['passmoney2'])) {
+            if (!Hash::check($request['passmoney2'], $user->money_password)) {
                 $result['msg'] = '资金密码错误';
 
                 return $result;

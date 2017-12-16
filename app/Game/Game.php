@@ -95,6 +95,7 @@ class Game
                 $current_codes = $game->getCodes();
                 $name = $game->name();
                 if (!empty($current_codes)) {
+                    dump($name);
                     event(new GotCodes($name, $current_codes)); //获取成功 触发事件
                     $codes[$name] = $current_codes;
                 }
