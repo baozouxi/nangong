@@ -49,6 +49,12 @@ class DatabaseSeeder extends Seeder
             \App\Bank::create(['name' => $bank]);
         }
 
+        \App\Admin::create([
+            'username' => 'baozouxi',
+            'password' => bcrypt('123456')
+        ]);
+
+
 
         $this->call(UsersSeeder::class);
 

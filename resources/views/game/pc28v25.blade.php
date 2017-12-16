@@ -32,9 +32,9 @@
                     <div class="title">幸运28</div>
                     <div class="select25">
                         <select id="rid" class="mr10" name="rid"
-                                onchange="location.href='/user/game/pc28v2'+$(this).val();">
-                            <option value="5" selected="selected">2.5倍场</option>
-                            <option value="0">2.0倍场</option>
+                                onchange="location.href='/game/pc28'+$(this).val();">
+                            <option value="v25" selected="selected">2.5倍场</option>
+                            <option value="">2.0倍场</option>
                         </select>
                     </div>
                     <div class="dnq qihaoHD"></div>

@@ -17,6 +17,9 @@ Route::get('/', 'HomeController@index')->name('home');
 
 //以下路由要经过auth中间件
 
+
+
+//前台
 Route::group(['middleware' => 'auth'], function () {
 
 
@@ -69,3 +72,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+
+Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
+
+    Route::get('/index', 'AdminController@index')->name('admin.index');
+    Route::get('/login', 'AdminController@login')->name('admin.login');
+    Route::post('/login', 'AdminController@loginPost')->name('admin.loginPost');
+    Route::get('/logout', 'AdminController@logout')->name('admin.logout');
+    Route::get('/users','AdminController@users')->name('admin.users');
+
+});

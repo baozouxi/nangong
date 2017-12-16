@@ -1218,9 +1218,9 @@ function onlynum10(t0) {
 function hrefjs(the) {
     var url = location.href;
     if (the.value == "0") {
-        url = url.replace("pc28v25", "pc28v20");
+        url = url.replace("pc28v25", "pc28");
     } else {
-        url = url.replace("pc28v20", "pc28v25");
+        url = url.replace("pc28", "pc28v25");
     }
     location.href = url;
 }
