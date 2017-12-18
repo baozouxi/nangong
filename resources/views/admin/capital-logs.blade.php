@@ -8,7 +8,7 @@
     </div>
     <ol class="am-breadcrumb">
         <li><a href="{{ route('admin.index') }}" class="am-icon-home">首页</a></li>
-        <li><a href="#">用户列表</a></li>
+        <li><a href="#">财务记录</a></li>
     </ol>
     <div class="tpl-portlet-components">
         <div class="portlet-title">
@@ -56,71 +56,43 @@
                             <tr>
                                 <th class="table-check"><input type="checkbox" class="tpl-table-fz-check"></th>
                                 <th class="table-id">ID</th>
-                                <th class="table-title">用户名</th>
-                                <th class="table-type">余额</th>
-                                <th class="table-type">银行用户名</th>
-                                <th class="table-type">银行卡号</th>
-                                <th class="table-author am-hide-sm-only">状态</th>
-                                <th class="table-date am-hide-sm-only">上次登录日期</th>
-                                <th class="table-date am-hide-sm-only">注册日期</th>
+                                <th class="table-title">类别</th>
+                                <th class="table-type">操作金额</th>
+                                <th class="table-type">用户名</th>
+                                <th class="table-type">状态</th>
+                                <th class="table-date am-hide-sm-only">操作日期</th>
                                 <th class="table-set">操作</th>
                             </tr>
                             </thead>
                             <tbody>
 
-
-                            @foreach($users as $user)
+                            @foreach($capitalLogs as $capitalLog)
                                 <tr>
                                     <td><input type="checkbox"></td>
-                                    <td>{{ $user->id }}</td>
-                                    <td class="username"><a href="#">{{ $user->username }}</a></td>
-                                    <td class="money">{{ number_format($user->capital->money, 2)  }}</td>
-                                    <td>{{ $user->bankName ? $user->bankName->name :  '暂未添加' }}</td>
+                                    <td>{{ $capitalLog->id }}</td>
                                     <td>
-                                        <div class="am-dropdown" data-am-dropdown>
-                                            <button class="am-btn am-btn-primary am-dropdown-toggle"
-                                                    style="color: #000;" data-am-dropdown-toggle>银行账户列表 <span
-                                                        class="am-icon-caret-down"></span></button>
-                                            <ul class="am-dropdown-content">
-                                                @foreach($user->cards as $card)
-                                                    <li class="am-disabled">{{ $card->bank->name }}
-                                                        ：{{ $card->number }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
+                                        <a href="#">{{ $capitalLog->type == \App\CapitalLog::RECHARGE ? '充值' : '提现' }}</a>
                                     </td>
-                                    <td class="am-hide-sm-only enable">{{  $user->enable ? '正常' : '冻结' }}</td>
-                                    <td class="am-hide-sm-only">{{ $user->login->isNotEmpty() ? $user->login->first()->login_time : '' }}</td>
-                                    <td class="am-hide-sm-only">{{ $user->created_at }}</td>
+                                    <td>{{ number_format($capitalLog->money, 2)  }}</td>
+                                    <td class="am-hide-sm-only">{{ $capitalLog->user->username }}</td>
+                                    <td class="am-hide-sm-only">{{ $capitalLog->ok ? '已到账' : '未处理' }}</td>
+                                    <td class="am-hide-sm-only">{{ $capitalLog->created_at }}</td>
                                     <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <button type="button"
-                                                        class="am-btn am-btn-default am-btn-xs am-text-secondary recharge"
-                                                        data-id="{{ $user->id }}"><span
-                                                            class="am-icon-pencil-square-o"></span> 充值
-                                                </button>
-
-                                                @if($user->enable)
-
+                                        @if($capitalLog->type != \App\CapitalLog::WITHDRAW)
+                                            <div class="am-btn-toolbar">
+                                                <div class="am-btn-group am-btn-group-xs">
                                                     <button type="button"
-                                                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only frozen"
-                                                            data-id="{{ $user->id }}">
-                                                        <span class="am-icon-trash-o"></span> 冻结
+                                                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only order-cancel"
+                                                            data-id="{{ $capitalLog->id }}"><span
+                                                                class="am-icon-trash-o"></span>撤销
                                                     </button>
-
-                                                @else
-                                                    <button type="button"
-                                                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only reFrezen"
-                                                            data-id="{{ $user->id }}">
-                                                        <span class="am-icon-trash-o"></span> 解冻
-                                                    </button>
-                                                @endif
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
+
 
                             </tbody>
                         </table>
@@ -166,5 +138,5 @@
 @endsection
 
 @push('scripts')
-    <script src="/assets/js/user.js"></script>
+    <script src="/assets/js/capital_log.js"></script>
 @endpush

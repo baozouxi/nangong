@@ -28,7 +28,7 @@
                     <div class="name"><span>{{ Auth::user()->username }}</span>
                         <div class="uid">uid：{{ Auth::user()->id }}</div>
                     </div>
-                    <div class="time">上次登录时间：{{ $lastLogin->login_time }}</div>
+                    <div class="time">上次登录时间：{{ $lastLogin? $lastLogin->login_time : '' }}</div>
                 </div>
             </div>
         </div>
@@ -358,10 +358,10 @@
                                     <input type="radio" name="banktype" checked="checked" value="2">
                                     <span>银行卡</span></label>
                             </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="banktype" value="1"> <span>支付宝</span></label>
-                            </li>
+                            {{--<li>--}}
+                                {{--<label>--}}
+                                    {{--<input type="radio" name="banktype" value="1"> <span>支付宝</span></label>--}}
+                            {{--</li>--}}
                         </ul>
                         <div class="clear"></div>
                         <div class="hzname">户主姓名</div>

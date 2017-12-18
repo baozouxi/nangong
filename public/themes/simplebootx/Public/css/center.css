@@ -450,7 +450,7 @@
 .xuanzeyinhang .slideTxtBox .hd ul li .title i.b00008{display: block;width: 24px;height: 24px;background: url(../images/zgnyyhicon.png) no-repeat center center;float: left;margin-top: 6px;margin-right: 10px;}
 .xuanzeyinhang .slideTxtBox .hd ul li .title i.b99999{display: block;width: 24px;height: 25px;background: url(../images/zfbicon000.png) no-repeat center center;float: left;margin-top: 6px;margin-right: 10px;}
 
-.xuanzeyinhang .slideTxtBox .hd ul li .num{margin-left: 40px;height: 27px;line-height: 27px;color: #666666;font-size: 16px;float: left;}
+.xuanzeyinhang .slideTxtBox .hd ul li .num{margin-left: 42px; clear:both;height: 27px;line-height: 27px;color: #666666;font-size: 16px;float: left;}
 .xuanzeyinhang .slideTxtBox .bd ul{}
 .xuanzeyinhang .slideTxtBox .bd ul .jinebox{width: 906px;height: 204px;float: left;margin-left: 46px;margin-top: 57px;background: url(../images/txbg.png) no-repeat center center;}
 .xuanzeyinhang .slideTxtBox .bd ul .jinebox li{width: 100%;height: auto;float: left;}

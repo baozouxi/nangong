@@ -85,7 +85,7 @@
                 <li class="rows clearfix takecode">
                     <div id="codedrag" style="width:315px;margin:18px 0 0 0;"></div>
                 </li>
-                <li class="clearfix alj"><a href="http://ng077.com/user/register/index.html" class="zczh">注册账号</a><a
+                <li class="clearfix alj"><a href="{{ route('register')  }}" class="zczh">注册账号</a><a
                             href="javascript:;" class="wjmm">忘记密码</a></li>
                 <li style="border:none;">
                     <input type="button" id="signinButton" onclick="checklogin()" disabled="disabled"

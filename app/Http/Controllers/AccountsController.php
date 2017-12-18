@@ -6,7 +6,9 @@ use App\Bank;
 use App\BankName;
 use App\Bet;
 use App\Capital;
+use App\CapitalLog;
 use App\Login;
+use App\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -41,12 +43,52 @@ class AccountsController extends Controller
             compact('lastLogin', 'capital', 'phone', 'bankName', 'cards'));
     }
 
-    public function logs()
+    public function logs(Request $request)
     {
-        $str
-            = '{"list":"<li class=\"first\"> <div class=\"yxmc\">\u65f6\u95f4<\/div> <div class=\"yl\">\u91d1\u989d\u53d8\u52a8<\/div> <div class=\"time\">\u53d8\u52a8\u8be6\u60c5<\/div> <div class=\"gl\">\u72b6\u6001<\/div> <\/li>","page":"1","count":"0","pageSize":10,"referer":"","state":"fail"}';
 
-        return json_decode($str, true);
+        $logs = new CapitalLog();
+
+        $logs = $logs->where('user_id', Auth::user()->id);
+
+        if ($request->has('type')) {
+            $logs = $logs->where('type', $request['type']);
+        }
+
+        if ($request->has('date')) {
+            $logs = $logs->whereDate('created_at', $request['date']);
+        }
+
+        $all_count = $logs->count();
+        $logs = $logs->get();
+
+
+
+        $str
+            = '<div class="yx_list"><li class="first"> <div class="yxmc">时间</div> <div class="yl">金额变动</div> <div class="time">变动详情</div> <div class="gl">状态</div> </li>';
+
+
+        foreach ($logs as $log) {
+            $type = $log->type == CapitalLog::RECHARGE ? '充值' : '提现';
+            $status = $log->ok ? '已到账' : '未处理';
+            $str .= '<li><div class="yxmc">'.$log->created_at.'</div>';
+            $str .= '<div class="yl">'.$log->money.'</div>';
+            $str .= '<div class="time">'.$type.'</div>';
+            $str .= '<div class="gl">'.$status.'</div>';
+            $str .= '</li>';
+        }
+
+        $str .= '</div><div class="pagination"></div>';
+
+        $result = [];
+        $result['list'] = $str;
+        $result['page'] = '1';
+        $result['count'] = $all_count;
+        $result['pageSize'] = '10';
+        $result['referer'] = '';
+        $result['state'] = 'fail';
+
+
+        return $result;
     }
 
 
@@ -65,7 +107,51 @@ class AccountsController extends Controller
         $lastLogin = $login->lastLogin($user_id);
         $capital = Capital::where('user_id', $user_id)->first();
 
-        return view('account.withdraw', compact('lastLogin', 'capital'));
+        $cards = Auth::user()->cards;
+
+
+        return view('account.withdraw',
+            compact('lastLogin', 'capital', 'cards'));
+
+    }
+
+
+    //submit withdraw
+    public function doWithdraw(Request $request)
+    {
+        $this->validate($request, [
+            't0' => 'required|min:50|numeric',
+            't1' => 'required|min:0|exists:cards,id',
+            't2' => 'required|string',
+        ]);
+
+        $user = Auth::user();
+        $result = [];
+        $result['status'] = 0;
+        $result['msg'] = '请求失败';
+        if (!Hash::check($request['t2'], $user->money_password)) {
+            $result['msg'] = '资金密码错误';
+
+            return $result;
+        }
+
+        if ($request['t0'] > $user->capital->money) {
+            $result['msg'] = '账户余额不足';
+
+            return $result;
+        }
+
+
+        if ($user->withdraws()->create([
+            'money'   => $request['t0'],
+            'card_id' => $request['t1'],
+        ])
+        ) {
+            $result['status'] = 1;
+            $result['msg'] = '请求成功，请等待管理员处理';
+        }
+
+        return $result;
 
     }
 
@@ -102,7 +188,6 @@ class AccountsController extends Controller
         $capital = Capital::where('user_id', $user_id)->first();
         $bank_list = Bank::all();
         $bank_name = Auth::user()->bankName ? Auth::user()->bankName->name : '';
-
 
         return view('account.safe',
             compact('lastLogin', 'capital', 'bank_list', 'bank_name'));
@@ -271,13 +356,6 @@ class AccountsController extends Controller
         $result['msg'] = '添加失败';
 
 
-        //处理支付宝
-        if ($request['passmoney1']) {
-            $result['msg'] = '资金密码错误';
-
-            return $result;
-        }
-
         //处理银行
 
         if ($request['passmoney2']) {
@@ -314,6 +392,7 @@ class AccountsController extends Controller
 
         $user = Auth::user();
 
+
         if ($bankName = $user->bankName) {
 
             if ($cars = $user->cards) {
@@ -330,9 +409,9 @@ class AccountsController extends Controller
             }
         }
 
-
         return $str;
 
     }
+
 
 }

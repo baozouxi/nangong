@@ -565,7 +565,7 @@ function editbankcard(the)
 	url="/account/cards";
 	data="banktype="+encodeURIComponent($.trim(banktype));
 	data+="&alipay="+encodeURIComponent($.trim(the.alipay.value));
-	data+="&realipay="+encodeURIComponent($.trim(the.realipay.value));
+	data+="&alipay_confirmation="+encodeURIComponent($.trim(the.realipay.value));
 	data+="&passmoney1="+encodeURIComponent($.trim(the.passmoney1.value));
 	data+="&bankname="+encodeURIComponent($.trim(the.bankname.value));
 	data+="&userbankcard="+encodeURIComponent($.trim(the.userbankcard.value));

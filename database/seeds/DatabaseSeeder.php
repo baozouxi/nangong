@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             '上海浦东发展银行',
             '北京农村商业银行',
             '广东发展银行',
+            '支付宝'
         ];
 
         foreach ($bank_list as $bank) {

@@ -27,7 +27,7 @@
                     <div class="name"><span>{{ Auth::user()->username }}</span>
                         <div class="uid">uid：{{ Auth::user()->id }}</div>
                     </div>
-                    <div class="time">上次登录时间：{{ $lastLogin->login_time }}</div>
+                    <div class="time">上次登录时间：{{ $lastLogin ? $lastLogin->login_time : ''  }}</div>
                 </div>
             </div>
         </div>
@@ -57,17 +57,14 @@
                         <div class="text"></div>
                         <a href="index.html" class="xg"></a></li>
                     </li>
-                    <li><i class="emailicon"></i>
-                        <div class="text">123456123456</div>
-                        <div class="name">asdas</div>
-                    </li>
+
                     <li style="border:none;height:38px;">
                         @foreach($cards as $card)
                             <i class="yhicon"
                                style="background: url(/themes/simplebootx/Public/images/0000{{ $card->bank_id }}.png) no-repeat center center;"></i>
                             <div class="text">{{ $card->number }}</div>
                             <div class="name">{{ $bankName }}</div>
-                            @break
+
                         @endforeach
                     </li>
                     </li>

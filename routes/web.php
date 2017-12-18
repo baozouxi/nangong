@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/user-info', 'AccountsController@userInfo')->name('account.userInfo'); //个人信息
         Route::get('/recharge', 'AccountsController@recharge')->name('account.recharge'); //充值
         Route::get('/withdraw', 'AccountsController@withdraw')->name('account.withdraw'); //提现
+        Route::post('/withdraw', 'AccountsController@doWithdraw')->name('account.doWithdraw'); //处理提现
         Route::get('/capital-log', 'AccountsController@capitalLog')->name('account.capital_log'); //财务记录
         Route::get('/agency', 'AccountsController@agency')->name('account.agency'); //代理中心
         Route::get('/safe', 'AccountsController@safe')->name('account.safe'); // 安全中心
@@ -80,5 +81,11 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::post('/login', 'AdminController@loginPost')->name('admin.loginPost');
     Route::get('/logout', 'AdminController@logout')->name('admin.logout');
     Route::get('/users','AdminController@users')->name('admin.users');
+    Route::get('/capital-logs', 'AdminController@capitalLogs')->name('admin.capital-logs');
+    Route::patch('/users/{user}/capital','AdminController@recharge')->name('admin.recharge'); //充值
+    Route::patch('/users/{user}', 'AdminController@userUpdate')->name('admin.userUpdate');
+    Route::delete('/capital-logs/{capitalLog}', 'AdminController@cancelCapitalLog')->name('admin.cancelCapitalLog');
+    Route::get('/withdraws', 'AdminController@withDraws')->name('admin.withDraws');\
+    Route::post('/withdraws/{withdraw}','AdminController@updateWithdraw')->name('admin.updateWithdraw');
 
 });

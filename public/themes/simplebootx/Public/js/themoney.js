@@ -67,7 +67,7 @@ function checkdb(the)
         ok:function()
         {
             var url,data;
-            url="/user/profile/expressive_apply";
+            url="/account/withdraw";
             data="t0="+encodeURIComponent(d1);
             data+="&t1="+encodeURIComponent($.trim(the.thetype.value));
             data+="&t2="+encodeURIComponent($.trim(the.passmoney.value));
@@ -88,7 +88,7 @@ function checkdb(the)
                             break;
                         case 1:
                             $.message({type:"ok",content:data.msg});
-                            setTimeout(function(){window.location.href = "/user/center/index";},1000);
+                            setTimeout(function(){window.location.href = "/account/user";},1000);
                             break;
                     }
 

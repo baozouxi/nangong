@@ -17,8 +17,11 @@ class CreateCapitalLogsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('capital_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->float('money', 10, 2)->unsigned();
             $table->enum('type', ['1','2'])->comment('1=> 充值， 2=>提现');
+            $table->tinyInteger('ok')->unsigned()->default(0)->comment('是否到账');
+
         });
     }
 

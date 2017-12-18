@@ -33,7 +33,7 @@
                     <div class="name"><span>{{ Auth::user()->username }}</span>
                         <div class="uid">uid：{{ Auth::user()->id }}</div>
                     </div>
-                    <div class="time">上次登录时间：{{ $lastLogin->login_time }}</div>
+                    <div class="time">上次登录时间：{{ $lastLogin? $lastLogin->login_time: '' }}</div>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
             <div class="hyzx_zhye">
                 <div class="zhye_box">
                     <div class="title"><i class="zhyeicon"></i>账户余额</div>
-                    <div class="num">{{ number_format($lastLogin->money, 2) }} 元</div>
+                    <div class="num">{{ number_format(\Illuminate\Support\Facades\Auth::user()->capital->money, 2) }} 元</div>
                     <a href="{{ route('account.recharge') }}" class="cz">充值</a><a
                             href="{{ route('account.withdraw') }}" class="tx">提现</a></div>
                 <div class="geren_infolist">

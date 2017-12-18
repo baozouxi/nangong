@@ -15,6 +15,7 @@
         var webroot = "/",
             tsort = "1",
             d = "1",
+            type = 2,
             page = 1;
     </script>
 @endpush
@@ -32,7 +33,7 @@
                     <div class="name"><span>{{ Auth::user()->username }}</span>
                         <div class="uid">uid：{{ Auth::user()->id }}</div>
                     </div>
-                    <div class="time">上次登录时间：{{ $lastLogin->login_time }}</div>
+                    <div class="time">上次登录时间：{{ $lastLogin ?  $lastLogin->login_time: '' }}</div>
                 </div>
             </div>
         </div>
@@ -46,17 +47,17 @@
         <div class="w1000">
             <div class="my_game1 mb40">
                 <div class="titbox">
-                    <li class="tt1"><a href="javascript:;" onclick="get_finance_list(1,1,1)">提现</a></li>
-                    <li class="tt1"><a href="javascript:;" onclick="get_finance_list(2,1,1)">充值</a></li>
-                    <div class="line"></div>
-                    <li class="tt2"><a href="javascript:;" onclick="get_finance_list(tsort,1,1)">最近一个月</a></li>
-                    <li class="tt2"><a href="javascript:;" onclick="get_finance_list(tsort,2,1)">最近三个月</a></li>
-                    <li class="tt2"><a href="javascript:;" onclick="get_finance_list(tsort,3,1)">全部</a></li>
+                    <li class="tt1"><a href="javascript:;" onclick="get_finance_list(1,1,1,2)">提现</a></li>
+                    <li class="tt1"><a href="javascript:;" onclick="get_finance_list(2,1,1,1)">充值</a></li>
+                    {{--<div class="line"></div>--}}
+                    {{--<li class="tt2"><a href="javascript:;" onclick="get_finance_list(tsort,1,1)">最近一个月</a></li>--}}
+                    {{--<li class="tt2"><a href="javascript:;" onclick="get_finance_list(tsort,2,1)">最近三个月</a></li>--}}
+                    {{--<li class="tt2"><a href="javascript:;" onclick="get_finance_list(tsort,3,1)">全部</a></li>--}}
                 </div>
                 <div class="yx_list" id="yx_list" style="min-height: 400px;">
                     <li class='loading'><span>正在加载数据, 请稍等......</span></li>
                 </div>
-                <div class="pagination"></div>
+
             </div>
         </div>
     </div>
@@ -97,10 +98,12 @@
         var appdownload = null
     </script>
     <script type="text/javascript">
-        function get_finance_list(t, d, page) {
+        function get_finance_list(t, d, page,type) {
             var url, data;
             tsort = t;
-            url = "/account/money-logs?page" + page;
+            url = "/account/money-logs?page" + page+'&type='+type;
+
+
             $(".titbox a").removeClass("current");
             var i1 = t - 1;
             var i2 = d - 1;
@@ -143,7 +146,7 @@
                     $(this).next(".ck_nr").toggle();
                 }
             )
-            get_finance_list(tsort, d, page);
+            get_finance_list(tsort, d, page,type);
         });
     </script>
 @endpush

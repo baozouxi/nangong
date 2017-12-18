@@ -27,7 +27,7 @@
                     <div class="name"><span>{{ Auth::user()->username }}</span>
                         <div class="uid">uid：{{ Auth::user()->id }}</div>
                     </div>
-                    <div class="time">上次登录时间：{{ $lastLogin->login_time }}</div>
+                    <div class="time">上次登录时间：{{ $lastLogin? $lastLogin->login_time : '' }}</div>
                 </div>
             </div>
         </div>
@@ -48,41 +48,43 @@
                                                                                              class="tx">提现</a></div>
                     <div class="geren_infolist">
                         <li><i class="telicon"></i>
-                            <div class="text">13228595558</div>
+                            <div class="text">{{ Auth::user()->phone  }}</div>
                             <a href="themoney.html" class="xg"></a></li>
                         </li>
                         <li><i class="qqicon"></i>
                             <div class="text"></div>
                             <a href="themoney.html" class="xg"></a></li>
                         </li>
-                        <li><i class="emailicon"></i>
-                            <div class="text">123456123456</div>
-                            <div class="name">asdas</div>
-                        </li>
-                        <li style="border:none;height:38px;"><i class="yhicon"
-                                                                style="background: url(/themes/simplebootx/Public/images/00001.png) no-repeat center center;"></i>
-                            <div class="text">123131231321232312312312332</div>
-                            <div class="name">asdas</div>
-                        </li>
-                        </li>
+
+                        @foreach($cards as $card)
+                            <li style="border:none;height:38px;">
+                                <i class="yhicon"
+                                   style="background: url(/themes/simplebootx/Public/images/0000{{ $card->bank_id }}.png) no-repeat center center;"></i>
+                                <div class="text">{{ $card->number }}</div>
+                                <div class="name">{{ Auth::user()->bankName->name  }}</div>
+                            </li>
+                        @endforeach
+
                     </div>
                 </div>
                 <div class="xuanzeyinhang">
                     <div class="slideTxtBox">
                         <div class="hd">
                             <ul>
-                                <li onclick="selthetype(2771);">
-                                    <div class="title"><i class="bankicoall"
-                                                          style="background: url(/themes/simplebootx/Public/images/00001.png) no-repeat center center;"></i>工商银行
-                                    </div>
-                                    <div class="num">123131231321232312312312332 <span>asdas</span></div>
-                                </li>
-                                <li onclick="selthetype(2770);">
-                                    <div class="title"><i class="bankicoall"
-                                                          style="background: url(/themes/simplebootx/Public/images/99999.png) no-repeat center center;"></i>支付宝
-                                    </div>
-                                    <div class="num">123456123456 <span>asdas</span></div>
-                                </li>
+                                @foreach($cards as $card)
+                                    <li onclick="selthetype({{ $card->id }});">
+                                        <div class="title"><i class="bankicoall"
+                                                              style="background: url(/themes/simplebootx/Public/images/0000{{ $card->bank_id }}.png) no-repeat center center;"></i>{{ $card->bank->name }}
+                                        </div>
+                                        <div class="num">{{ $card->number }} <span>{{ Auth::user()->bankName->name }}</span></div>
+                                    </li>
+                                @endforeach
+                                {{--<li onclick="selthetype(2770);">--}}
+                                {{--<div class="title"><i class="bankicoall"--}}
+                                {{--style="background: url(/themes/simplebootx/Public/images/99999.png) no-repeat center center;"></i>支付宝--}}
+                                {{--</div>--}}
+                                {{--<div class="num">123456123456 <span>asdas</span></div>--}}
+                                {{--</li>--}}
                             </ul>
                         </div>
                         <div class="bd">
@@ -92,13 +94,14 @@
                                         <div class="name">提现金额</div>
                                         <input type="text" class="textin" name="t1" onkeyup="onlynum(this);" value="50">
                                         <div class="clear"></div>
-                                        <div class="tips">当前可提现金额：<span>{{ number_format($capital->money, 2) }}</span>元</div>
+                                        <div class="tips">当前可提现金额：<span>{{ number_format($capital->money, 2) }}</span>元
+                                        </div>
                                     </li>
                                     <li>
                                         <div class="name">资金密码</div>
                                         <input type="password" class="textin" name="passmoney"></li>
                                 </div>
-                                <input type="hidden" name="thetype" id="thetype" value="2771"/>
+                                <input type="hidden" name="card_id" id="thetype" value=""/>
                                 <input type="submit" class="qrtx0000" name="bnt" value="确认提现"></ul>
                         </div>
                     </div>

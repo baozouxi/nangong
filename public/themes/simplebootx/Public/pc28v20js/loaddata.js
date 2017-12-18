@@ -729,7 +729,7 @@ function loadopentime(game_id) {
             if (dataJson.sign === "true" && dataJson.remainTime && eval(dataJson.remainTime) > 1) {
                 countdownTime(dataJson.currFullExpect, dataJson.currExpect, dataJson.remainTime,game_id);
                 ret = dataJson.lastFullExpect;
-                shownotbet();
+                // shownotbet();
             } else {
                 //alert("出错啦");
             }

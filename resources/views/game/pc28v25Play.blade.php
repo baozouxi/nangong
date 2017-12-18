@@ -66,7 +66,7 @@
                         <div class="yx_btn" style="margin-left:84px;"><a href="javascript:void(0)"
                                                                          onclick="document.getElementById('lightyxgz').style.display='block';document.getElementById('fadeyxgz').style.display='block'"
                                                                          class="yxgz">游戏规则</a> <a
-                                    href="http://ng077.com/user/game/pc28v25.html" class="lskj">历史开奖</a></div>
+                                    href="{{ route('pc28v25') }}" class="lskj">历史开奖</a></div>
                     </div>
                     <div class="d55445 txtScroll-top">
                         <div class="hd btn"><a class="next shang" href="javascript:nextgetopencode();"></a> <a

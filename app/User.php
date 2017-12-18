@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'phone','money_password'
+        'username', 'email', 'password', 'phone','money_password','enable'
     ];
 
     /**
@@ -39,6 +39,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Capital');
     }
 
+    public function capitalLogs()
+    {
+        return $this->hasMany('App\CapitalLog');
+    }
+
 
     public function bankName()
     {
@@ -50,4 +55,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Card');
     }
+
+    public function withdraws()
+    {
+       return $this->hasMany('App\Withdraw');
+    }
+
+
 }

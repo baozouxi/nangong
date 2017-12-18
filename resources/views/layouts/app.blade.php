@@ -14,6 +14,8 @@
     <link href="/public/css/base.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/themes/simplebootx/Public/css/animate.min.css"/>
     <link href="/themes/simplebootx/Public/css/css.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/themes/simplebootx/Public/css/page.css" type="text/css"/>
+
 
     @stack('css')
 
