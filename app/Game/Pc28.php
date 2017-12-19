@@ -14,7 +14,7 @@ use App\Game\Traits\GetFrom360;
 
 class Pc28 implements GameInterface
 {
-    Const CODE_URL = 'http://www.bwlc.net/';
+    Const CODE_URL = 'http://chart.cp.360.cn/kaijiang/kl8?sb_spm=319e0d1a7e0082196ba89a5bd80952eb';
     Const NAME = '北京幸运28';
 
     use GetFrom360, CheckOpen;
@@ -149,6 +149,10 @@ class Pc28 implements GameInterface
         $request = \Requests::request(self::CODE_URL);
 
         $result = $this->parse($request->body);
+
+
+
+
 
         $this->checkOpen($result);
 
