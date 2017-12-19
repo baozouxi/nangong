@@ -200,7 +200,7 @@ class AccountsController extends Controller
             .number_format(Auth::user()->capital->money, 2)
             .'</i></span><a href="'.route('account.recharge')
             .'">充值</a><a href="'.route('account.withdraw')
-            .'">提现</a><a href="/user/message/index?v1">消息中心 <i>5</i></a><a href="#"  class="logout">退出</a>';
+            .'">提现</a><a href="#"  class="logout">退出</a>';
     }
 
 

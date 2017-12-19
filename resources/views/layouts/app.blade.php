@@ -47,7 +47,7 @@
             <div class="user" id="userpanel">
                 <span>欢迎您，{{ Auth::user()->username }}</span><span>账户余额：<i>￥{{ number_format(Auth::user()->capital->money, 2) }}</i></span><a
                         href="{{ route('account.recharge') }}">充值</a><a href="{{ route('account.withdraw') }}">提现</a><a
-                        href="/user/message/index?v1">消息中心 <i>5</i></a><a href="#" class="logout">退出</a></div>
+                        href="#" class="logout">退出</a></div>
         @endif
     </div>
 </div>
@@ -73,7 +73,7 @@
                         href="{{ route('account.agency') }}">代理中心</a> <a href="{{ route('account.safe') }}">安全中心</a>
             </div>
         </li>
-        <li><a href="{{ route('team.index') }}"><i class="navicon6"></i><span class="cn">团队代理</span><span
+        <li><a href="#"><i class="navicon6"></i><span class="cn">团队代理</span><span
                         class="en">team</span></a></li>
         <li><a href="#"><i class="navicon7"></i><span class="cn">系统公告</span><span class="en">discount</span></a>
             <div class="ssnav">
