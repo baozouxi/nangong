@@ -104,15 +104,15 @@
                 <div class="notice">
                     <div class="tab-hd">
                         <ul>
-                            <li class="on">支付宝支付</li>
-                            <li class="">微信支付</li>
-                            <li class="">财富通支付</li>
-                            <li>网银支付</li>
+                            {{--<li class="on">支付宝支付</li>--}}
+                            {{--<li class="">微信支付</li>--}}
+                            {{--<li class="">财富通支付</li>--}}
+                            {{--<li>网银支付</li>--}}
                             <li class="">银行卡转账</li>
                         </ul>
                     </div>
                     <div class="tab-bd">
-                        <div class="tab-pal">
+                        {{--<div class="tab-pal">
                             <div class="zfbzf">
                                 <!-- 支付宝扫码线上支付start -->
                                 <!-- 支付宝扫码线上支付end -->
@@ -259,19 +259,19 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </form>--}}
                         <div class="tab-pal">
                             <div class="yhkzz">
                                 <div class="title">招商银行账户</div>
                                 <div class="nr">
                                     <div class="zh">6214 8372 1262 2157</div>
                                     <div class="name">林丽容</div>
-                                    <div class="czjedoc">充值金额</div>
-                                    <form id="bankdata1">
-                                        <input type="text" class="jetext" name="t0_bank_zs" maxlength="10" value="50">
-                                        <input type="hidden" name="t1_bank_zs" value="banktobank:招商银行账户转账">
-                                        <input type="button" class="tjje" value="提交" id="submitbank1"
-                                               onclick="to_banktobank('1');"></form>
+                                    {{--<div class="czjedoc">充值金额</div>--}}
+                                    {{--<form id="bankdata1">--}}
+                                        {{--<input type="text" class="jetext" name="t0_bank_zs" maxlength="10" value="50">--}}
+                                        {{--<input type="hidden" name="t1_bank_zs" value="banktobank:招商银行账户转账">--}}
+                                        {{--<input type="button" class="tjje" value="提交" id="submitbank1"--}}
+                                               {{--onclick="to_banktobank('1');"></form>--}}
                                     <div class="clear"></div>
                                     <div class="jetips"> 银行卡转账后在此提交您转账的金额，后联系客服QQ：9001723或直接联系客服转账充值</div>
                                 </div>
@@ -279,12 +279,12 @@
                                 <div class="nr">
                                     <div class="zh">6217003030107072504</div>
                                     <div class="name">李鹂</div>
-                                    <div class="czjedoc">充值金额</div>
-                                    <form id="bankdata4">
-                                        <input type="text" class="jetext" name="t0_bank_zs" maxlength="10" value="50">
-                                        <input type="hidden" name="t1_bank_zs" value="banktobank:建设银行账户转账">
-                                        <input type="button" class="tjje" value="提交" id="submitbank4"
-                                               onclick="to_banktobank('4');"></form>
+                                    {{--<div class="czjedoc">充值金额</div>--}}
+                                    {{--<form id="bankdata4">--}}
+                                        {{--<input type="text" class="jetext" name="t0_bank_zs" maxlength="10" value="50">--}}
+                                        {{--<input type="hidden" name="t1_bank_zs" value="banktobank:建设银行账户转账">--}}
+                                        {{--<input type="button" class="tjje" value="提交" id="submitbank4"--}}
+                                               {{--onclick="to_banktobank('4');"></form>--}}
                                     <div class="clear"></div>
                                     <div class="jetips"> 银行卡转账后在此提交您转账的金额，后联系客服QQ：9001723或直接联系客服转账充值</div>
                                 </div>

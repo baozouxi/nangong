@@ -14,12 +14,12 @@ function checkreg(the)
         form.find('input[name=mobile]').focus();
         return false
     }
-    if(form.find('input[name=mobilecode]').val().length!=5)
-    {
-        $.message({type:"error",content:'请正确输入手机收到的验证码'});
-        the.mobilecode.focus();
-        return false
-    }
+    // if(form.find('input[name=mobilecode]').val().length!=5)
+    // {
+    //     $.message({type:"error",content:'请正确输入手机收到的验证码'});
+    //     the.mobilecode.focus();
+    //     return false
+    // }
 
     if(form.find('input[name=password]').val().length<6||form.find('input[name=password]').val().length>16)
     {

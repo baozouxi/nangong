@@ -15,10 +15,7 @@
     <link rel="stylesheet" href="/themes/simplebootx/Public/css/animate.min.css"/>
     <link href="/themes/simplebootx/Public/css/css.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/themes/simplebootx/Public/css/page.css" type="text/css"/>
-
-
     @stack('css')
-
     <script src="/themes/simplebootx/Public/js/min/jquery-v1.10.2.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="/themes/simplebootx/Public/js/jquery.SuperSlide.2.1.1.js"></script>
     <!--[if (gte IE 6)&(lte IE 10)]>
@@ -31,7 +28,6 @@
     <script src="/themes/simplebootx/Public/js/min/modernizr-custom-v2.7.1.min.js" type="text/javascript"></script>
     <link href="/themes/simplebootx/Public/css/flickerplate.css" type="text/css" rel="stylesheet">
     <script src="/themes/simplebootx/Public/js/min/flickerplate.min.js" type="text/javascript"></script>
-
     @stack('init-scripts')
 </head>
 

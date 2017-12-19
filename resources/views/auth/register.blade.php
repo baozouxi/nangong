@@ -48,11 +48,11 @@
                         </li>
                         <li>
                             <input type="text" placeholder="请输入手机号码" class="c_mobile" id="mobile" name="mobile"></li>
-                        <li>
+                      {{--  <li>
                             <input class="yzmin" placeholder="填写验证码" class="c_mobilecode" type="text" name="mobilecode">
                             <button type="button" class="yzmbt" id="zphone">发送验证码</button>
                             <div class="tips">请输入手机收到的验证码</div>
-                        </li>
+                        </li>--}}
                         <li>
                             <input type="password" placeholder="请输入密码" class="c_password" value="" id="mmzh-pass"
                                    name="password">
