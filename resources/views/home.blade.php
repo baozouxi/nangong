@@ -66,25 +66,25 @@
                 <div class="picbox"><a href="javascript:;"><img src="themes/simplebootx/Public/images/huodong.jpg"
                                                                 alt=""></a></div>
                 <ul>
-                    <li><a href="http://ng077.com/portal/index/show/id/96.html" target="_blank"> 北京2.0倍 加拿大2.0倍玩法 赔率改动
+                    <li><a href="#" target="_blank"> 北京2.0倍 加拿大2.0倍玩法 赔率改动
                             <span>2017-09-15</span></a></li>
-                    <li><a href="http://ng077.com/portal/index/show/id/95.html" target="_blank"> 加拿大2.7倍玩法调整为2.8倍玩法
+                    <li><a href="#" target="_blank"> 加拿大2.7倍玩法调整为2.8倍玩法
                             <span>2017-03-17</span></a></li>
-                    <li><a href="http://ng077.com/portal/index/show/id/94.html" target="_blank"> 2016-12-11日起提现将收取手续费
+                    <li><a href="#" target="_blank"> 2016-12-11日起提现将收取手续费
                             <span>2016-12-10</span></a></li>
-                    <li><a href="http://ng077.com/portal/index/show/id/93.html" target="_blank"> 南宫国际幸运争霸赛9069完美结束
+                    <li><a href="#" target="_blank"> 国际幸运争霸赛9069完美结束
                             <span>2016-12-04</span></a></li>
-                    <li><a href="http://ng077.com/portal/index/show/id/92.html" target="_blank"> 南宫国际幸运争霸赛9068完美结束
+                    <li><a href="#" target="_blank"> 国际幸运争霸赛9068完美结束
                             <span>2016-12-02</span></a></li>
-                    <li><a href="http://ng077.com/portal/index/show/id/91.html" target="_blank"> 南宫国际幸运争霸赛9067完美结束
+                    <li><a href="#" target="_blank"> 国际幸运争霸赛9067完美结束
                             <span>2016-11-30</span></a></li>
-                    <li><a href="http://ng077.com/portal/index/show/id/90.html" target="_blank"> 南宫国际幸运争霸赛9066完美结束
+                    <li><a href="#" target="_blank"> 国际幸运争霸赛9066完美结束
                             <span>2016-11-27</span></a></li>
-                    <li><a href="http://ng077.com/portal/index/show/id/89.html" target="_blank"> 南宫国际幸运争霸赛9065完美结束
+                    <li><a href="#" target="_blank"> 国际幸运争霸赛9065完美结束
                             <span>2016-11-25</span></a></li>
-                    <li><a href="http://ng077.com/portal/index/show/id/88.html" target="_blank"> 南宫国际幸运争霸赛9064完美结束
+                    <li><a href="#" target="_blank"> 国际幸运争霸赛9064完美结束
                             <span>2016-11-23</span></a></li>
-                    <li><a href="http://ng077.com/portal/index/show/id/87.html" target="_blank"> 南宫国际幸运争霸赛9063完美结束
+                    <li><a href="#" target="_blank"> 国际幸运争霸赛9063完美结束
                             <span>2016-11-20</span></a></li>
                 </ul>
             </div>
