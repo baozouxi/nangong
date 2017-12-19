@@ -363,7 +363,7 @@ class GamesController extends Controller
 
 
     //反水  逻辑还不清楚 暂时弄个假象
-    public function fanshui(Game $game)
+    public function fanshui(Game $game, Request $request)
     {
         $str
             = '{"list":"<div class=\"yxzxwqkq\"> <ul> <li class=\"first\"> <div class=\"w172\">\u65e5\u671f<\/div> <div class=\"w201\">\u7ec4\u5408\u6bd4\u4f8b<\/div> <div class=\"w186\">\u76c8\u4e8f<\/div> <div class=\"w149\">\u72b6\u6001<\/div> <div class=\"w244\">\u8fd4\u6c34<\/div> <\/li> <li style=\"line-height:20px; color:#888; padding:10px 0;\">\u5907\u6ce8\uff1a1\u3001\u8f93600\u4ee5\u4e0a\/\u4e0b\u6ce815\u628a\u4ee5\u4e0a; 2\u3001\u56de\u6c3410%\u8f931\u4e07\u4ee5\u4e0a12%; 3\u3001\u5f53\u5929\u8f93\u94b1\u6b21\u65e5\u51cc\u66682\u70b9\u524d\u7533\u8bf7\u56de\u6c34\u6709\u6548; 4\u3001\u8d85\u65f6\u65e0\u6cd5\u7533\u8bf7\uff0c\u4e0d\u53ef\u8865; 5\u3001\u5f53\u65e5\u7533\u8bf7\u56de\u6c34\u540e\u4e0d\u53ef\u4e0b\u6ce8\uff0c\u4e0b\u6ce8\u540e\u56de\u6c34\u4f1a\u88ab\u53d6\u6d88\uff01 <\/li> <\/ul> <\/div> <div class=\"pagination\"><\/div>","page":"1","count":0,"pageSize":10,"referer":"","state":"fail"}';
@@ -372,11 +372,18 @@ class GamesController extends Controller
     }
 
 
-    public function zoushi(Game $game)
+
+    //走势
+    public function zoushi(Game $game, Request $request)
     {
 
+        $pageSize = 15;
 
-        $open_codes = $game->openCodes;
+        $open_codes = OpenCode::where('game_id', $game->id)
+            ->orderBy('created_at', 'desc');
+
+        $all_count = $open_codes->count();
+        $open_codes = $open_codes->paginate($pageSize);
 
         $fields = [];
 
@@ -401,6 +408,21 @@ class GamesController extends Controller
             $fields[] = '对子';
             $fields[] = '豹子';
         }
+
+        $colors = [];
+        $colors['28'] = 'bj_ffc300';
+        $colors['29'] = 'bj_ff00e9';
+        $colors['30'] = 'bj_ff9300';
+        $colors['31'] = 'bj_b200ff';
+        $colors['32'] = 'bj_ff0079';
+        $colors['33'] = 'bj_00c22c';
+        $colors['34'] = 'bj_c27400';
+        $colors['35'] = 'bj_bfc200';
+        $colors['36'] = 'bj_6400ff';
+        $colors['37'] = 'bj_0090ff';
+        $colors['38'] = 'bj_ffc300';
+        $colors['39'] = 'bj_ff0079';
+        $colors['40'] = 'bj_00c22c';
 
 
         $game_obj = app()->make(Game\Game::class)->getGame($game->name);
@@ -427,7 +449,65 @@ class GamesController extends Controller
                         $str .= '<td></td>';
                     }
                 } else {
-                    
+
+                    switch ($field) {
+
+                        case '大':
+                        case '小':
+
+                            if ($field == $lottery['daxiao']) {
+                                $str .= '<td class="'.$colors[$key].'">'.$field
+                                    .'</td>';
+                            } else {
+                                $str .= '<td></td>';
+                            }
+                            break;
+                        case '单':
+                        case '双':
+                            if ($field == $lottery['danshuang']) {
+                                $str .= '<td class="'.$colors[$key].'">'.$field
+                                    .'</td>';
+                            } else {
+                                $str .= '<td></td>';
+                            }
+                            break;
+                        case '大单':
+                        case '小单':
+                        case '大双':
+                        case '小双':
+                            if ($field == $lottery['zuhe']) {
+                                $str .= '<td class="'.$colors[$key].'">·</td>';
+                            } else {
+                                $str .= '<td></td>';
+                            }
+                            break;
+                        case '极大':
+                        case '极小':
+                            if ($field == $lottery['jizhi']) {
+                                $str .= '<td class="'.$colors[$key].'">·</td>';
+                            } else {
+                                $str .= '<td></td>';
+                            }
+                            break;
+
+                    }
+
+                    if (isset($lottery['baozi'])) {
+                        switch ($field) {
+                            case '顺子':
+                            case '豹子':
+                            case '对子':
+                                if ($field == $lottery['baozi'] ||  $field == $lottery['duizi']  || $field == $lottery['shunzi'] ) {
+                                    $str .= '<td class="'.$colors[$key]
+                                        .'">·</td>';
+                                } else {
+                                    $str .= '<td></td>';
+                                }
+
+                                break;
+                        }
+                    }
+
 
                 }
             }
@@ -435,14 +515,14 @@ class GamesController extends Controller
             $str .= '</tr>';
         }
 
-        $str .= '</tbody></table></div>';
+        $str .= '</tbody></table></div><div class="pagination"></div>';
 
         $result = [];
-        $result['page'] = '1';
-        $result['pageSize'] = '15';
+        $result['page'] = $request->has('page') ? $request['page'] : '1';
+        $result['pageSize'] = $pageSize;
         $result['referer'] = '';
         $result['state'] = 'fail';
-        $result['count'] = '0';
+        $result['count'] = $all_count;
         $result['list'] = $str;
 
         return $result;
