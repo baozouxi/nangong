@@ -756,7 +756,7 @@ class GamesController extends Controller
             $str .= '<div class="w201">'.$bet['open_time'].'</div>';
             $str .= '<div class="w186">'.mt_rand(100, 500).'</div>';
             $str .= ' <div class="w149">'.mt_rand(10000,100000)
-                .'</div>';
+                .'00</div>';
             $open_code_lst = explode(',', $bet['codes']);
             $str .= '<div class="w244"><i class="bgbl">'.$open_code_lst['0']
                 .'</i>+<i class="bgbl">'.$open_code_lst['1']
