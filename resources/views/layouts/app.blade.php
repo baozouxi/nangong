@@ -88,12 +88,16 @@
 <div class="footer">
     <div class="w1000">
         <div class="hzhb"><img src="/themes/simplebootx/Public/images/hzhb.png" alt=""></div>
-        <div class="copyright"> Copyright (c) 2017 NG娱乐（No good）. 版权由NG娱乐所有。
+        <div class="copyright"> Copyright (c) 中资盛世. 版权由中资盛世所有。
             <span>注：未满18岁严禁注册娱乐</span></div>
     </div>
 </div>
 
-
+<script>
+    var kflist = { "3": [{ "id": "6", "title": "中资盛世", "name": "\u5ba2\u670d\u2460", "cid": "1", "ac": "3", "value": "441653499", "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=441653499&amp;site=qq&amp;menu=yes", "img": "", "status": "1", "remark": "", "sort": "0" }] };
+    var appdownload = null
+</script>
+<script src="/plug/service/online.js?v0.1"></script>
 <script>
     $(function () {
         $('body').on('click', '.logout', function (event) {
@@ -106,6 +110,8 @@
     });
 
 </script>
+
+
 
 
 @stack('scripts')

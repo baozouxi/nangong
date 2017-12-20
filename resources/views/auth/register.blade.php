@@ -33,7 +33,7 @@
     <div class="zc_main">
         <div class="w1000">
             <div class="imgbox" style="height: auto;"><a href="http://ng077.com/"><img
-                            src="/themes/simplebootx/Public/images/titimg_logo.png" alt="南宫国际娱乐"></a></div>
+                            src="/themes/simplebootx/Public/images/titimg_logo.png" alt="中资盛世"></a></div>
             <div class="registerform" style="height: 610px;">
                 <div class="titbox">
                     <div class="title">欢迎来到中资盛世</div>

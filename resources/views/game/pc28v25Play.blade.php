@@ -155,7 +155,7 @@
                         <div class="qsr">请输入您觉得本次开奖结果的数字</div>
                         <input type="text" class="textin" onkeyup="onlynum(this);" onblur="onlynum27(this)" id="tp999"
                                name="tp999">
-                        <input type="submit" class="btn" value="猜测" onclick="submitOKtp999();return false;"></div>
+                        <input type="submit" class="btn" value="猜测" onclick="submitOKtp999({{ $game_id }});return false;"></div>
                     <div class="xiao_tips">
                         投注超过1001元，可以免费猜一个数字，猜中奖励88元；投注超过2000元，猜中奖励188元；投注超过5000元，猜中奖励588元；投注超过10000元，猜中奖励888元。
                     </div>

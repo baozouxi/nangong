@@ -128,6 +128,14 @@ class Pc28 implements GameInterface
                     if ($bet == $lottery['daxiao']) {
                         $time = 2;
                     }
+                    if ($bet == '大' && $lottery['num'] == 14) {
+                        $time = 1;
+                    }
+                    if ($bet == '小' && $lottery['num'] == 13) {
+                        $time = 1;
+                    }
+
+
                     break;
                 case '极大' :
                 case '极小' :
@@ -138,6 +146,7 @@ class Pc28 implements GameInterface
             }
 
         }
+
         return $time;
 
 

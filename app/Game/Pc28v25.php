@@ -75,8 +75,6 @@ class Pc28v25 extends Pc28
     }
 
 
-
-
     //豹子算法 过滤相同值 取唯一 剩一个即为豹子
     protected function baozi(array $code_list)
     {
@@ -126,6 +124,20 @@ class Pc28v25 extends Pc28
                     if ($bet == '双' && $lottery['num'] == 14) {
                         $time = 1.2;
                     }
+
+                    if ($lottery['shunzi'] || $lottery['baozi']
+                        || $lottery['duizi']
+                    ) {
+                        $time = 0;
+                        if ($bet == '单' && $lottery['num'] == 13) {
+                            $time = 1.2;
+                        }
+                        if ($bet == '双' && $lottery['num'] == 14) {
+                            $time = 1.2;
+                        }
+
+                    }
+
                     break;
                 case '小单' :
                 case '小双' :
@@ -138,12 +150,43 @@ class Pc28v25 extends Pc28
                             $time = 5;
                         }
                     }
+                    if ($lottery['shunzi'] || $lottery['baozi']
+                        || $lottery['duizi']
+                    ) {
+                        $time = 0;
+                        if ($bet == '小单' && $lottery['num'] == 13) {
+                            $time = 1.2;
+                        }
+                        if ($bet == '大双'
+                            && $lottery['num'] ==
+                            14
+                        ) {
+                            $time = 1.2;
+                        }
+
+                    }
+
+
                     break;
                 case '大' :
                 case '小' :
                     if ($bet == $lottery['daxiao']) {
                         $time = 2.5;
                     }
+
+                    if ($lottery['shunzi'] || $lottery['baozi']
+                        || $lottery['duizi']
+                    ) {
+                        $time = 0;
+                        if ($bet == '小' && $lottery['num'] == 13) {
+                            $time = 1.2;
+                        }
+                        if ($bet == '大' && $lottery['num'] == 14) {
+                            $time = 1.2;
+                        }
+
+                    }
+
                     break;
                 case '极大' :
                 case '极小' :
@@ -170,6 +213,7 @@ class Pc28v25 extends Pc28
             }
 
         }
+
         return $time;
 
     }

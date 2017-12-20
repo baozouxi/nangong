@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Bet;
 use App\Game;
+use App\Guess;
 use App\OpenCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -372,7 +373,6 @@ class GamesController extends Controller
     }
 
 
-
     //走势
     public function zoushi(Game $game, Request $request)
     {
@@ -497,7 +497,10 @@ class GamesController extends Controller
                             case '顺子':
                             case '豹子':
                             case '对子':
-                                if ($field == $lottery['baozi'] ||  $field == $lottery['duizi']  || $field == $lottery['shunzi'] ) {
+                                if ($field == $lottery['baozi']
+                                    || $field == $lottery['duizi']
+                                    || $field == $lottery['shunzi']
+                                ) {
                                     $str .= '<td class="'.$colors[$key]
                                         .'">·</td>';
                                 } else {
@@ -530,6 +533,93 @@ class GamesController extends Controller
     }
 
 
+    //猜数
+    public function guess(Game $game, Request $request)
+    {
+
+        $this->validate($request, [
+            'tp999' => 'required|min:0|max:27|numeric',
+        ]);
+
+
+        $openCode = new OpenCode();
+        $current_expect = $openCode->currentExpect($game->id);
+
+        $level_1 = 1001;
+        $level_2 = 2000;
+        $level_3 = 5000;
+        $level_4 = 10000;
+
+        $level_1_profit = 88; //奖励金额
+        $level_2_profit = 188; //奖励金额
+        $level_3_profit = 588; //奖励金额
+        $level_4_profit = 888; //奖励金额
+
+
+        $sum = 0;
+        $profit = 0; //奖励金额
+        $result = [];
+        $result['status'] = 0;
+        $result['info'] = '当期投注未满足要求';
+
+
+        //是否已经 猜数
+
+        $guess = Guess::where('user_id', Auth::user()->id)
+            ->where('actionNo', $current_expect)->first();
+
+
+        if ($guess != null) {
+            $result['info'] = '当期已经猜数';
+
+            return $result;
+        }
+
+
+        $bets = Bet::where('game_id', $game->id)
+            ->where('actionNo', $current_expect)
+            ->where('user_id', Auth::user()->id)
+            ->first([DB::raw('sum(money) as money')]);
+
+        $sum = ($bets->money != null) ? $bets->money : 0;
+
+        if ((int)$sum < 1001) {
+            return $result;
+        }
+
+
+        if ($sum > $level_1 && $sum <= $level_2) {
+            $profit = $level_1_profit;
+        }
+
+        if ($sum > $level_2 && $sum <= $level_3) {
+            $profit = $level_2_profit;
+        }
+
+        if ($sum > $level_3 && $sum <= $level_4) {
+            $profit = $level_3_profit;
+        }
+
+        if ($sum > $level_4) {
+            $profit = $level_4_profit;
+        }
+
+        if ($game->guesses()->create([
+            'user_id'  => Auth::user()->id,
+            'actionNo' => $current_expect,
+            'number'   => $request['tp999'],
+            'money'    => $profit,
+        ])
+        ) {
+            $result['status'] = 1;
+            $result['info'] = '猜数成功';
+        }
+
+        return $result;
+
+    }
+
+
     public function todayBets(Game $game, Request $request)
     {
         $userBetList = [];
@@ -546,7 +636,12 @@ class GamesController extends Controller
         $result['referer'] = '';
         $result['state'] = 'fail';
 
+
+        $actionNo_arr = [];
+
         foreach ($bets as $bet) {
+
+
             $temp_arr = [];
             $state = '0';
             $temp_arr['billno'] = $bet->id;
@@ -566,8 +661,48 @@ class GamesController extends Controller
             }
             $temp_arr['state'] = $state;
 
+            array_push($actionNo_arr, $bet->actionNo);
             array_push($userBetList, $temp_arr);
         }
+
+        //猜数
+
+        $guesses = Guess::where('user_id', Auth::user()->id)
+            ->where('game_id', $game->id)
+            ->whereIn('actionNo',array_unique($actionNo_arr))
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+
+        foreach($guesses as $guess) {
+            $temp_arr = [];
+            $state = "0";
+            $temp_arr['billno'] = 'g_'.$guess->id;
+            $temp_arr['expect'] = $guess->actionNo;
+            $temp_arr['betsTimes'] = $guess->created_at->__toString();
+            $temp_arr['code'] = $guess->number.'(猜数)';
+            $temp_arr['betsMoney'] = $guess->money;
+            $temp_arr['prizeMoney'] = $guess->profit;
+
+            $temp_arr['betid'] = 'g'.$guess->id;
+
+            if ($guess->lotteried == 1) {
+                //未中奖
+                $state = '1';
+            }
+
+            if ($guess->profit > 0) {
+                $state = "2";
+            }
+
+
+            $temp_arr['state'] = $state;
+
+
+            array_push($userBetList, $temp_arr);
+            $all_count += 1;
+        }
+
         $page = $request->has('page') ? $request->input('page') : '1';
 
 
@@ -619,7 +754,7 @@ class GamesController extends Controller
         foreach ($bet_arr as $bet) {
             $str .= '<li><div class="w172">'.$bet['expect'].'</div>';
             $str .= '<div class="w201">'.$bet['open_time'].'</div>';
-            $str .= '<div class="w186">'.$user_count[$bet['expect']].'</div>';
+            $str .= '<div class="w186">'.mt_rand(100, 500).'</div>';
             $str .= ' <div class="w149">'.$expect_money_sum[$bet['expect']]
                 .'</div>';
             $open_code_lst = explode(',', $bet['codes']);

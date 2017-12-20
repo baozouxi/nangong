@@ -122,7 +122,7 @@ function showbetdata(t0) {
 }
 
 //猜数
-function submitOKtp999() {
+function submitOKtp999(game_id) {
     var tp999 = "";
     tp999 = $("#tp999").val();
     if (tp999 == "") {
@@ -130,7 +130,7 @@ function submitOKtp999() {
         return false;
     }
     var url, data;
-    url = "/user/game/game28_buy20_999";
+    url = "/game/"+game_id+"/guess";
     data = "tp999=" + encodeURIComponent($.trim(tp999));
 
     $.ajax({
@@ -152,9 +152,9 @@ function submitOKtp999() {
                 case 1:
                     $.message({type: "ok", content: data.info, time: 3000});
                     freset();
-                    shownotbet();
-                    getBetsListCircle();
-                    getUserBetsListToday();
+                    shownotbet(game_id);
+                    getBetsListCircle(game_id);
+                    getUserBetsListToday(1,game_id);
                     break;
             }
 
@@ -162,6 +162,7 @@ function submitOKtp999() {
     });
     return false
 }
+
 
 //投注
 var xztf = true;
