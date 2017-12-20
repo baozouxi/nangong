@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <title> NG南宫国际娱乐</title>
+    <title>中资盛世</title>
     <script>
         var webroot = "/";
     </script>

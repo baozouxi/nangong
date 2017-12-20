@@ -7,7 +7,7 @@
     <meta name="Keywords" content=""/>
     <meta name="Description" content=""/>
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>会员登陆-NG南宫国际娱乐-最用心的娱乐平台！</title>
+    <title>会员登陆-中资盛世-最用心的娱乐平台！</title>
     <link href="/public/css/base.css" rel="stylesheet" type="text/css"/>
     <script>
         var webroot = "/";

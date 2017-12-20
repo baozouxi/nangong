@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta name="Keywords" content=""/>
     <meta name="Description" content=""/>
-    <title>注册账户-NG南宫国际娱乐-最用心的娱 乐平台！</title>
+    <title>注册账户-中资盛世-最用心的娱 乐平台！</title>
     <link href="/public/css/base.css" rel="stylesheet" type="text/css"/>
     <script>
         var webroot = "/";
@@ -36,7 +36,7 @@
                             src="/themes/simplebootx/Public/images/titimg_logo.png" alt="南宫国际娱乐"></a></div>
             <div class="registerform" style="height: 610px;">
                 <div class="titbox">
-                    <div class="title">欢迎来到南宫国际娱乐</div>
+                    <div class="title">欢迎来到中资盛世</div>
                     <a href="{{ route('login') }}" class="dl">登录</a></div>
                 <div class="biaodan" style="height: 430px;">
                     <input type="hidden" placeholder="推荐人UID" class="yzmin" value="" id="mmzh-puid" name="puid">
@@ -121,7 +121,7 @@
 <div class="footer">
     <div class="w1000">
         <div class="hzhb"><img src="/themes/simplebootx/Public/images/hzhb.png" alt=""></div>
-        <div class="copyright"> Copyright (c) 2017 NG娱乐（No good）. 版权由NG娱乐所有。
+        <div class="copyright"> Copyright (c) 2017 中资盛世（No good）. 版权由中资盛世所有。
             <span>注：未满18岁严禁注册娱乐</span></div>
     </div>
 </div>

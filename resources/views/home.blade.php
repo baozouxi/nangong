@@ -78,7 +78,8 @@
                             <span>2016-12-02</span></a></li>
                     <li><a href="#" target="_blank"> 国际幸运争霸赛9067完美结束
                             <span>2016-11-30</span></a></li>
-                    <li><a href="#" target="_blank"> 国际幸运争霸赛9066完美结束
+                    <li><a href="#" target="_blank">
+
                             <span>2016-11-27</span></a></li>
                     <li><a href="#" target="_blank"> 国际幸运争霸赛9065完美结束
                             <span>2016-11-25</span></a></li>
