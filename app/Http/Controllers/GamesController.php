@@ -628,7 +628,7 @@ class GamesController extends Controller
         $pageSize = '10';
 
         $bets = Bet::where('user_id', Auth::user()->id)
-            ->where('game_id', $game->id)->orderBy('created_at', 'desc');
+            ->where('game_id', $game->id)->orderBy('id', 'desc');
         $all_count = $bets->count();
         $bets = $bets->paginate($pageSize);
 

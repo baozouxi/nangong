@@ -172,13 +172,21 @@ class Pc28v25 extends Pc28
                 case '小' :
                     if ($bet == $lottery['daxiao']) {
                         $time = 2.5;
+                        if (in_array('大',$code_info_arr) && in_array('小',$code_info_arr)) {
+                            $time = 1.5;
+                        }
                     }
 
                     if ($lottery['shunzi'] || $lottery['baozi']
                         || $lottery['duizi']
                     ) {
-                        if ($bet == $lottery['daxiao']) {
-                            $time = 1.5;
+
+                        if (in_array('大', $code_info_arr)
+                            && in_array('小', $code_info_arr)
+                        ) {
+                            if ($bet == $lottery['daxiao']) {
+                                $time = 1.5;
+                            }
                         }
                         if ($bet == '小' && $lottery['num'] == 13) {
                             $time = 1.2;
@@ -188,7 +196,6 @@ class Pc28v25 extends Pc28
                         }
 
                     }
-
                     break;
                 case '极大' :
                 case '极小' :
