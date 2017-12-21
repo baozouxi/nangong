@@ -88,7 +88,7 @@ class Pc28 implements GameInterface
 
 
     //根据投注 计算倍数
-    public function rule($bet, $open_num)
+    public function rule($bet, $open_num, $code_info_arr)
     {
         $lottery = $this->lottery($open_num);
         $time = 0;

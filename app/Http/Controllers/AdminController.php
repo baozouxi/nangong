@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Admin;
+use App\Bet;
 use App\CapitalLog;
+use App\Game;
 use App\User;
 use App\Withdraw;
 use Illuminate\Http\Request;
@@ -232,8 +234,76 @@ class AdminController extends Controller
 
 
         return $result;
+    }
 
+
+
+    // 投注记录
+    public function bets(Game $game)
+    {
+        $bets =  Bet::where('game_id',$game->id)->orderBy('created_at', 'desc')->paginate(10);
+
+        $result = [];
+        $users = [];
+
+
+        foreach ($bets as $bet) {
+
+            if (!isset($users[$bet->actionNo])) {
+                $users[$bet->actionNo] = [];
+            }
+
+            if (!isset($result[$bet->actionNo])) {
+                $result[$bet->actionNo] = [];
+                $result[$bet->actionNo]['money'] = 0;
+                $result[$bet->actionNo]['profit'] = 0;
+                $result[$bet->actionNo]['user_count'] = 0;
+            }
+            $result[$bet->actionNo]['money'] += $bet->money;
+            $result[$bet->actionNo]['profit'] += $bet->profit;
+            array_push($users[$bet->actionNo], $bet->user_id);
+        }
+
+
+        foreach ($users as $actionNo => $count) {
+            $result[$actionNo]['user_count'] = count(array_unique($count));
+        }
+
+
+        return view('admin.bets',['bets'=>$result, 'game_id'=>$game->id, 'bets'=>$bets]);
 
     }
+
+
+
+    public function betsList(Game $game, int $actionNo)
+    {
+
+
+        $bets = Bet::where('game_id',$game->id)->where('actionNo',$actionNo)->with('user')->paginate();
+        $result = [];
+
+        foreach ($bets as $bet) {
+            if (!isset($result[$bet->user_id])) {
+                $result[$bet->user_id] = [];
+                $result[$bet->user_id]['money'] = 0;
+                $result[$bet->user_id]['profit'] = 0;
+                $result[$bet->user_id]['codes'] = '';
+                $result[$bet->user_id]['username'] = '';
+                $result[$bet->user_id]['actionNo'] = 0;
+            }
+
+            $result[$bet->user_id]['money'] += $bet->money;
+            $result[$bet->user_id]['profit'] += $bet->profit;
+            $result[$bet->user_id]['codes'] .= $bet->code.',';
+            $result[$bet->user_id]['username'] = $bet->user->username;
+            $result[$bet->user_id]['actionNo'] = $bet->actionNo;
+        }
+
+
+        return view('admin.bets-list', ['bets'=>$result]);
+
+    }
+
 
 }

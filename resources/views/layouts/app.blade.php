@@ -121,7 +121,8 @@
             "sort": "0"
         }]
     };
-    var appdownload = null</script>
+    var appdownload = null
+</script>
 <script src="/plug/service/online.js?v0.1"></script>
 <script>
     $(function () {
@@ -131,9 +132,7 @@
                 window.location = '/';
             });
         });
-
     });
-
 </script>
 
 

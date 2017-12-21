@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Bet;
 use App\Events\AwardPrizes;
 use App\Game\Game;
 use App\OpenCode;

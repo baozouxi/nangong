@@ -41,16 +41,29 @@ class AwardPrizesListener
             $event->result['actionNo'])->where('lotteried', 0)->get();
 
         $guesses = Guess::where('game_id', $gameModel->id)
-            ->where('actionNo', $event->result['actionNo'])->where('lotteried', '0')
+            ->where('actionNo', $event->result['actionNo'])
+            ->where('lotteried', '0')
             ->get();
 
 
         $actionNo = $event->result['actionNo'];
         $game_id = $gameModel->id;
 
+
+        $codes = [];
+
+        foreach ($bets as $bet) {
+            if (!isset($codes[$bet->user_id])) {
+                $codes[$bet->user_id] = [];
+            }
+            array_push($codes[$bet->user_id], $bet->code);
+
+        }
+
         foreach ($bets as $bet) {
 
-            $time = $game->rule($bet->code, $event->result['codes']); //根据结果计算倍数
+            $time = $game->rule($bet->code, $event->result['codes'],
+                $codes[$bet->user_id]); //根据结果计算倍数
             try {
                 DB::transaction(function () use (
                     $bet,

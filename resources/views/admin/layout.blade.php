@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amaze UI Admin index Examples</title>
-    <meta name="description" content="这是一个 index 页面">
+    <title>中资盛世后台</title>
     <meta name="keywords" content="index">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,7 +72,7 @@
 
     <div class="tpl-left-nav tpl-left-nav-hover">
         <div class="tpl-left-nav-title">
-            Amaze UI 列表
+            中资盛世
         </div>
         <div class="tpl-left-nav-list">
             <ul class="tpl-left-nav-menu">
@@ -102,71 +101,97 @@
                         <span>提现请求</span>
                     </a>
                 </li>
-{{--
 
                 <li class="tpl-left-nav-item">
-                    <!-- 打开状态 a 标签添加 active 即可   -->
-                    <a href="javascript:;" class="nav-link tpl-left-nav-link-list active">
-                        <i class="am-icon-table"></i>
-                        <span>表格</span>
-                        <!-- 列表打开状态的i标签添加 tpl-left-nav-more-ico-rotate 图表即90°旋转  -->
+                    <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                        <i class="am-icon-wpforms"></i>
+                        <span>投注记录</span>
                         <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
                     </a>
-                    <ul class="tpl-left-nav-sub-menu" style="display:block">
+
+
+
+                    <ul class="tpl-left-nav-sub-menu" style="display: block;">
+
+
                         <li>
-                            <!-- 打开状态 a 标签添加 active 即可   -->
-                            <a href="table-font-list.html" class="active">
+                            @foreach($games as $game)
+
+                            <a href="{{ route('admin.bets', ['game'=>$game->id]) }}">
                                 <i class="am-icon-angle-right"></i>
-                                <span>文字表格</span>
+                                <span>{{ $game->name }}</span>
                                 <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
                             </a>
+                            @endforeach
 
-                            <a href="table-images-list.html">
-                                <i class="am-icon-angle-right"></i>
-                                <span>图片表格</span>
-                                <i class="tpl-left-nav-content tpl-badge-success">
-                                    18
-                                </i>
-
-                                <a href="form-news.html">
-                                    <i class="am-icon-angle-right"></i>
-                                    <span>消息列表</span>
-                                    <i class="tpl-left-nav-content tpl-badge-primary">
-                                        5
-                                    </i>
-
-
-                                    <a href="form-news-list.html">
-                                        <i class="am-icon-angle-right"></i>
-                                        <span>文字列表</span>
-
-                                    </a>
                         </li>
                     </ul>
                 </li>
---}}
+                {{--
 
-{{--                <li class="tpl-left-nav-item">
-                    <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                        <i class="am-icon-wpforms"></i>
-                        <span>表单</span>
-                        <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
-                    </a>
-                    <ul class="tpl-left-nav-sub-menu">
-                        <li>
-                            <a href="form-amazeui.html">
-                                <i class="am-icon-angle-right"></i>
-                                <span>Amaze UI 表单</span>
-                                <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
-                            </a>
+                                <li class="tpl-left-nav-item">
+                                    <!-- 打开状态 a 标签添加 active 即可   -->
+                                    <a href="javascript:;" class="nav-link tpl-left-nav-link-list active">
+                                        <i class="am-icon-table"></i>
+                                        <span>表格</span>
+                                        <!-- 列表打开状态的i标签添加 tpl-left-nav-more-ico-rotate 图表即90°旋转  -->
+                                        <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                                    </a>
+                                    <ul class="tpl-left-nav-sub-menu" style="display:block">
+                                        <li>
+                                            <!-- 打开状态 a 标签添加 active 即可   -->
+                                            <a href="table-font-list.html" class="active">
+                                                <i class="am-icon-angle-right"></i>
+                                                <span>文字表格</span>
+                                                <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+                                            </a>
 
-                            <a href="form-line.html">
-                                <i class="am-icon-angle-right"></i>
-                                <span>线条表单</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>--}}
+                                            <a href="table-images-list.html">
+                                                <i class="am-icon-angle-right"></i>
+                                                <span>图片表格</span>
+                                                <i class="tpl-left-nav-content tpl-badge-success">
+                                                    18
+                                                </i>
+
+                                                <a href="form-news.html">
+                                                    <i class="am-icon-angle-right"></i>
+                                                    <span>消息列表</span>
+                                                    <i class="tpl-left-nav-content tpl-badge-primary">
+                                                        5
+                                                    </i>
+
+
+                                                    <a href="form-news-list.html">
+                                                        <i class="am-icon-angle-right"></i>
+                                                        <span>文字列表</span>
+
+                                                    </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                --}}
+
+                {{--                <li class="tpl-left-nav-item">
+                                    <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                                        <i class="am-icon-wpforms"></i>
+                                        <span>表单</span>
+                                        <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                                    </a>
+                                    <ul class="tpl-left-nav-sub-menu">
+                                        <li>
+                                            <a href="form-amazeui.html">
+                                                <i class="am-icon-angle-right"></i>
+                                                <span>Amaze UI 表单</span>
+                                                <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+                                            </a>
+
+                                            <a href="form-line.html">
+                                                <i class="am-icon-angle-right"></i>
+                                                <span>线条表单</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>--}}
 
             </ul>
         </div>

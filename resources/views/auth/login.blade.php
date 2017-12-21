@@ -139,8 +139,34 @@
             <span>注：未满18岁严禁注册娱乐</span></div>
     </div>
 </div>
-<script>
-    var kflist = { "3": [{ "id": "6", "title": "中资盛世", "name": "\u5ba2\u670d\u2460", "cid": "1", "ac": "3", "value": "441653499", "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=441653499&amp;site=qq&amp;menu=yes", "img": "", "status": "1", "remark": "", "sort": "0" }] };
+<script>var kflist = {
+        "3": [{
+            "id": "6",
+            "title": "中资盛世",
+            "name": "\u5ba2\u670d\u2460",
+            "cid": "1",
+            "ac": "3",
+            "value": "577407777",
+            "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=577407777&amp;site=qq&amp;menu=yes",
+            "img": "",
+            "status": "1",
+            "remark": "",
+            "sort": "0"
+        }],
+        "4": [{
+            "id": "7",
+            "title": "\u5357\u5bab\u4ea4\u6d41Q\u7fa4",
+            "name": "\u4ea4\u6d41\u7fa4\u2460",
+            "cid": "1",
+            "ac": "4",
+            "value": "15468886",
+            "url": "",
+            "img": "",
+            "status": "1",
+            "remark": "",
+            "sort": "0"
+        }]
+    };
     var appdownload = null
 </script>
 <script src="/plug/service/online.js?v0.1"></script>

@@ -77,7 +77,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
-
     Route::get('/index', 'AdminController@index')->name('admin.index');
     Route::get('/login', 'AdminController@login')->name('admin.login');
     Route::post('/login', 'AdminController@loginPost')->name('admin.loginPost');
@@ -89,5 +88,8 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::delete('/capital-logs/{capitalLog}', 'AdminController@cancelCapitalLog')->name('admin.cancelCapitalLog');
     Route::get('/withdraws', 'AdminController@withDraws')->name('admin.withDraws');\
     Route::post('/withdraws/{withdraw}','AdminController@updateWithdraw')->name('admin.updateWithdraw');
+    Route::get('/game/{game}/bets', 'AdminController@bets')->name('admin.bets');
+    Route::get('/game/{game}/bets/{actionNo}', 'AdminController@betsList')->name('admin.betsList');
+
 
 });

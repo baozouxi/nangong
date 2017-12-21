@@ -102,7 +102,8 @@ class Pc28v25 extends Pc28
     }
 
 
-    public function rule($bet, $open_num)
+    //开奖
+    public function rule($bet, $open_num, $code_info_arr)
     {
         $lottery = $this->lottery($open_num);
         $time = 0;
@@ -135,7 +136,6 @@ class Pc28v25 extends Pc28
                         if ($bet == '双' && $lottery['num'] == 14) {
                             $time = 1.2;
                         }
-
                     }
 
                     break;
@@ -177,7 +177,9 @@ class Pc28v25 extends Pc28
                     if ($lottery['shunzi'] || $lottery['baozi']
                         || $lottery['duizi']
                     ) {
-                        $time = 0;
+                        if ($bet == $lottery['daxiao']) {
+                            $time = 1.5;
+                        }
                         if ($bet == '小' && $lottery['num'] == 13) {
                             $time = 1.2;
                         }
