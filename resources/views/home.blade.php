@@ -66,27 +66,11 @@
                 <div class="picbox"><a href="javascript:;"><img src="themes/simplebootx/Public/images/huodong.jpg"
                                                                 alt=""></a></div>
                 <ul>
-                    <li><a href="#" target="_blank"> 北京2.0倍 加拿大2.0倍玩法 赔率改动
-                            <span>2017-09-15</span></a></li>
-                    <li><a href="#" target="_blank"> 加拿大2.7倍玩法调整为2.8倍玩法
-                            <span>2017-03-17</span></a></li>
-                    <li><a href="#" target="_blank"> 2016-12-11日起提现将收取手续费
-                            <span>2016-12-10</span></a></li>
-                    <li><a href="#" target="_blank"> 国际幸运争霸赛9069完美结束
-                            <span>2016-12-04</span></a></li>
-                    <li><a href="#" target="_blank"> 国际幸运争霸赛9068完美结束
-                            <span>2016-12-02</span></a></li>
-                    <li><a href="#" target="_blank"> 国际幸运争霸赛9067完美结束
-                            <span>2016-11-30</span></a></li>
-                    <li><a href="#" target="_blank">
+                    @foreach($articles as $article)
+                    <li><a href="{{ route('articles.show', ['id'=>$article->id])  }}" target="_blank"> {{ $article->title }}
+                            <span>{{ $article->created_at }}</span></a></li>
+                    @endforeach
 
-                            <span>2016-11-27</span></a></li>
-                    <li><a href="#" target="_blank"> 国际幸运争霸赛9065完美结束
-                            <span>2016-11-25</span></a></li>
-                    <li><a href="#" target="_blank"> 国际幸运争霸赛9064完美结束
-                            <span>2016-11-23</span></a></li>
-                    <li><a href="#" target="_blank"> 国际幸运争霸赛9063完美结束
-                            <span>2016-11-20</span></a></li>
                 </ul>
             </div>
             <div class="gametwo">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Article;
 use App\Bet;
 use App\Events\AwardPrizes;
 use App\Game\Game;
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $articles = Article::limit(5)->orderBy('created_at', 'desc')->get();
+
+        return view('home', compact('articles'));
     }
 }

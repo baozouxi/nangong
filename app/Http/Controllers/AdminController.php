@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Admin;
+use App\Article;
 use App\Bet;
 use App\CapitalLog;
 use App\Game;
@@ -270,7 +271,9 @@ class AdminController extends Controller
         }
 
 
-        return view('admin.bets',['bets'=>$result, 'game_id'=>$game->id, 'bets'=>$bets]);
+
+
+        return view('admin.bets',['bets'=>$result, 'game_id'=>$game->id]);
 
     }
 
@@ -302,6 +305,46 @@ class AdminController extends Controller
 
 
         return view('admin.bets-list', ['bets'=>$result]);
+
+    }
+
+
+    public function articles()
+    {
+        $articles = Article::all();
+
+        return view('admin.article-list', compact('articles'));
+    }
+
+
+
+    public function articleCreate()
+    {
+        return view('admin.article-create');
+    }
+
+
+    public function submitArticle(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required|string',
+            'body' => 'required|string'
+        ]);
+
+
+        if (Article::create(['title' =>$request['title'], 'body'=>$request['body']])) {
+            return redirect(route('admin.articles'));
+        }
+
+    }
+
+
+    public function deleteArticle(Article $article)
+    {
+        if ($article->delete()) {
+            return ['status' => 'ok'];
+        }
+        return ['status' => 'error'];
 
     }
 

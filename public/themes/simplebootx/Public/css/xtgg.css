@@ -1,0 +1,38 @@
+/* 2016年6月22日18:00:09; */
+.xtgg-stb { background-color: #fff; }
+.xtgg-stb .slideTxtBox{width:1000px;border-bottom:none;text-align:center;}
+.xtgg-stb .slideTxtBox .hd{height:59px;line-height:59px;background:#fff;border:none;position:relative;}
+.xtgg-stb .slideTxtBox .hd ul{float:left;position:absolute;left:0px;top:0px;height:32px;width: 998px;border:1px solid #e8e8e8;border-bottom: none;height: 59px;p}
+.xtgg-stb .slideTxtBox .hd ul li{float:left;cursor:pointer;height: 59px;width: 179px;border-right: 1px solid #e8e8e8;line-height: 59px;font-size: 18px;color: #666666;}
+.xtgg-stb .slideTxtBox .hd ul li.on{border-top:3px solid #035caf;border-bottom:1px solid #fff;margin-top: -1px;height: 56px;line-height: 56px;font-size: 18px;color: #035caf;}
+.xtgg-stb .slideTxtBox .bd ul.newslist{padding: 17px 25px 39px 34px;}
+.banner_xtzx{width: 1000px;min-width: 1000px;overflow: hidden;height: 250px;background: url(http://ng077.com/themes/simplebootx/Public/images/banner_xtzx.jpg) no-repeat center center;}
+.banner_xtzx a.czzx{background:rgb(3,92,175) url(../images/gamejt.png) no-repeat 186px center ;display: block;width: 253px;height: 80px;margin-top: 96px;}
+.banner_xtzx a.czzx span.tit,.banner_xtzx a.czzx span.en{color: #fff;margin-left: 36px;}
+.banner_xtzx a.czzx span.tit{width:100%;height:24px;line-height: 24px;font-size: 20px;float:left;margin-top: 22px;}
+.banner_xtzx a.czzx span.en{width:100%;height:14px;line-height: 14px;font-size: 12px;float:left;margin-bottom: 19px;text-transform: uppercase;}
+/* 2016年6月22日18:00:09; */
+
+ul.newslist{height: auto; border: 1px solid #e8e8e8;box-sizing:border-box;padding-top: 13px;}
+ul.newslist li{width: 100%;height: 52px;float: left;border-bottom:1px dashed #e3e3e3;line-height: 52px;}
+ul.newslist li a{color: #666666;font-size: 14px;float: left;}
+ul.newslist li a:hover{text-decoration: underline;color: #035caf;}
+ul.newslist li span{float: right;margin-right: 10px;color: #999;}
+
+
+.arcnr{width: 998px;height: auto;float: left;border: 1px solid #e2e2e2; padding-left: 30px;padding-right:30px;margin-bottom: 60px;box-sizing:border-box; background-color: #fff; }
+.arcnr .arctitle{width: 100%;height: 34px;float: left;margin-top: 36px;text-align: center;line-height: 34px;color: #666;font-size: 20px;}
+.arcnr .arctips{width: 100%;height: 30px;float: left;text-align: center;line-height: 30px;color: #999;font-size: 12px;margin-bottom: 22px;}
+.arcnr .arcline{width: 100%;height:0px;border-top: 1px solid #cccccc;float: left;}
+/*
+.arcnr p{width: 860px;height: auto;float: left;margin-left: 39px;line-height: 22px;margin-top: 25px;margin-bottom: 68px;color: #666;font-size: 14px;}
+*/
+.arcnr p{width: 860px;height: auto;float: left;margin-top: 15px; margin-left: 39px;line-height: 22px; color: #666;font-size: 14px;}
+.arcnr .syp{width: 50%;height: 54px;float: left;line-height: 54px;margin-bottom: 20px;}
+.arcnr .syp span{width: auto;height: auto;color: #666666;font-size: 14px;}
+.arcnr .syp a{width: auto;height: auto;color: #666666;font-size: 14px;}
+.arcnr .xyp{width: 50%;height: 54px;float: right;line-height: 54px;margin-bottom: 20px;}
+.arcnr .xyp span{width: auto;height: auto;float: right;color: #666666;font-size: 14px;}
+.arcnr .xyp a{width: auto;height: auto;float: right;color: #666666;font-size: 14px;}
+.arcnr .xyp a:hover{color: #035caf;}
+.arcnr .syp a:hover{color: #035caf;}

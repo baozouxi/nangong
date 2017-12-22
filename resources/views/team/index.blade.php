@@ -28,10 +28,10 @@
                                                               alt=""></a>
                 </div>
                 <div class="name_box">
-                    <div class="name"><span>baozouxi</span>
-                        <div class="uid">uid：9016</div>
+                    <div class="name"><span>{{ $user->username }}</span>
+                        <div class="uid">uid：{{ $user->id }}</div>
                     </div>
-                    <div class="time">上次登录时间：2017-12-15 16:02:09</div>
+                    <div class="time">上次登录时间：{{ $lastLogin? $lastLogin->login_time : ''  }}</div>
                 </div>
             </div>
         </div>

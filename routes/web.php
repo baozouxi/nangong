@@ -18,7 +18,6 @@ Route::get('/', 'HomeController@index')->name('home');
 //以下路由要经过auth中间件
 
 
-
 //前台
 Route::group(['middleware' => 'auth'], function () {
 
@@ -49,9 +48,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/popularize','TeamsController@popularize')->name('team.popularize'); //推广
     });
 
-
-
-
     Route::group(['prefix' => '/game'], function () {
 
         Route::get('/{game}/last-open-codes/{expect}', 'GamesController@getLastCodes')->name('lastOpenCodes');
@@ -76,6 +72,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+Route::resource('articles','ArticlesController');
+
+
 
 Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::get('/index', 'AdminController@index')->name('admin.index');
@@ -91,6 +90,7 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::post('/withdraws/{withdraw}','AdminController@updateWithdraw')->name('admin.updateWithdraw');
     Route::get('/game/{game}/bets', 'AdminController@bets')->name('admin.bets');
     Route::get('/game/{game}/bets/{actionNo}', 'AdminController@betsList')->name('admin.betsList');
-
-
+    Route::get('/articles', 'AdminController@articles')->name('admin.articles');
+    Route::get('/articles/create','AdminController@articleCreate')->name('admin.articleCreate');
+    Route::post('/articles', 'AdminController@submitArticle')->name('admin.articleSubmit');
 });

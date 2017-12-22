@@ -101,6 +101,12 @@
                         <span>提现请求</span>
                     </a>
                 </li>
+                <li class="tpl-left-nav-item">
+                    <a href="{{ route('admin.articles') }}" class="nav-link tpl-left-nav-link-list">
+                        <i class="am-icon-key"></i>
+                        <span>网站公告</span>
+                    </a>
+                </li>
 
                 <li class="tpl-left-nav-item">
                     <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
