@@ -35,7 +35,7 @@
 <div class="header">
     <div class="w1000">
         <div class="logo"><a href="index.html"><img src="/themes/simplebootx/Public/images/logo.png" alt=""></a></div>
-        <div class="gg">刘晓明在872355期红包接龙中夺得运气王!</div>
+        <div class="gg">{{ $ad->body }}</div>
         @if(!Auth::check())
             <div class="user" id="userpanel"><span>欢迎您，新用户！请先 </span><a href="{{ route('login') }}">登录</a><a
                         href="{{ route('register') }}">注册</a></div>
@@ -108,7 +108,7 @@
         }],
         "4": [{
             "id": "7",
-            "title": "\u5357\u5bab\u4ea4\u6d41Q\u7fa4",
+            "title": "中资盛世Q群",
             "name": "\u4ea4\u6d41\u7fa4\u2460",
             "cid": "1",
             "ac": "4",

@@ -55,6 +55,10 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123456')
         ]);
 
+        \App\Ad::create([
+            'body' => '刘晓明在872355期s红包接龙中夺得运气王!'
+        ]);
+
 
 
         $this->call(UsersSeeder::class);

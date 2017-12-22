@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ad;
 use App\Admin;
 use App\Article;
 use App\Bet;
@@ -347,6 +348,32 @@ class AdminController extends Controller
         return ['status' => 'error'];
 
     }
+
+
+
+    //get Ad
+    public function ad()
+    {
+        $ad = Ad::first();
+        return view('admin.ad', compact('ad'));
+
+    }
+
+    public function updateAd(Ad $ad, Request $request)
+    {
+        $this->validate($request, [
+            'body' => 'required|string'
+        ]);
+        $ad->body = $request['body'];
+
+        if ($ad->save()) {
+            return redirect(route('admin.ad'));
+        }
+
+
+
+    }
+
 
 
 }

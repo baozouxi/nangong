@@ -93,4 +93,7 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::get('/articles', 'AdminController@articles')->name('admin.articles');
     Route::get('/articles/create','AdminController@articleCreate')->name('admin.articleCreate');
     Route::post('/articles', 'AdminController@submitArticle')->name('admin.articleSubmit');
+    Route::get('/ad', 'AdminController@ad')->name('admin.ad');
+    Route::post('/ad/{ad}', 'AdminController@updateAd')->name('admin.updateAd');
+
 });
