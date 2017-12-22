@@ -63,6 +63,25 @@ class GamesController extends Controller
         $actionNo = (OpenCode::where('game_id', $game->id)
                 ->orderBy('open_time', 'desc')->limit(1)->first()->actionNo)
             + 1;
+
+
+        //2.0倍不允许同时下大小
+        try {
+            $pc_game = app()->make(Game\Game::class)->getGame($game->name);
+
+            $pc_game->checkSubmitBet($request->all());
+        } catch (Game\GameException $exception) {
+
+            return [
+                'status'  => 0,
+                'msg'     => $exception->getMessage(),
+                'referer' => '',
+                'state'   => 'fail',
+            ];
+
+        }
+
+
         $user_id = Auth::user()->id;
         $capital = Auth::user()->capital; //账户余额
 
@@ -89,7 +108,6 @@ class GamesController extends Controller
                         'actionNo'   => $actionNo,
                     ]);
                 }
-
             }
         }
 
@@ -164,6 +182,64 @@ class GamesController extends Controller
     }
 
 
+    //返回不能下注的类型 2.0不能同时下
+    public function getCannotBet(Game $game)
+    {
+        $fields = [];
+        $fields['tp101'] = 'false';
+        $fields['tp102'] = 'false';
+        $fields['tp103'] = 'false';
+        $fields['tp104'] = 'false';
+        $fields['tp105'] = 'false';
+        $fields['tp106'] = 'false';
+        $fields['tp107'] = 'false';
+        $fields['tp108'] = 'false';
+        $fields['tp109'] = 'false';
+        $fields['tp110'] = 'false';
+        $fields['tp140'] = 'false';
+        $fields['tp141'] = 'false';
+        $fields['tp142'] = 'false';
+        $fields['sign'] = 'true';
+        if ($game->name == '北京幸运28') {
+
+            $openCode = new OpenCode();
+
+
+            $current_expect = $openCode->currentExpect($game->id);
+
+            $bets = Bet::where('user_id', Auth::user()->id)
+                ->where('game_id', $game->id)
+                ->where('actionNo', $current_expect)->get();
+
+            foreach ($bets as $bet) {
+
+                if ($bet->code == '小') {
+                    $fields['tp102'] = 'true';
+                }
+
+                if ($bet->code == '大') {
+                    $fields['tp101'] = 'true';
+                }
+
+                if ($bet->code == '单') {
+                    $fields['tp104'] = 'true';
+                }
+
+
+                if ($bet->code == '双') {
+                    $fields['tp103'] = 'true';
+                }
+            }
+
+        }
+
+
+        return $fields;
+
+
+    }
+
+
     public function cancelBet(Bet $bet)
     {
         $result = [];
@@ -188,7 +264,6 @@ class GamesController extends Controller
         } catch (\Throwable $e) {
             Log::info($e->getMessage());
         }
-
 
         return $result;
 
@@ -669,12 +744,12 @@ class GamesController extends Controller
 
         $guesses = Guess::where('user_id', Auth::user()->id)
             ->where('game_id', $game->id)
-            ->whereIn('actionNo',array_unique($actionNo_arr))
+            ->whereIn('actionNo', array_unique($actionNo_arr))
             ->orderBy('created_at', 'desc')
             ->get();
 
 
-        foreach($guesses as $guess) {
+        foreach ($guesses as $guess) {
             $temp_arr = [];
             $state = "0";
             $temp_arr['billno'] = 'g_'.$guess->id;
@@ -755,7 +830,7 @@ class GamesController extends Controller
             $str .= '<li><div class="w172">'.$bet['expect'].'</div>';
             $str .= '<div class="w201">'.$bet['open_time'].'</div>';
             $str .= '<div class="w186">'.mt_rand(100, 500).'</div>';
-            $str .= ' <div class="w149">'.mt_rand(100,1000)
+            $str .= ' <div class="w149">'.mt_rand(100, 1000)
                 .'00</div>';
             $open_code_lst = explode(',', $bet['codes']);
             $str .= '<div class="w244"><i class="bgbl">'.$open_code_lst['0']

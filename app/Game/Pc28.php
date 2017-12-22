@@ -9,8 +9,11 @@
 namespace App\Game;
 
 
+use App\Bet;
 use App\Game\Traits\CheckOpen;
 use App\Game\Traits\GetFrom360;
+use App\OpenCode;
+use Illuminate\Support\Facades\Auth;
 
 class Pc28 implements GameInterface
 {
@@ -162,7 +165,6 @@ class Pc28 implements GameInterface
         $this->checkOpen($result);
 
         return $result;
-
     }
 
 
@@ -171,5 +173,55 @@ class Pc28 implements GameInterface
         return static::NAME;
     }
 
+    //过滤下注数组
+    public function checkSubmitBet($bet_arr)
+    {
+        $game = \App\Game::where('name',self::NAME)->first();
+        $openCode = new OpenCode();
+        $current_expect = $openCode->currentExpect($game->id);
+
+
+        if ($bet_arr['tp101'] && $bet_arr['tp102']) {
+            throw new GameException('不能同时下注大小');
+        }
+        if ($bet_arr['tp103'] && $bet_arr['tp104']) {
+            throw new GameException('不能同时下注单双');
+        }
+
+        if ($bet_arr['tp101']) {
+            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('code', '大')->first();
+            if ($bet != null) {
+                throw new GameException('已经下注大，不能再下注小');
+            }
+
+        }
+
+        if ($bet_arr['tp102']) {
+            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('code', '小')->first();
+            if ($bet != null) {
+                throw new GameException('已经下注小，不能再下注大');
+            }
+
+        }
+
+
+        if ($bet_arr['tp103']) {
+            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('code', '双')->first();
+            if ($bet != null) {
+                throw new GameException('已经下注双，不能再下注单');
+            }
+
+        }
+
+        if ($bet_arr['tp104']) {
+            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('code', '单')->first();
+            if ($bet != null) {
+                throw new GameException('已经下注单，不能再下注双');
+            }
+
+        }
+
+
+    }
 
 }

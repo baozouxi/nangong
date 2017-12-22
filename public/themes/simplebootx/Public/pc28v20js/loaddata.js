@@ -453,7 +453,7 @@ function checkdb(the,game_id) {
                     xztf = true;
                     $.message({type: "ok", content: data.msg, time: 3000});
                     freset();
-                    shownotbet();
+                    shownotbet(game_id);
                     getUserYingLoss(0);
                     getUserBetsListToday(1,game_id);
                     break;
@@ -653,10 +653,10 @@ function hidenotbet() {
 }
 
 //标出不允许下注的输入框
-function shownotbet() {
+function shownotbet(game_id) {
     $.ajax({
-        url: "/user/game/getCannotBetType_20/t/" + Math.random(),
-        type: "post",
+        url: "/game/"+game_id+"/cannot-type",
+        type: "get",
         data: {
             //"expect": expect
         },

@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{game}/fanshui', 'GamesController@fanshui')->name('fanshui'); //获取反水记录
         Route::get('/{game}/zoushi', 'GamesController@zoushi')->name('zoushi'); //获取开奖走势
         Route::post('/{game}/guess', 'GamesController@guess')->name('caishu');
+        Route::get('/{game}/cannot-type', 'GamesController@getCannotBet')->name('canotType');
 
     });
 

@@ -203,7 +203,6 @@ class Pc28v25 extends Pc28
                         $time = 11;
                     }
                     break;
-
                 case '豹子':
                     if ($bet == $lottery['baozi']) {
                         $time = 50;
@@ -224,6 +223,13 @@ class Pc28v25 extends Pc28
         }
 
         return $time;
+
+    }
+
+
+    //null
+    public function checkSubmitBet($bet_arr)
+    {
 
     }
 
