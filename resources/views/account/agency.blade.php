@@ -162,7 +162,7 @@
                     $(this).next(".ck_nr").toggle();
                 }
             )
-            get_myagent_list(tsort, d, page, '');
+            // get_myagent_list(tsort, d, page, '');
         });
     </script>
     <br/>
@@ -171,37 +171,3 @@
 
 @endsection
 
-@push('scrpits')
-
-    <script>
-        var kflist = {
-            "3": [{
-                "id": "6",
-                "title": "\u5357\u5bab\u5ba2\u670d",
-                "name": "\u5ba2\u670d\u2460",
-                "cid": "1",
-                "ac": "3",
-                "value": "9001723",
-                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=9001723&amp;site=qq&amp;menu=yes",
-                "img": "",
-                "status": "1",
-                "remark": "",
-                "sort": "0"
-            }],
-            "4": [{
-                "id": "7",
-                "title": "\u5357\u5bab\u4ea4\u6d41Q\u7fa4",
-                "name": "\u4ea4\u6d41\u7fa4\u2460",
-                "cid": "1",
-                "ac": "4",
-                "value": "591811597",
-                "url": "",
-                "img": "",
-                "status": "1",
-                "remark": "",
-                "sort": "0"
-            }]
-        };
-        var appdownload = null
-    </script>
-@endpush
