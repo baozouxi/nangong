@@ -189,7 +189,7 @@ class Pc28 implements GameInterface
         }
 
         if ($bet_arr['tp101']) {
-            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('code', '大')->first();
+            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('game_id',$game->id)->where('code', '大')->first();
             if ($bet != null) {
                 throw new GameException('已经下注大，不能再下注小');
             }
@@ -197,7 +197,7 @@ class Pc28 implements GameInterface
         }
 
         if ($bet_arr['tp102']) {
-            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('code', '小')->first();
+            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('game_id',$game->id)->where('code', '小')->first();
             if ($bet != null) {
                 throw new GameException('已经下注小，不能再下注大');
             }
@@ -206,7 +206,7 @@ class Pc28 implements GameInterface
 
 
         if ($bet_arr['tp103']) {
-            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('code', '双')->first();
+            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('game_id',$game->id)->where('code', '双')->first();
             if ($bet != null) {
                 throw new GameException('已经下注双，不能再下注单');
             }
@@ -214,7 +214,7 @@ class Pc28 implements GameInterface
         }
 
         if ($bet_arr['tp104']) {
-            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('code', '单')->first();
+            $bet = Bet::where('user_id', Auth::user()->id)->where('actionNo',$current_expect)->where('game_id',$game->id)->where('code', '单')->first();
             if ($bet != null) {
                 throw new GameException('已经下注单，不能再下注双');
             }

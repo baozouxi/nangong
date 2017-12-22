@@ -118,6 +118,17 @@ class Pc28v25 extends Pc28
                 case '双' :
                     if ($bet == $lottery['danshuang']) {
                         $time = 2.5;
+
+                        if (in_array('单', $code_info_arr)
+                            && in_array('双', $code_info_arr)
+                        ) {
+                            $time = 2.4;
+                            if ($lottery['shunzi'] || $lottery['baozi']
+                                || $lottery['duizi']
+                            ) {
+                                $time = 1;
+                            }
+                        }
                     }
                     if ($bet == '单' && $lottery['num'] == 13) {
                         $time = 1.2;
@@ -126,17 +137,6 @@ class Pc28v25 extends Pc28
                         $time = 1.2;
                     }
 
-                    if ($lottery['shunzi'] || $lottery['baozi']
-                        || $lottery['duizi']
-                    ) {
-                        $time = 0;
-                        if ($bet == '单' && $lottery['num'] == 13) {
-                            $time = 1.2;
-                        }
-                        if ($bet == '双' && $lottery['num'] == 14) {
-                            $time = 1.2;
-                        }
-                    }
 
                     break;
                 case '小单' :
@@ -172,30 +172,28 @@ class Pc28v25 extends Pc28
                 case '小' :
                     if ($bet == $lottery['daxiao']) {
                         $time = 2.5;
-                        if (in_array('大',$code_info_arr) && in_array('小',$code_info_arr)) {
-                            $time = 1.5;
-                        }
-                    }
-
-                    if ($lottery['shunzi'] || $lottery['baozi']
-                        || $lottery['duizi']
-                    ) {
 
                         if (in_array('大', $code_info_arr)
                             && in_array('小', $code_info_arr)
                         ) {
-                            if ($bet == $lottery['daxiao']) {
-                                $time = 1.5;
+                            $time = 2.4;
+                            if ($lottery['shunzi'] || $lottery['baozi']
+                                || $lottery['duizi']
+                            ) {
+                                $time = 1;
                             }
                         }
-                        if ($bet == '小' && $lottery['num'] == 13) {
-                            $time = 1.2;
-                        }
-                        if ($bet == '大' && $lottery['num'] == 14) {
-                            $time = 1.2;
-                        }
-
                     }
+
+                    if ($bet == '大' && $lottery['num'] == '14') {
+                        $time = 1;
+                    }
+
+                    if ($bet == '小' && $lottery['num'] == '13') {
+                        $time = 1;
+                    }
+
+
                     break;
                 case '极大' :
                 case '极小' :
