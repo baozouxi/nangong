@@ -74,8 +74,7 @@
         <li><a href="#"><i class="navicon7"></i><span class="cn">系统公告</span><span class="en">discount</span></a>
             <div class="ssnav">
                 <div class="h14"></div>
-                <a href="#">最新公告</a> <a href="#">会员必读</a>
-                <a href="#">活动公告</a></div>
+                <a href="{{ route('articles.index') }}">最新公告</a></div>
         </li>
     </div>
 </div>

@@ -28,4 +28,14 @@ class HomeController extends Controller
 
         return view('home', compact('articles'));
     }
+
+    public function articles()
+    {
+        $articles = Article::all();
+
+
+    }
+
+
+
 }
