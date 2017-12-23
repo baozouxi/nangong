@@ -122,7 +122,7 @@ class Pc28v25 extends Pc28
                         if (in_array('单', $code_info_arr)
                             && in_array('双', $code_info_arr)
                         ) {
-                            $time = 2.4;
+                            $time = 2.5;
                             if ($lottery['shunzi'] || $lottery['baozi']
                                 || $lottery['duizi']
                             ) {
@@ -176,7 +176,7 @@ class Pc28v25 extends Pc28
                         if (in_array('大', $code_info_arr)
                             && in_array('小', $code_info_arr)
                         ) {
-                            $time = 2.4;
+                            $time = 2.5;
                             if ($lottery['shunzi'] || $lottery['baozi']
                                 || $lottery['duizi']
                             ) {
