@@ -60,7 +60,7 @@
                     <li class="clearfix">
                         <div class="title">推广链接</div>
                         <i class="tgljicon"></i>
-                        <div class="text" id="tgurl">http://www.ng177.com/sreg?suid=9016</div>
+                        <div class="text" id="tgurl"></div>
                         <a href="javascript:;" class="fzlj"><span id="d_clip_button"
                                                                   data-clipboard-target="tgurl">复制链接</span></a></li>
                     <li class="clearfix">

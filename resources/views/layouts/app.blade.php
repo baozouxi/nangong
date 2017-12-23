@@ -60,7 +60,7 @@
         </li>
         <li><a href="javascript:;"><i class="navicon2"></i><span class="cn" style="color:#999">彩票游戏</span><span
                         class="en" style="color:#999">lottery</span></a></li>
-        <li><a href="javascript:;"><i class="navicon2"></i><span class="cn" style="color:#999">红包游戏</span><span
+        <li><a href="javascript:;"><i class="navicon2"></i><span class="cn" style="color:#999">香港六合彩</span><span
                         class="en" style="color:#999">games</span></a></li>
         <li><a href="{{ route('account.user') }}"><i class="navicon5"></i><span class="cn">账户管理</span><span class="en">account</span></a>
             <div class="ssnav">
