@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use App\Ad;
 use App\Admin;
 use App\Article;
@@ -371,9 +372,67 @@ class AdminController extends Controller
         }
 
 
+    }
+
+
+
+    //收款账户
+    public function accounts()
+    {
+        $accounts = Account::all();
+
+        return view('admin.account-list', compact('accounts'));
+
+    }
+
+    public function accountCreate()
+    {
+        return view('admin.account-create');
+    }
+
+
+    public function accountSubmit(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required|string|',
+            'tips' => 'nullable|string',
+            'number' => 'required|string',
+            'way' => 'required|string'
+        ]);
+
+        if (Account::create($request->all())) {
+            return redirect(route('admin.accounts'));
+        }
 
     }
 
 
+    public function accountUpdate(Account $account)
+    {
+        return view('admin.account-update', compact('account'));
+    }
+
+
+    public function accountUpdateSubmit(Account $account,Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required|string|',
+            'tips' => 'nullable|string',
+            'number' => 'required|string',
+            'way' => 'required|string'
+        ]);
+
+        if ($account->update($request->all())) {
+            return redirect(route('admin.accounts'));
+        }
+
+    }
+
+
+
+    public function accountDelete(Account $account)
+    {
+
+    }
 
 }

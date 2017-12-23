@@ -44,7 +44,7 @@
                     <div class="zhye_box">
                         <div class="title"><i class="zhyeicon"></i>账户余额</div>
                         <div class="num">{{ number_format($capital->money, 2) }} 元</div>
-                        <a href="http://ng077.com/user/profile/pay.html" class="cz">充值</a><a href="themoney.html"
+                        <a href="{{ route('account.recharge') }}" class="cz">充值</a><a href="{{ route('account.withdraw') }}"
                                                                                              class="tx">提现</a></div>
                     <div class="geren_infolist">
                         <li><i class="telicon"></i>

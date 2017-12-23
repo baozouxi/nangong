@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
 
 
         $bank_list = [
+            '支付宝',
+            '微信',
             '工商银行',
             '建设银行',
             '招商银行',
@@ -43,7 +45,7 @@ class DatabaseSeeder extends Seeder
             '上海浦东发展银行',
             '北京农村商业银行',
             '广东发展银行',
-            '支付宝'
+
         ];
 
         foreach ($bank_list as $bank) {
@@ -52,13 +54,12 @@ class DatabaseSeeder extends Seeder
 
         \App\Admin::create([
             'username' => 'baozouxi',
-            'password' => bcrypt('123456')
+            'password' => bcrypt('123456'),
         ]);
 
         \App\Ad::create([
-            'body' => '刘晓明在872355期s红包接龙中夺得运气王!'
+            'body' => '刘晓明在872355期红包接龙中夺得运气王!',
         ]);
-
 
 
         $this->call(UsersSeeder::class);

@@ -37,9 +37,8 @@ class HomeController extends Controller
     public function articles()
     {
         $articles = Article::all();
-
-
     }
+
 
 
 

@@ -26,7 +26,7 @@
     <script src="/public/js/base.js" type="text/javascript"></script>
     <script src="/themes/simplebootx/Public/js/base.js"></script>
     <script src="/themes/simplebootx/Public/js/min/modernizr-custom-v2.7.1.min.js" type="text/javascript"></script>
-    <link href="/themes/simplebootx/Public/css/flickerplate.css" type="text/css" rel="stylesheet">
+    <link href="/themes/simplebo otx/Public/css/flickerplate.css" type="text/css" rel="stylesheet">
     <script src="/themes/simplebootx/Public/js/min/flickerplate.min.js" type="text/javascript"></script>
     @stack('init-scripts')
 </head>
@@ -99,8 +99,8 @@
             "name": "\u5ba2\u670d\u2460",
             "cid": "1",
             "ac": "3",
-            "value": "577407777",
-            "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=577407777&amp;site=qq&amp;menu=yes",
+            "value": "577407888",
+            "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=577407888&amp;site=qq&amp;menu=yes",
             "img": "",
             "status": "1",
             "remark": "",

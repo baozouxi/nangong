@@ -115,6 +115,21 @@
                     </a>
                 </li>
 
+
+                <li class="tpl-left-nav-item">
+                    <a href="{{ route('admin.accounts') }}" class="nav-link tpl-left-nav-link-list">
+                        <i class="am-icon-key"></i>
+                        <span>收款账户</span>
+                    </a>
+                </li>
+
+                <li class="tpl-left-nav-item">
+                    <a href="#" class="nav-link tpl-left-nav-link-list">
+                        <i class="am-icon-key"></i>
+                        <span>浮动客服</span>
+                    </a>
+                </li>
+
                 <li class="tpl-left-nav-item">
                     <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                         <i class="am-icon-wpforms"></i>

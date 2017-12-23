@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use App\Bank;
 use App\BankName;
 use App\Bet;
@@ -95,7 +96,9 @@ class AccountsController extends Controller
     //充值中心
     public function recharge()
     {
-        return view('account.recharge');
+        $accounts = Account::all();
+
+        return view('account.recharge',compact('accounts'));
     }
 
     //提现
