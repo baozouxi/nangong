@@ -432,7 +432,16 @@ class AdminController extends Controller
 
     public function accountDelete(Account $account)
     {
+        $result =[];
+        $result['status'] = 'error';
+        $result['info'] = '删除失败';
 
+        if ($account->delete()) {
+            $result['status'] = 'ok';
+            $result['info'] = '删除成功';
+        }
+
+        return $result;
     }
 
 }

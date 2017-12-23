@@ -4,7 +4,7 @@
 @section('main')
 
     <div class="tpl-content-page-title">
-        添加收款账户
+        修改收款账户
     </div>
     <ol class="am-breadcrumb">
         <li><a href="{{ route('admin.index') }}" class="am-icon-home">首页</a></li>

@@ -99,6 +99,7 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::get('/accounts','AdminController@accounts')->name('admin.accounts'); //收款账户
     Route::get('/accounts/{account}/update','AdminController@accountUpdate')->name('admin.accountUpdate'); //修改账户
     Route::put('/accounts/{account}','AdminController@accountUpdateSubmit')->name('admin.accountUpdateSubmit'); //修改账户提交
+    Route::delete('/accounts/{account}','AdminController@accountDelete')->name('admin.accountDelete'); //删除账户提交
     Route::get('/account/create','AdminController@accountCreate')->name('admin.accountCreate'); //收款账户
     Route::post('/account','AdminController@accountSubmit')->name('admin.accountSubmit'); //收款账户提交
 

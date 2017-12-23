@@ -15,13 +15,7 @@
             <div class="caption font-green bold">
                 <span class="am-icon-code"></span> 列表
             </div>
-            <div class="tpl-portlet-input tpl-fz-ml">
-                <div class="portlet-input input-small input-inline">
-                    <div class="input-icon right">
-                        <i class="am-icon-search"></i>
-                        <input type="text" class="form-control form-control-solid" placeholder="搜索..."></div>
-                </div>
-            </div>
+
 
 
         </div>
@@ -83,7 +77,7 @@
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
                                                 <a href="{{ route('admin.accountUpdate', ['account'=>$account->id]) }}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</a>
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                                                <button type="button"  data-id="{{ $account->id }}" class="am-btn am-btn-default am-btn-xs am-text-danger account-delete am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                                             </div>
                                         </div>
                                     </td>
@@ -135,4 +129,18 @@
 
 @push('scripts')
     <script src="/assets/js/capital_log.js"></script>
+    <script>
+        $(function(){
+            $('.account-delete').click(function(){
+
+                var id =$(this).attr('data-id');
+                var url = '/admin/accounts/'+id;
+                _delete(url, $(this).parents('tr'));
+            });
+
+        });
+
+    </script>
+
+
 @endpush
