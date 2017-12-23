@@ -115,6 +115,7 @@
 @push('scripts')
 
     <script>
+        selthetype({{ $cards->first() ? $cards->first()->id  : '0' }});
         var kflist = {
             "3": [{
                 "id": "6",

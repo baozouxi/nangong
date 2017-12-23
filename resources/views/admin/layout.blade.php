@@ -55,7 +55,8 @@
                                 src="/assets/img/user01.png"></span>
                 </a>
                 <ul class="am-dropdown-content">
-                    <li><a href="#"><span class="am-icon-bell-o"></span>修改密码</a></li>
+                    <li><a href="javascript:void(0);" class="changePass"><span class="am-icon-bell-o"></span>修改密码</a>
+                    </li>
                     <li><a href="{{ route('admin.logout') }}"><span class="am-icon-power-off"></span> 退出</a></li>
                 </ul>
             </li>
@@ -141,11 +142,11 @@
                         <li>
                             @foreach($games as $game)
 
-                            <a href="{{ route('admin.bets', ['game'=>$game->id]) }}">
-                                <i class="am-icon-angle-right"></i>
-                                <span>{{ $game->name }}</span>
-                                <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
-                            </a>
+                                <a href="{{ route('admin.bets', ['game'=>$game->id]) }}">
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>{{ $game->name }}</span>
+                                    <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+                                </a>
                             @endforeach
 
                         </li>
@@ -228,6 +229,23 @@
     </div>
 
 </div>
+
+
+<div class="am-modal am-modal-prompt" tabindex="-1" id="changePass">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">修改密码</div>
+        <div class="am-modal-bd">
+            原密码： <input type="text" name="money" class="am-modal-prompt-input">
+            原密码： <input type="text" name="money" class="am-modal-prompt-input">
+            原密码： <input type="text" name="money" class="am-modal-prompt-input">
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+        </div>
+    </div>
+</div>
+
 
 <script src="/assets/js/app.js"></script>
 @stack('scripts')

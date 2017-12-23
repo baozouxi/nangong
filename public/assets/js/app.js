@@ -31,6 +31,17 @@ $(function () {
     })
 
 
+    $('.changePass').click(function () {
+
+        $('#changePass').modal({
+            relatedTarget: this,
+            onConfirm: function (e) {
+
+            },
+        });
+
+    });
+
 
 });
 
