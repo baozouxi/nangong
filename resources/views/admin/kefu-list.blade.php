@@ -4,18 +4,17 @@
 @section('main')
 
     <div class="tpl-content-page-title">
-        网站公告
+        浮动客服
     </div>
     <ol class="am-breadcrumb">
         <li><a href="{{ route('admin.index') }}" class="am-icon-home">首页</a></li>
-        <li><a href="#">网站公告</a></li>
+        <li><a href="#">浮动客服</a></li>
     </ol>
     <div class="tpl-portlet-components">
         <div class="portlet-title">
             <div class="caption font-green bold">
                 <span class="am-icon-code"></span> 列表
             </div>
-
 
 
         </div>
@@ -47,62 +46,44 @@
                     <div class="am-u-sm-12 am-u-md-6">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
-                                <a href="{{ route('admin.articleCreate') }}"
+                                <a href="{{ route('admin.kefuCreate') }}"
                                    class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span>
                                     新增</a>
                             </div>
                         </div>
                     </div>
                     <form class="am-form">
-
-
                         <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                             <tr>
-                                <th class="table-title">标题</th>
-                                <th class="table-title">内容</th>
-                                <th class="table-title">发布日期</th>
+                                <th class="table-title">联系方式</th>
+                                <th class="table-title">类型</th>
                                 <th class="table-set">操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($articles as $article)
+                            @foreach($kefus as $kefu)
                                 <tr>
-                                    <td class="table-title">{{ $article->title }}</td>
-                                    <td class="table-title">{{ $article->body }}</td>
-                                    <td class="table-title">{{ $article->created_at }}</td>
+                                    <td class="table-title">{{ $kefu->way }}</td>
+                                    <td class="table-title">{{ $kefu->type == '1' ? '客服' : 'qq群' }}</td>
                                     <td class="table-set">
-
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
-                                                <button type="button"
-                                                        class="am-btn am-btn-default am-btn-xs am-text-secondary recharge"
-                                                        data-id=""><span
-                                                            class="am-icon-pencil-square-o"></span> 删除
+                                                <a href="{{ route('admin.kefuEdit', ['account'=>$kefu->id]) }}"
+                                                   class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                                            class="am-icon-pencil-square-o"></span> 编辑</a>
+                                                <button type="button" data-id="{{ $kefu->id }}"
+                                                        class="am-btn am-btn-default am-btn-xs am-text-danger kefu-delete am-hide-sm-only">
+                                                    <span class="am-icon-trash-o"></span> 删除
                                                 </button>
-
                                             </div>
                                         </div>
-
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        <div class="am-cf">
 
-                            <div class="am-fr">
-                                <ul class="am-pagination tpl-pagination">
-                                    <li class="am-disabled"><a href="#">«</a></li>
-                                    <li class="am-active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">»</a></li>
-                                </ul>
-                            </div>
-                        </div>
                         <hr>
 
                     </form>
@@ -132,4 +113,17 @@
 
 @push('scripts')
     <script src="/assets/js/capital_log.js"></script>
+    <script>
+        $(function(){
+            $('.kefu-delete').click(function(){
+
+                var id =$(this).attr('data-id');
+                var url = '/admin/kefu/'+id;
+                _delete(url, $(this).parents('tr'));
+            });
+
+        });
+    </script>
+
+
 @endpush

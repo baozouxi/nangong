@@ -103,4 +103,15 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::get('/account/create','AdminController@accountCreate')->name('admin.accountCreate'); //收款账户
     Route::post('/account','AdminController@accountSubmit')->name('admin.accountSubmit'); //收款账户提交
 
+    Route::patch('/users/{user}/capital', 'AdminController@updateMoney')->name('admin.updateMoney'); //修改余额
+
+
+    Route::get('/kefu', 'AdminController@kefu')->name('admin.kefu');
+    Route::put('/kefu/{kefu}', 'AdminController@kefuUpdate')->name('admin.kefuUpdate');
+    Route::delete('/kefu/{kefu}', 'AdminController@kefuDelete')->name('admin.kefuDelete');
+    Route::get('/kefu/{kefu}/edit', 'AdminController@kefuEdit')->name('admin.kefuEdit');
+    Route::post('/kefu', 'AdminController@kefuSubmit')->name('admin.kefuSubmit');
+    Route::get('/kefu/create', 'AdminController@kefuCreate')->name('admin.kefuCreate');
+
+
 });

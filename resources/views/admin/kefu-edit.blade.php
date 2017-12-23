@@ -4,7 +4,7 @@
 @section('main')
 
     <div class="tpl-content-page-title">
-        后台管理系统
+        浮动客服
     </div>
     <ol class="am-breadcrumb">
         <li><a href="{{ route('admin.index') }}" class="am-icon-home">首页</a></li>
@@ -12,9 +12,8 @@
     <div class="tpl-portlet-components">
         <div class="portlet-title">
             <div class="caption font-green bold">
-                <span class="am-icon-code"></span> 发布公告
+                <span class="am-icon-code"></span> 浮动客服
             </div>
-
 
 
         </div>
@@ -24,27 +23,32 @@
 
 
                 <div class="am-u-sm-12 am-u-md-9">
-                    <form class="am-form am-form-horizontal" action="{{ route('admin.articleSubmit') }}" method="post">
+                    <form class="am-form am-form-horizontal" action="{{ route('admin.kefuUpdate', ['kefu'=>$kefu->id]) }}" method="post">
 
                         {!! csrf_field() !!}
+                        {!! method_field('PUT') !!}
                         <div class="am-form-group">
-                            <label for="user-name" class="am-u-sm-3 am-form-label">公告标题</label>
+                            <label for="user-name" class="am-u-sm-3 am-form-label">联系方式：</label>
                             <div class="am-u-sm-9">
-                                <input type="text" id="title" required placeholder="文章标题" name="title">
+                                <input type="text" id="way" required placeholder="联系方式（qq号" value="{{ $kefu->way }}" name="way">
                                 {{--<small>输入参数...</small>--}}
                             </div>
                         </div>
-                        
                         <div class="am-form-group">
-                            <label for="user-intro" class="am-u-sm-3 am-form-label">公告内容</label>
+                            <label for="user-name" class="am-u-sm-3 am-form-label">联系方式：</label>
                             <div class="am-u-sm-9">
-                                <textarea class="" rows="5" required id="user-intro" placeholder="公告内容..." name="body"></textarea>
+                                <select id="doc-select-1" name="type">
+                                    <option value="1" {{ $kefu->type == '1' ? 'selected' : '' }}>客服</option>
+                                    <option value="2" {{ $kefu->type == '2' ? 'selected' : '' }}>qq群</option>
+                                </select>
+                                {{--<small>输入参数...</small>--}}
                             </div>
                         </div>
 
+
                         <div class="am-form-group">
                             <div class="am-u-sm-9 am-u-sm-push-3">
-                                <button type="submit" class="am-btn am-btn-primary">发布公告</button>
+                                <button type="submit" class="am-btn am-btn-primary">修改浮动客服</button>
                             </div>
                         </div>
                     </form>

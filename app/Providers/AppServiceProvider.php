@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Ad;
 use App\Game;
+use App\Kefu;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -25,10 +26,13 @@ class AppServiceProvider extends ServiceProvider
             return $view->with('games', $games);
         });
 
-        View::composer('layouts.app', function ($view) {
+        View::composer(['layouts.app','auth.login'], function ($view) {
             $ad = Ad::first();
 
-            return $view->with('ad', $ad);
+            $kefus = Kefu::all();
+
+
+            return $view->with(['ad'=>$ad, 'kefus'=>$kefus]);
 
         });
 

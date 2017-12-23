@@ -26,7 +26,7 @@
     <script src="/public/js/base.js" type="text/javascript"></script>
     <script src="/themes/simplebootx/Public/js/base.js"></script>
     <script src="/themes/simplebootx/Public/js/min/modernizr-custom-v2.7.1.min.js" type="text/javascript"></script>
-    <link href="/themes/simplebo otx/Public/css/flickerplate.css" type="text/css" rel="stylesheet">
+    <link href="/themes/simplebootx/Public/css/flickerplate.css" type="text/css" rel="stylesheet">
     <script src="/themes/simplebootx/Public/js/min/flickerplate.min.js" type="text/javascript"></script>
     @stack('init-scripts')
 </head>
@@ -93,32 +93,47 @@
 </div>
 
 <script>var kflist = {
-        "3": [{
-            "id": "6",
-            "title": "中资盛世",
-            "name": "\u5ba2\u670d\u2460",
-            "cid": "1",
-            "ac": "3",
-            "value": "577407888",
-            "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=577407888&amp;site=qq&amp;menu=yes",
-            "img": "",
-            "status": "1",
-            "remark": "",
-            "sort": "0"
-        }],
-        "4": [{
-            "id": "7",
-            "title": "中资盛世Q群",
-            "name": "\u4ea4\u6d41\u7fa4\u2460",
-            "cid": "1",
-            "ac": "4",
-            "value": "15468886",
-            "url": "",
-            "img": "",
-            "status": "1",
-            "remark": "",
-            "sort": "0"
-        }]
+        "3": [
+
+                @foreach($kefus as $kefu)
+                @if($kefu->type == '1')
+            {
+                "id": "6",
+                "title": "中资盛世",
+                "name": "\u5ba2\u670d{{ $loop->index + 1 }}",
+                "cid": "1",
+                "ac": "3",
+                "value": "{{ $kefu->way }}",
+                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin={{ $kefu->way }}&amp;site=qq&amp;menu=yes",
+                "img": "",
+                "status": "1",
+                "remark": "",
+                "sort": "0"
+            },
+            @endif
+            @endforeach
+
+        ],
+        "4": [
+                @foreach($kefus as $kefu)
+                @if($kefu->type == '2')
+            {
+                "id": "7",
+                "title": "中资盛世Q群",
+                "name": "\u4ea4\u6d41\u7fa4\u2460",
+                "cid": "1",
+                "ac": "4",
+                "value": "{{ $kefu->way }}",
+                "url": "",
+                "img": "",
+                "status": "1",
+                "remark": "",
+                "sort": "0"
+            }
+            @endif
+            @endforeach
+
+        ]
     };
     var appdownload = null
 </script>

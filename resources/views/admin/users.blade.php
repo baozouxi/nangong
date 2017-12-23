@@ -94,6 +94,7 @@
                                                         data-id="{{ $user->id }}"><span
                                                             class="am-icon-pencil-square-o"></span> 充值
                                                 </button>
+                                                <button type="button" data-id="{{ $user->id }}" class="am-btn am-btn-default am-btn-xs am-text-secondary change-money"><span class="am-icon-pencil-square-o"></span>编辑余额</button>
 
                                                 @if($user->enable)
 
@@ -153,6 +154,22 @@
             <div class="am-modal-hd">账户余额充值</div>
             <div class="am-modal-bd">
                 您正在给用户名为：<span class="username" style="color: red;"></span> 的账户充值
+                <input type="number" name="money" class="am-modal-prompt-input">
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="am-modal am-modal-prompt" tabindex="-1" id="changeMoney">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">账户余额修改</div>
+            <div class="am-modal-bd">
+                您正在修改：<span class="username" style="color: red;"></span> 的账户余额
                 <input type="number" name="money" class="am-modal-prompt-input">
             </div>
             <div class="am-modal-footer">

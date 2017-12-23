@@ -55,8 +55,7 @@
                                 src="/assets/img/user01.png"></span>
                 </a>
                 <ul class="am-dropdown-content">
-                    <li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
-                    <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+                    <li><a href="#"><span class="am-icon-bell-o"></span>修改密码</a></li>
                     <li><a href="{{ route('admin.logout') }}"><span class="am-icon-power-off"></span> 退出</a></li>
                 </ul>
             </li>
@@ -124,7 +123,7 @@
                 </li>
 
                 <li class="tpl-left-nav-item">
-                    <a href="#" class="nav-link tpl-left-nav-link-list">
+                    <a href="{{ route('admin.kefu') }}" class="nav-link tpl-left-nav-link-list">
                         <i class="am-icon-key"></i>
                         <span>浮动客服</span>
                     </a>
@@ -137,10 +136,7 @@
                         <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
                     </a>
 
-
-
                     <ul class="tpl-left-nav-sub-menu" style="display: block;">
-
 
                         <li>
                             @foreach($games as $game)

@@ -49,11 +49,9 @@
                     <div class="geren_infolist">
                         <li><i class="telicon"></i>
                             <div class="text">{{ Auth::user()->phone  }}</div>
-                            <a href="themoney.html" class="xg"></a></li>
                         </li>
                         <li><i class="qqicon"></i>
                             <div class="text"></div>
-                            <a href="themoney.html" class="xg"></a></li>
                         </li>
 
                         @foreach($cards as $card)
@@ -64,7 +62,6 @@
                                 <div class="name">{{ Auth::user()->bankName->name  }}</div>
                             </li>
                         @endforeach
-
                     </div>
                 </div>
                 <div class="xuanzeyinhang">

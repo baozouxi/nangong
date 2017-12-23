@@ -9,6 +9,7 @@ use App\Article;
 use App\Bet;
 use App\CapitalLog;
 use App\Game;
+use App\Kefu;
 use App\User;
 use App\Withdraw;
 use Illuminate\Http\Request;
@@ -240,11 +241,11 @@ class AdminController extends Controller
     }
 
 
-
     // 投注记录
     public function bets(Game $game)
     {
-        $bets =  Bet::where('game_id',$game->id)->orderBy('created_at', 'desc')->paginate(10);
+        $bets = Bet::where('game_id', $game->id)->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         $result = [];
         $users = [];
@@ -273,19 +274,17 @@ class AdminController extends Controller
         }
 
 
-
-
-        return view('admin.bets',['bets'=>$result, 'game_id'=>$game->id]);
+        return view('admin.bets', ['bets' => $result, 'game_id' => $game->id]);
 
     }
-
 
 
     public function betsList(Game $game, int $actionNo)
     {
 
 
-        $bets = Bet::where('game_id',$game->id)->where('actionNo',$actionNo)->with('user')->paginate();
+        $bets = Bet::where('game_id', $game->id)->where('actionNo', $actionNo)
+            ->with('user')->paginate();
         $result = [];
 
         foreach ($bets as $bet) {
@@ -306,7 +305,7 @@ class AdminController extends Controller
         }
 
 
-        return view('admin.bets-list', ['bets'=>$result]);
+        return view('admin.bets-list', ['bets' => $result]);
 
     }
 
@@ -319,7 +318,6 @@ class AdminController extends Controller
     }
 
 
-
     public function articleCreate()
     {
         return view('admin.article-create');
@@ -330,11 +328,15 @@ class AdminController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|string',
-            'body' => 'required|string'
+            'body'  => 'required|string',
         ]);
 
 
-        if (Article::create(['title' =>$request['title'], 'body'=>$request['body']])) {
+        if (Article::create([
+            'title' => $request['title'],
+            'body'  => $request['body'],
+        ])
+        ) {
             return redirect(route('admin.articles'));
         }
 
@@ -346,16 +348,17 @@ class AdminController extends Controller
         if ($article->delete()) {
             return ['status' => 'ok'];
         }
+
         return ['status' => 'error'];
 
     }
-
 
 
     //get Ad
     public function ad()
     {
         $ad = Ad::first();
+
         return view('admin.ad', compact('ad'));
 
     }
@@ -363,7 +366,7 @@ class AdminController extends Controller
     public function updateAd(Ad $ad, Request $request)
     {
         $this->validate($request, [
-            'body' => 'required|string'
+            'body' => 'required|string',
         ]);
         $ad->body = $request['body'];
 
@@ -374,6 +377,65 @@ class AdminController extends Controller
 
     }
 
+
+    public function kefu()
+    {
+        $kefus = Kefu::all();
+
+        return view('admin.kefu-list', compact('kefus'));
+    }
+
+    public function kefuCreate()
+    {
+        return view('admin.kefu-create');
+    }
+
+
+    public function kefuSubmit(Request $request)
+    {
+        $this->validate($request, [
+            'way'  => 'required|string',
+            'type' => 'required|in:1,2',
+        ]);
+
+        if (Kefu::create($request->all())) {
+            return redirect(route('admin.kefu'));
+        }
+
+    }
+
+    public function kefuEdit(Kefu $kefu)
+    {
+        return view('admin.kefu-edit', compact('kefu'));
+    }
+
+
+    public function kefuUpdate(Kefu $kefu, Request $request)
+    {
+        $this->validate($request, [
+            'way'  => 'required|string',
+            'type' => 'required|in:1,2',
+        ]);
+
+        if ($kefu->update($request->all())) {
+            return redirect(route('admin.kefu'));
+        }
+    }
+
+
+    public function kefuDelete(Kefu $kefu)
+    {
+        $result = [];
+        $result['status'] = 'error';
+        $result['info'] = '修改失败';
+        if ($kefu->delete()) {
+            $result['status'] = 'ok';
+            $result['info'] = '修改成功';
+        }
+
+        return $result;
+
+    }
 
 
     //收款账户
@@ -393,11 +455,11 @@ class AdminController extends Controller
 
     public function accountSubmit(Request $request)
     {
-        $this->validate($request,[
-            'name' => 'required|string|',
-            'tips' => 'nullable|string',
+        $this->validate($request, [
+            'name'   => 'required|string|',
+            'tips'   => 'nullable|string',
             'number' => 'required|string',
-            'way' => 'required|string'
+            'way'    => 'required|string',
         ]);
 
         if (Account::create($request->all())) {
@@ -413,13 +475,13 @@ class AdminController extends Controller
     }
 
 
-    public function accountUpdateSubmit(Account $account,Request $request)
+    public function accountUpdateSubmit(Account $account, Request $request)
     {
-        $this->validate($request,[
-            'name' => 'required|string|',
-            'tips' => 'nullable|string',
+        $this->validate($request, [
+            'name'   => 'required|string|',
+            'tips'   => 'nullable|string',
             'number' => 'required|string',
-            'way' => 'required|string'
+            'way'    => 'required|string',
         ]);
 
         if ($account->update($request->all())) {
@@ -429,10 +491,9 @@ class AdminController extends Controller
     }
 
 
-
     public function accountDelete(Account $account)
     {
-        $result =[];
+        $result = [];
         $result['status'] = 'error';
         $result['info'] = '删除失败';
 
@@ -444,4 +505,26 @@ class AdminController extends Controller
         return $result;
     }
 
+
+    public function updateMoney(User $user, Request $request)
+    {
+        $this->validate($request, [
+            'money' => 'required|numeric|min:0',
+        ]);
+
+        $capital = $user->capital;
+        $result = [];
+        $result['status'] = 'error';
+        $result['info'] = '修改失败';
+
+
+        if ($capital->update($request->all())) {
+            $result['status'] = 'ok';
+            $result['info'] = '修改失败';
+            $result['money'] = $capital->money;
+        }
+
+        return $result;
+
+    }
 }
