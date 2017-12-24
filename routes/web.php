@@ -113,5 +113,5 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::post('/kefu', 'AdminController@kefuSubmit')->name('admin.kefuSubmit');
     Route::get('/kefu/create', 'AdminController@kefuCreate')->name('admin.kefuCreate');
 
-
+    Route::put('/password', 'AdminController@changaPass')->name('admin.changaPass');
 });

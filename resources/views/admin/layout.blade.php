@@ -11,6 +11,8 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
+
     <link rel="icon" type="image/png" href="/assets/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">
     <link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
@@ -235,9 +237,9 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">修改密码</div>
         <div class="am-modal-bd">
-            原密码： <input type="text" name="money" class="am-modal-prompt-input">
-            原密码： <input type="text" name="money" class="am-modal-prompt-input">
-            原密码： <input type="text" name="money" class="am-modal-prompt-input">
+            原密码： <input type="text" name="oldpass" required class="am-modal-prompt-input">
+            新密码： <input type="text" name="password"  required class="am-modal-prompt-input">
+            确认密码： <input type="text" name="password_confirmation" required class="am-modal-prompt-input">
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-cancel>取消</span>

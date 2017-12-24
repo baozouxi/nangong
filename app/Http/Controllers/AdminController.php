@@ -22,6 +22,8 @@ use Illuminate\Validation\Rule;
 class AdminController extends Controller
 {
 
+    Const PAGE_SIZE  = 10;
+
     public function login()
     {
         return view('admin.login');
@@ -39,10 +41,10 @@ class AdminController extends Controller
             'username' => 'required|string|exists:admins',
             'password' => 'required|min:6',
         ], [
-            'username.reqired'  => '请输入用户名',
-            'username.exists'   => '该用户不存在',
+            'username.reqired' => '请输入用户名',
+            'username.exists' => '该用户不存在',
             'password.required' => '请输入密码',
-            'password.min'      => '密码格式错误',
+            'password.min' => '密码格式错误',
         ]);
 
 
@@ -79,7 +81,7 @@ class AdminController extends Controller
             'login' => function ($query) {
                 return $query->orderBy('login_time', 'desc');
             },
-        ])->get();
+        ])->paginate(self::PAGE_SIZE);
 
 
         return view('admin.users', compact('users'));
@@ -105,10 +107,10 @@ class AdminController extends Controller
                 $capital->money += $money;
                 $capital->save();
                 $user->capitalLogs()->create([
-                    'money'      => $money,
+                    'money' => $money,
                     'capital_id' => $capital->id,
-                    'type'       => CapitalLog::RECHARGE,
-                    'ok'         => 1,
+                    'type' => CapitalLog::RECHARGE,
+                    'ok' => 1,
                 ]);
                 $result['status'] = 1;
 
@@ -117,7 +119,7 @@ class AdminController extends Controller
             });
 
         } catch (\Throwable $e) {
-            Log::error('充值失败：'.$e->getMessage());
+            Log::error('充值失败：' . $e->getMessage());
         }
 
         return $result;
@@ -130,7 +132,7 @@ class AdminController extends Controller
     {
 
         $capitalLogs = CapitalLog::with('user')->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(self::PAGE_SIZE);
 
 
         return view('admin.capital-logs', compact('capitalLogs'));
@@ -146,7 +148,7 @@ class AdminController extends Controller
                 'nullable',
                 Rule::in([0, 1]),
             ],
-            'phone'  => [
+            'phone' => [
                 'nullable',
                 'min:11',
                 'regex:/^1\d{1}\d{1}\d{8}/',
@@ -198,7 +200,7 @@ class AdminController extends Controller
             'user',
             'user.capital',
             'user.bankName',
-        ])->get();
+        ])->paginate(self::PAGE_SIZE);
 
 
         return view('admin.withdraws', compact('withdraws'));
@@ -221,11 +223,11 @@ class AdminController extends Controller
                 $capital->save();
 
                 $user->capitalLogs()->create([
-                    'type'       => CapitalLog::WITHDRAW,
-                    'money'      => $withdraw->money,
-                    'user_id'    => $user->id,
+                    'type' => CapitalLog::WITHDRAW,
+                    'money' => $withdraw->money,
+                    'user_id' => $user->id,
                     'capital_id' => $capital->id,
-                    'ok'         => 1,
+                    'ok' => 1,
                 ]);
 
                 $result['status'] = 1;
@@ -233,7 +235,7 @@ class AdminController extends Controller
 
             });
         } catch (\Throwable $exception) {
-            Log::error('提现失败：'.$exception->getMessage());
+            Log::error('提现失败：' . $exception->getMessage());
         }
 
 
@@ -245,7 +247,7 @@ class AdminController extends Controller
     public function bets(Game $game)
     {
         $bets = Bet::where('game_id', $game->id)->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(self::PAGE_SIZE);
 
         $result = [];
         $users = [];
@@ -274,7 +276,7 @@ class AdminController extends Controller
         }
 
 
-        return view('admin.bets', ['bets' => $result, 'game_id' => $game->id]);
+        return view('admin.bets', ['bets' => $result, 'game_id' => $game->id, 'bet_obj'=>$bets]);
 
     }
 
@@ -299,7 +301,7 @@ class AdminController extends Controller
 
             $result[$bet->user_id]['money'] += $bet->money;
             $result[$bet->user_id]['profit'] += $bet->profit;
-            $result[$bet->user_id]['codes'] .= $bet->code.',';
+            $result[$bet->user_id]['codes'] .= $bet->code . ',';
             $result[$bet->user_id]['username'] = $bet->user->username;
             $result[$bet->user_id]['actionNo'] = $bet->actionNo;
         }
@@ -312,7 +314,7 @@ class AdminController extends Controller
 
     public function articles()
     {
-        $articles = Article::all();
+        $articles = Article::paginate(self::PAGE_SIZE);
 
         return view('admin.article-list', compact('articles'));
     }
@@ -328,13 +330,13 @@ class AdminController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|string',
-            'body'  => 'required|string',
+            'body' => 'required|string',
         ]);
 
 
         if (Article::create([
             'title' => $request['title'],
-            'body'  => $request['body'],
+            'body' => $request['body'],
         ])
         ) {
             return redirect(route('admin.articles'));
@@ -394,7 +396,7 @@ class AdminController extends Controller
     public function kefuSubmit(Request $request)
     {
         $this->validate($request, [
-            'way'  => 'required|string',
+            'way' => 'required|string',
             'type' => 'required|in:1,2',
         ]);
 
@@ -413,7 +415,7 @@ class AdminController extends Controller
     public function kefuUpdate(Kefu $kefu, Request $request)
     {
         $this->validate($request, [
-            'way'  => 'required|string',
+            'way' => 'required|string',
             'type' => 'required|in:1,2',
         ]);
 
@@ -441,7 +443,7 @@ class AdminController extends Controller
     //收款账户
     public function accounts()
     {
-        $accounts = Account::all();
+        $accounts = Account::paginate(self::PAGE_SIZE);
 
         return view('admin.account-list', compact('accounts'));
 
@@ -456,10 +458,10 @@ class AdminController extends Controller
     public function accountSubmit(Request $request)
     {
         $this->validate($request, [
-            'name'   => 'required|string|',
-            'tips'   => 'nullable|string',
+            'name' => 'required|string|',
+            'tips' => 'nullable|string',
             'number' => 'required|string',
-            'way'    => 'required|string',
+            'way' => 'required|string',
         ]);
 
         if (Account::create($request->all())) {
@@ -478,10 +480,10 @@ class AdminController extends Controller
     public function accountUpdateSubmit(Account $account, Request $request)
     {
         $this->validate($request, [
-            'name'   => 'required|string|',
-            'tips'   => 'nullable|string',
+            'name' => 'required|string|',
+            'tips' => 'nullable|string',
             'number' => 'required|string',
-            'way'    => 'required|string',
+            'way' => 'required|string',
         ]);
 
         if ($account->update($request->all())) {
@@ -525,6 +527,50 @@ class AdminController extends Controller
         }
 
         return $result;
+
+    }
+
+
+    //改密码
+    public function changaPass(Request $request)
+    {
+        $this->validate($request, [
+            'oldpass' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+
+        $admin = Admin::findOrFail(session()->get('admin-id'));
+
+
+        $admin = $admin->first();
+
+        $result = [];
+        $result['status'] = 'error';
+        $result['info'] = '修改失败';
+
+
+        if (!Hash::check($request['oldpass'], $admin->password)) {
+            $result['info'] = '原密码错误';
+            return $result;
+        }
+
+
+        $request['password'] = bcrypt($request['password']);
+
+        if (!$admin->update($request->all())) {
+            $result['info'] = '修改失败，请联系管理员';
+            Log::error('管理员密码修改失败：');
+            return $result;
+
+        }
+
+        $result['status'] = 'ok';
+        $result['info'] = '修改成功';
+
+        return $result;
+
+
 
     }
 }

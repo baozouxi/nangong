@@ -36,6 +36,23 @@ $(function () {
         $('#changePass').modal({
             relatedTarget: this,
             onConfirm: function (e) {
+                var data ={};
+                data.oldpass = e.data[0];
+                data.password = e.data[1];
+                data.password_confirmation = e.data[2];
+                data._method = 'PUT';
+
+
+                $.post('/admin/password', data, function(data){
+
+                    if (data.status == 'ok') {
+                        alert('修改成功');
+                        window.location.href = '/admin/logout';
+                    }
+
+                    alert(data.info);
+
+                },'json');
 
             },
         });
