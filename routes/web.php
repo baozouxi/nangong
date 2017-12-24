@@ -14,6 +14,7 @@
 
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/tuiguang', 'HomeController@tuiguang')->name('tuiguang'); //推广页面
 
 //以下路由要经过auth中间件
 
