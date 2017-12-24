@@ -44,9 +44,12 @@ class HomeController extends Controller
 
     public function ces()
     {
-        $request = \Requests::request('http://lotto.bclc.com/services2/keno/draw/latest/today');
+//        $request = \Requests::request('http://lotto.bclc.com/services2/keno/draw/latest/today');
+//
+//        dd(json_decode($request->body, true));
 
-        dd(json_decode($request->body, true));
+
+        echo file_get_contents('http://lotto.bclc.com/services2/keno/draw/latest/today');
 
     }
 
