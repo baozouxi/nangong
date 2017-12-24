@@ -64,7 +64,7 @@
             <form times="0">
                 <li><i class="iconloginuser"></i>
                     <input type="text" name="username" style="display:none;">
-                    <input type="text" id="username" name="username" class="login_text" placeholder="请输入用户名/手机号码"
+                    <input type="text" id="username" name="username" class="login_text" placeholder="请输入用户名"
                            autocomplete="off">
                 </li>
                 <li><i class="iconloginpw"></i>
