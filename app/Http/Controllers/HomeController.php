@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $articles = Article::limit(5)->orderBy('created_at', 'desc')->get();
 
         return view('home', compact('articles'));
@@ -35,15 +36,19 @@ class HomeController extends Controller
     }
 
 
-
     public function tuiguang()
     {
         return view('tuiguang');
-
     }
 
 
+    public function ces()
+    {
+        $request = \Requests::request('http://lotto.bclc.com/services2/keno/draw/latest/today');
 
+        dd(json_decode($request->body, true));
+
+    }
 
 
 }
