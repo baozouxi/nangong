@@ -1129,7 +1129,7 @@ function countdownTime(qihao, num, timeHD, game_id) {
                 $(".timeHD2").html(m1 + m2);
                 $(".timeHD3").html(s1 + s2);
 
-                if (t < 30) {
+                if (t < 60) {
                     $(".timeHD4").html("开奖倒计时");
                     $(".xz").attr("onclick", "return false;");
                     $(".xz").addClass("xznot");
