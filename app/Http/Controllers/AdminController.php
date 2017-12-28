@@ -7,6 +7,7 @@ use App\Ad;
 use App\Admin;
 use App\Article;
 use App\Bet;
+use App\Capital;
 use App\CapitalLog;
 use App\Game;
 use App\Kefu;
@@ -92,7 +93,6 @@ class AdminController extends Controller
     //充值
     public function recharge(Request $request, User $user)
     {
-
         $this->validate($request, [
             'money' => 'required|numeric|min:0',
         ]);
@@ -103,17 +103,21 @@ class AdminController extends Controller
 
         try {
             DB::transaction(function () use ($user, $money, &$result) {
+
                 $capital = $user->capital;
-                $capital->money += $money;
+
+                $capital->money =  $capital->money + $money;
                 $capital->save();
-                $user->capitalLogs()->create([
+
+                CapitalLog::create([
                     'money' => $money,
                     'capital_id' => $capital->id,
+                    'user_id' => $user->id,
                     'type' => CapitalLog::RECHARGE,
                     'ok' => 1,
                 ]);
-                $result['status'] = 1;
 
+                $result['status'] = 1;
                 $result['money'] = $capital->money;
 
             });

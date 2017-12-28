@@ -105,7 +105,7 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::get('/account/create','AdminController@accountCreate')->name('admin.accountCreate'); //收款账户
     Route::post('/account','AdminController@accountSubmit')->name('admin.accountSubmit'); //收款账户提交
 
-    Route::patch('/users/{user}/capital', 'AdminController@updateMoney')->name('admin.updateMoney'); //修改余额
+    Route::patch('/users/{user}/capital-money', 'AdminController@updateMoney')->name('admin.updateMoney'); //修改余额
 
 
     Route::get('/kefu', 'AdminController@kefu')->name('admin.kefu');

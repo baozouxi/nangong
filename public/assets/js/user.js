@@ -66,7 +66,7 @@ function reFrozen(user_id, obj) {
 
 //编辑余额
 function updateMoney(user_id, money, obj) {
-    var url = '/admin/users/' + user_id + '/capital';
+    var url = '/admin/users/' + user_id + '/capital-money';
     var data = {_method: 'PATCH', money: money};
 
     $.post(url, data, function (data) {
@@ -85,9 +85,9 @@ function updateMoney(user_id, money, obj) {
 
 $(function () {
     $('.recharge').on('click', function () {
-
+        var user_id = 0;
         var username = $(this).parents('td').siblings('.username').text();
-        var user_id = $(this).attr('data-id');
+        user_id = $(this).attr('data-id');
         var money_obj = $(this).parents('td').siblings('.money');
         $('#recharge span.username').text(username);
         $('#recharge').modal({
@@ -100,23 +100,25 @@ $(function () {
 
 
     $('.frozen').on('click', function () {
-
-        var user_id = $(this).attr('data-id');
+        var user_id = 0;
+        user_id = $(this).attr('data-id');
         var obj = $(this).parents('td').siblings('.enable');
         frozen(user_id, obj);
     });
 
 
     $('.reFrezen').on('click', function () {
-        var user_id = $(this).attr('data-id');
+        var user_id = 0;
+        user_id = $(this).attr('data-id');
         var obj = $(this).parents('td').siblings('.enable');
         reFrozen(user_id, obj);
     });
 
 
     $('.change-money').click(function () {
+        var user_id = 0;
         var username = $(this).parents('td').siblings('.username').text();
-        var user_id = $(this).attr('data-id');
+        user_id = $(this).attr('data-id');
         var money_obj = $(this).parents('td').siblings('.money');
         $('#changeMoney span.username').text(username);
         $('#changeMoney').modal({
