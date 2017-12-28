@@ -132,10 +132,10 @@ class Pc28 implements GameInterface
                         $time = 2;
                     }
                     if ($bet == '大' && $lottery['num'] == 14) {
-                        $time = 1;
+                        $time = 1.6;
                     }
                     if ($bet == '小' && $lottery['num'] == 13) {
-                        $time = 1;
+                        $time = 1.6;
                     }
 
 
