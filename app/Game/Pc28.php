@@ -108,10 +108,10 @@ class Pc28 implements GameInterface
                         $time = 2;
                     }
                     if ($bet == '单' && $lottery['num'] == 13) {
-                        $time = 1.6;
+                        $time = 2;
                     }
                     if ($bet == '双' && $lottery['num'] == 14) {
-                        $time = 1.6;
+                        $time = 2;
                     }
                     break;
                 case '小单' :
@@ -132,10 +132,10 @@ class Pc28 implements GameInterface
                         $time = 2;
                     }
                     if ($bet == '大' && $lottery['num'] == 14) {
-                        $time = 1.6;
+                        $time = 2;
                     }
                     if ($bet == '小' && $lottery['num'] == 13) {
-                        $time = 1.6;
+                        $time = 2;
                     }
 
 
