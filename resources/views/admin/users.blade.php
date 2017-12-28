@@ -17,7 +17,6 @@
             </div>
 
 
-
         </div>
         <div class="tpl-block">
             {{--            <div class="am-g">
@@ -48,7 +47,7 @@
                         <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                             <tr>
-                                <th class="table-check"><input type="checkbox" class="tpl-table-fz-check"></th>
+                                <th class="table-set">操作</th>
                                 <th class="table-id">ID</th>
                                 <th class="table-title">用户名</th>
                                 <th class="table-type">余额</th>
@@ -57,7 +56,7 @@
                                 <th class="table-author am-hide-sm-only">状态</th>
                                 <th class="table-date am-hide-sm-only">上次登录日期</th>
                                 <th class="table-date am-hide-sm-only">注册日期</th>
-                                <th class="table-set">操作</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -65,7 +64,37 @@
 
                             @foreach($users as $user)
                                 <tr>
-                                    <td><input type="checkbox"></td>
+                                    <td>
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <button type="button"
+                                                        class="am-btn am-btn-default am-btn-xs am-text-secondary recharge"
+                                                        data-id="{{ $user->id }}"><span
+                                                            class="am-icon-pencil-square-o"></span> 充值
+                                                </button>
+                                                <button type="button" data-id="{{ $user->id }}"
+                                                        class="am-btn am-btn-default am-btn-xs am-text-secondary change-money">
+                                                    <span class="am-icon-pencil-square-o"></span>编辑余额
+                                                </button>
+
+                                                @if($user->enable)
+
+                                                    <button type="button"
+                                                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only frozen"
+                                                            data-id="{{ $user->id }}">
+                                                        <span class="am-icon-trash-o"></span> 冻结
+                                                    </button>
+
+                                                @else
+                                                    <button type="button"
+                                                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only reFrezen"
+                                                            data-id="{{ $user->id }}">
+                                                        <span class="am-icon-trash-o"></span> 解冻
+                                                    </button>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>{{ $user->id }}</td>
                                     <td class="username"><a href="#">{{ $user->username }}</a></td>
                                     <td class="money">{{ number_format($user->capital->money, 2)  }}</td>
@@ -86,40 +115,12 @@
                                     <td class="am-hide-sm-only enable">{{  $user->enable ? '正常' : '冻结' }}</td>
                                     <td class="am-hide-sm-only">{{ $user->login->isNotEmpty() ? $user->login->first()->login_time : '' }}</td>
                                     <td class="am-hide-sm-only">{{ $user->created_at }}</td>
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <button type="button"
-                                                        class="am-btn am-btn-default am-btn-xs am-text-secondary recharge"
-                                                        data-id="{{ $user->id }}"><span
-                                                            class="am-icon-pencil-square-o"></span> 充值
-                                                </button>
-                                                <button type="button" data-id="{{ $user->id }}" class="am-btn am-btn-default am-btn-xs am-text-secondary change-money"><span class="am-icon-pencil-square-o"></span>编辑余额</button>
 
-                                                @if($user->enable)
-
-                                                    <button type="button"
-                                                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only frozen"
-                                                            data-id="{{ $user->id }}">
-                                                        <span class="am-icon-trash-o"></span> 冻结
-                                                    </button>
-
-                                                @else
-                                                    <button type="button"
-                                                            class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only reFrezen"
-                                                            data-id="{{ $user->id }}">
-                                                        <span class="am-icon-trash-o"></span> 解冻
-                                                    </button>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </td>
                                 </tr>
                             @endforeach
 
                             </tbody>
                         </table>
-
 
 
                         {!! $users->links()  !!}

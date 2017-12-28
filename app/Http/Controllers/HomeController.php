@@ -44,12 +44,13 @@ class HomeController extends Controller
 
     public function ces()
     {
-//        $request = \Requests::request('http://lotto.bclc.com/services2/keno/draw/latest/today');
-//
-//        dd(json_decode($request->body, true));
+        $request = \Requests::request('http://lotto.bclc.com/services2/keno/draw/latest/today');
 
+        $codes_list = json_decode($request->body, true);
 
-        echo file_get_contents('http://lotto.bclc.com/services2/keno/draw/latest/today');
+        $codes = array_shift($codes_list);
+
+        dd($codes);
 
     }
 
