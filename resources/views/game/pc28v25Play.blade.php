@@ -161,7 +161,7 @@
                     </div>
                     <div class="querentouzhu">
                         <ul id="betall"></ul>
-                        <div id="tj_new"><span class="JKnum04">账户余额：0.00</span>
+                        <div id="tj_new"><span class="JKnum04">账户余额：{{ number_format(Auth::user()->capital->money,2)  }}</span>
                             <input type="submit" class="tj xz" value=""
                                    style="background:url(/themes/simplebootx/Public/images/tj_new.png) no-repeat  center center;"
                                    onclick="submitOK();return false;"> <span class="jk-z" id="jk-z"><i class="on"
