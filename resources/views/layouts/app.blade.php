@@ -55,7 +55,7 @@
             <div class="ssnav">
                 <div class="h14"></div>
                 <dd><a href="javascript:;" onclick="hbgame();">北京快乐8</a></dd>
-                <dd><a href="javascript:;" onclick="cakenogame();">加拿大28</a></dd>
+                {{--<dd><a href="javascript:;" onclick="cakenogame();">加拿大28</a></dd>--}}
             </div>
         </li>
         <li><a href="javascript:;"><i class="navicon2"></i><span class="cn" style="color:#999">彩票游戏</span><span
