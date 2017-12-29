@@ -14,6 +14,22 @@ use Illuminate\Support\Facades\Log;
 class GamesController extends Controller
 {
 
+    Const CANADA20 = '加拿大幸运28';
+    Const CANADA25 = '加拿大幸运28-2.5倍场';
+    Const CANADA28 = '加拿大幸运28-2.8倍场';
+    Const BEIJING = '北京幸运28';
+    Const BEIJING25 = '北京幸运28-2.5倍场';
+
+
+    //加拿大2.0倍
+    public function canada()
+    {
+        $game = Game::where('name', self::CANADA20)->firstOrFail();
+
+        return view('game.canada', ['game_id' => $game->id]);
+    }
+
+
     /**
      * pc28
      * 游戏展示页面
@@ -24,7 +40,7 @@ class GamesController extends Controller
      */
     public function pc28(Request $request)
     {
-        $game = Game::where('name', '北京幸运28')->firstOrFail();
+        $game = Game::where('name', self::BEIJING)->firstOrFail();
 
         return view('game.index', ['game_id' => $game->id]);
     }
@@ -33,7 +49,7 @@ class GamesController extends Controller
     //下注界面
     public function pc28Play()
     {
-        $game = Game::where('name', '北京幸运28')->firstOrFail();
+        $game = Game::where('name', self::BEIJING)->firstOrFail();
 
         return view('game.play', ['game_id' => $game->id]);
     }
@@ -42,7 +58,7 @@ class GamesController extends Controller
     //北京幸运28-2.5倍场
     public function pc28v25(Request $request)
     {
-        $game = Game::where('name', '北京幸运28-2.5倍场')->firstOrFail();
+        $game = Game::where('name', self::BEIJING25)->firstOrFail();
 
         return view('game.pc28v25', ['game_id' => $game->id]);
     }
@@ -51,7 +67,7 @@ class GamesController extends Controller
     //北京幸运28-2.5倍场 下注界面
     public function pc28v25Play()
     {
-        $game = Game::where('name', '北京幸运28-2.5倍场')->firstOrFail();
+        $game = Game::where('name', self::BEIJING25)->firstOrFail();
 
         return view('game.pc28v25Play', ['game_id' => $game->id]);
     }
@@ -349,7 +365,17 @@ class GamesController extends Controller
             return ['sign' => 'false'];
         }
 
+
         $remainTime = strtotime("$lastOpen->open_time +5min") - time();
+
+
+        if (strpos($game->name, '加拿大') !== false) {
+
+            $remainTime = strtotime("$lastOpen->open_time + 3 minutes 30 seconds") - time();
+        }
+
+
+
 
         $res_arr = [
             'currFullExpect' => $lastOpen->actionNo + 1,

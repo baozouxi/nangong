@@ -36,7 +36,9 @@
 	url:url,
     dataType: "json",
 	data:data,
-	error:function(){alert("\u670d\u52a1\u5668\u9519\u8bef\uff0c\u64cd\u4f5c\u5931\u8d25");},
+	error:function(xhr){
+		alert('账号或密码错误，请检查后重试');
+	},
 	success:function(dataJson)
 	{
 		switch(dataJson.status)

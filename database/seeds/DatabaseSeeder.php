@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $games = [
             ['name' => \App\Game\Pc28::NAME],
             ['name' => \App\Game\Pc28v25::NAME],
+            ['name' => \App\Game\Canada::NAME],
         ];
 
         array_map(function ($game) {

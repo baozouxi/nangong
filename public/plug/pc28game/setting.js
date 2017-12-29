@@ -77,7 +77,7 @@ function game3(){
     //document.getElementById("idmoney").innerHTML="";
     document.getElementById("cakeno").style.display = "none";
     document.getElementById("hongbao_bg").style.display = "none";
-    location.href="/user/canada/pc28v20";
+    location.href="/game/canada";
 }
 
 function game4(){

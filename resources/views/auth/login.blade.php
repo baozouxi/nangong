@@ -82,13 +82,13 @@
                                                   onclick='this.src=this.src+"?"+Math.random()' title='看不清？点击换一张图片'/>
                     </div>
                 </li>
-                <li class="rows clearfix takecode">
-                    <div id="codedrag" style="width:315px;margin:18px 0 0 0;"></div>
-                </li>
+                {{--<li class="rows clearfix takecode">--}}
+                    {{--<div id="codedrag" style="width:315px;margin:18px 0 0 0;"></div>--}}
+                {{--</li>--}}
                 <li class="clearfix alj"><a href="{{ route('register')  }}" class="zczh">注册账号</a><a
                             href="javascript:;" class="wjmm">忘记密码</a></li>
                 <li style="border:none;">
-                    <input type="button" id="signinButton" onclick="checklogin()" disabled="disabled"
+                    <input type="button" id="signinButton" onclick="checklogin()"
                            class="input_dlbtn" value="登 录">
                 </li>
             </form>
@@ -112,14 +112,14 @@
 </div>
 <script>
     //验证
-    var dragCfg = {
-        token: false,
-        url: "/user/login/calltoken.html",
-        callback: function () {
-            $('#signinButton').attr('disabled', false);
-        }
-    };
-    $('#codedrag').drag(dragCfg);
+    // var dragCfg = {
+    //     token: false,
+    //     url: "/user/login/calltoken.html",
+    //     callback: function () {
+    //         $('#signinButton').attr('disabled', false);
+    //     }
+    // };
+    // $('#codedrag').drag(dragCfg);
     $('#username,#password').focus(function () {
         if ($('#checkcode').val() != '' || $('.takecode:visible #checktoken').length > 0) $('#signinButton').attr('disabled', false);
     });

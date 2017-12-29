@@ -52,11 +52,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => '/game'], function () {
 
+
+
         Route::get('/{game}/last-open-codes/{expect}', 'GamesController@getLastCodes')->name('lastOpenCodes');
         Route::get('/{game}/last-open-codes-list', 'GamesController@getLastCodeList')->name('lastOpenCodeList');
         Route::get('/{game}/last10', 'GamesController@getLast10')->name('last10');
         Route::get('/{game}/open-time', 'GamesController@getOpenTime')->name('openTime'); //开奖时间
+        Route::get('/canada', 'GamesController@canada')->name('canada20'); //加拿大2.0
         Route::get('/pc28', 'GamesController@pc28')->name('pc28'); //北京幸运28欢迎界面
+        Route::get('/canada', 'GamesController@canada')->name('canada20'); //加拿大2.0
         Route::get('/pc28/play', 'GamesController@pc28Play')->name('pc28Play'); // 北京幸运28游戏界面
         Route::get('/pc28v25', 'GamesController@pc28v25')->name('pc28v25'); //北京幸运28 2.5倍欢迎界面
         Route::get('/pc28v25/play', 'GamesController@pc28v25Play')->name('pc28v25Play'); // 北京幸运28 2.5倍游戏界面

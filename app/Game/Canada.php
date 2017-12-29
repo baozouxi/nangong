@@ -20,6 +20,4 @@ class Canada extends Pc28
     use GetFromForien,CheckOpen;
 
 
-
-
 }

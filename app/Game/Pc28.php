@@ -29,7 +29,7 @@ class Pc28 implements GameInterface
 
         $code_arr = explode(',', $code);
         if (empty($code_arr)) {
-            throw new GameException(self::NAME.'开奖结果错误');
+            throw new GameException(static::NAME.'开奖结果错误');
         }
         //初始化结果 防止出错
         $code_arr['num'] = null;
@@ -40,7 +40,7 @@ class Pc28 implements GameInterface
         $sum = array_sum($code_arr);
 
         if ($sum > 27) {
-            throw new GameException(self::NAME.'开奖结果错误');
+            throw new GameException(static::NAME.'开奖结果错误');
         }
 
         $code_arr['num'] = $sum;
@@ -158,7 +158,7 @@ class Pc28 implements GameInterface
 
     public function getCodes()
     {
-        $request = \Requests::request(self::CODE_URL);
+        $request = \Requests::request(static::CODE_URL);
 
         $result = $this->parse($request->body);
 
@@ -176,7 +176,7 @@ class Pc28 implements GameInterface
     //过滤下注数组
     public function checkSubmitBet($bet_arr)
     {
-        $game = \App\Game::where('name',self::NAME)->first();
+        $game = \App\Game::where('name',static::NAME)->first();
         $openCode = new OpenCode();
         $current_expect = $openCode->currentExpect($game->id);
 
