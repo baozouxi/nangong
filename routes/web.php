@@ -101,23 +101,21 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::post('/articles', 'AdminController@submitArticle')->name('admin.articleSubmit');
     Route::get('/ad', 'AdminController@ad')->name('admin.ad');
     Route::post('/ad/{ad}', 'AdminController@updateAd')->name('admin.updateAd');
-
     Route::get('/accounts','AdminController@accounts')->name('admin.accounts'); //收款账户
     Route::get('/accounts/{account}/update','AdminController@accountUpdate')->name('admin.accountUpdate'); //修改账户
     Route::put('/accounts/{account}','AdminController@accountUpdateSubmit')->name('admin.accountUpdateSubmit'); //修改账户提交
     Route::delete('/accounts/{account}','AdminController@accountDelete')->name('admin.accountDelete'); //删除账户提交
     Route::get('/account/create','AdminController@accountCreate')->name('admin.accountCreate'); //收款账户
     Route::post('/account','AdminController@accountSubmit')->name('admin.accountSubmit'); //收款账户提交
-
     Route::patch('/users/{user}/capital-money', 'AdminController@updateMoney')->name('admin.updateMoney'); //修改余额
-
-
     Route::get('/kefu', 'AdminController@kefu')->name('admin.kefu');
     Route::put('/kefu/{kefu}', 'AdminController@kefuUpdate')->name('admin.kefuUpdate');
     Route::delete('/kefu/{kefu}', 'AdminController@kefuDelete')->name('admin.kefuDelete');
     Route::get('/kefu/{kefu}/edit', 'AdminController@kefuEdit')->name('admin.kefuEdit');
     Route::post('/kefu', 'AdminController@kefuSubmit')->name('admin.kefuSubmit');
     Route::get('/kefu/create', 'AdminController@kefuCreate')->name('admin.kefuCreate');
-
     Route::put('/password', 'AdminController@changaPass')->name('admin.changaPass');
+
+    Route::get('/users/{user}/bets', 'AdminController@userBetsList')->name('用户具体投注记录');
+
 });
