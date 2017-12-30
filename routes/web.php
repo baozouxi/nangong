@@ -116,6 +116,6 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::get('/kefu/create', 'AdminController@kefuCreate')->name('admin.kefuCreate');
     Route::put('/password', 'AdminController@changaPass')->name('admin.changaPass');
 
-    Route::get('/users/{user}/bets', 'AdminController@userBetsList')->name('用户具体投注记录');
+    Route::get('/users/{user}/bets', 'AdminController@userBetsList')->name('userBetsList');
 
 });

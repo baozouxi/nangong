@@ -288,7 +288,7 @@ class AdminController extends Controller
 
     public function userBetsList(User $user)
     {
-        $bets = Bet::where('user_id', $user->id)->with(['game', 'user'])->paginate(self::PAGE_SIZE);
+        $bets = Bet::where('user_id', $user->id)->with(['game', 'user'])->orderBy('created_at', 'desc')->paginate(self::PAGE_SIZE);
         return view('admin.user-bets-list', compact('bets'));
     }
 

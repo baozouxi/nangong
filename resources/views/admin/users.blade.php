@@ -96,7 +96,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $user->id }}</td>
-                                    <td class="username"><a href="#">{{ $user->username }}</a></td>
+                                    <td class="username"><a href="{{ route('userBetsList', ['user'=>$user->id]) }}">{{ $user->username }}</a></td>
                                     <td class="money">{{ number_format($user->capital->money, 2)  }}</td>
                                     <td>{{ $user->bankName ? $user->bankName->name :  '暂未添加' }}</td>
                                     <td>
