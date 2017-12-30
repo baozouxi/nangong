@@ -377,10 +377,6 @@ class GamesController extends Controller
 
 
 
-        if ($remainTime < 0 ) {
-            return ['sign' => 'false'];
-        }
-
         $res_arr = [
             'currFullExpect' => $lastOpen->actionNo + 1,
             'lastFullExpect' => $lastOpen->actionNo,

@@ -929,7 +929,7 @@ function loadOpenCode(game_id, expect) {
                 }
             } else {
                 opencodeTimeOut = setTimeout(function () {
-
+                    alert('开奖结果延迟');
                     loadOpenCode(game_id, expect);
                 }, 5 * 1000);
             }
