@@ -953,7 +953,7 @@ function countdownTime(qihao, num, timeHD,game_id) {
     var s, s1, s2;
     var localCurrentTime = new Date();
 
-    var endTime = localCurrentTime.getTime();
+    var endTime = localCurrentTime.getTiΩme();
     endTime = parseInt(endTime) + parseInt(t * 1000);
 
 
