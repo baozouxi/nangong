@@ -361,10 +361,11 @@ class GamesController extends Controller
 
         $lastOpen = $game->OpenCodes->first(); //上期开奖
 
+
+
         if ($lastOpen == null) {
             return ['sign' => 'false'];
         }
-
 
         $remainTime = strtotime("$lastOpen->open_time +5min") - time();
 

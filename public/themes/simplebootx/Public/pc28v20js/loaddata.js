@@ -929,6 +929,7 @@ function loadOpenCode(game_id, expect) {
                 }
             } else {
                 opencodeTimeOut = setTimeout(function () {
+                    alert('asdsad');
                     loadOpenCode(game_id, expect);
                 }, 5 * 1000);
             }
