@@ -32,6 +32,7 @@
                                 <th class="table-title">总投注金额</th>
                                 <th class="table-title">赔付金额</th>
                                 <th class="table-title">投注时间</th>
+                                <th class="table-title">游戏名称</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -43,6 +44,7 @@
                                     <td class="table-title">{{ $bet->money }}</td>
                                     <td class="table-title">{{ $bet->profit }}</td>
                                     <td class="table-title">{{ $bet->created_at }}</td>
+                                    <td class="table-title">{{ $bet->game->name }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
