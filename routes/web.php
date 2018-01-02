@@ -59,8 +59,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{game}/last10', 'GamesController@getLast10')->name('last10');
         Route::get('/{game}/open-time', 'GamesController@getOpenTime')->name('openTime'); //开奖时间
         Route::get('/canada', 'GamesController@canada')->name('canada20'); //加拿大2.0
+        Route::get('/canada/play', 'GamesController@canadaPlay')->name('canadaPlay'); //加拿大2.0游戏界面
+        Route::get('/canadav25', 'GamesController@canadav25')->name('canada25'); //加拿大2.5
+        Route::get('/canadav25/play', 'GamesController@canadav25Play')->name('canadav25Play'); //加拿大2.5游戏界面
+        Route::get('/canadav28', 'GamesController@canadav28')->name('canada28'); //加拿大2.8
+        Route::get('/canadav28/play', 'GamesController@canadav28Play')->name('canadav28Play'); //加拿大2.8游戏界面
         Route::get('/pc28', 'GamesController@pc28')->name('pc28'); //北京幸运28欢迎界面
-        Route::get('/canada', 'GamesController@canada')->name('canada20'); //加拿大2.0
         Route::get('/pc28/play', 'GamesController@pc28Play')->name('pc28Play'); // 北京幸运28游戏界面
         Route::get('/pc28v25', 'GamesController@pc28v25')->name('pc28v25'); //北京幸运28 2.5倍欢迎界面
         Route::get('/pc28v25/play', 'GamesController@pc28v25Play')->name('pc28v25Play'); // 北京幸运28 2.5倍游戏界面

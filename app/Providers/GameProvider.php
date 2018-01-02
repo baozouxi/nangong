@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Game\Canada;
+use App\Game\Canadav25;
+use App\Game\Canadav28;
 use App\Game\Game;
 use App\Game\Pc28;
 use App\Game\Pc28v25;
@@ -32,9 +34,13 @@ class GameProvider extends ServiceProvider
             $pc28 = new Pc28();
             $pc28v25 = new Pc28v25();
             $canada = new Canada();
+            $canadav25 = new Canadav25();
+            $canadav28 = new Canadav28();
             $games[$pc28->name()] = $pc28;
             $games[$pc28v25->name()] = $pc28v25;
             $games[$canada->name()] = $canada;
+            $games[$canadav25->name()] = $canadav25;
+            $games[$canadav28->name()] = $canadav28;
             return new Game($games);
         });
     }

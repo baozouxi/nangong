@@ -1,82 +1,79 @@
 @extends('layouts.app')
 
 
-
 @push('css')
+    <link href="/public/css/base.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/themes/simplebootx/Public/css/page.css" type="text/css"/>
     <link rel="stylesheet" href="/themes/simplebootx/Public/css/game28.css" type="text/css"/>
 @endpush
-
 @push('init-scripts')
-
     <script src="/public/js/jquery.js" type="text/javascript"></script>
-    <script src="/themes/simplebootx/Public/js/base.js"></script>
-    <script type="text/javascript" src="/themes/simplebootx/Public/pc28v20js/loaddata.js"></script>
-    <script type="text/javascript" src="/themes/simplebootx/Public/pc28v20js/json2.js"></script>
+    <script type="text/javascript" src="/themes/simplebootx/Public/pc28v25js/loaddata.js"></script>
+    <script type="text/javascript" src="/themes/simplebootx/Public/pc28v25js/json2.js"></script>
     <script type="text/javascript" src="/themes/simplebootx/Public/js/page.js"></script>
     <script type="text/javascript" src="/themes/simplebootx/Public/js/gamepc28.js"></script>
     <script>
         var webroot = "/",
             t = 2,
-            v = "20",
-            page = 1,
-            game_id = {{ $game_id }};
+            v = "25",
+            page = 1;
     </script>
+
 @endpush
 
 
 @section('main')
 
     <div class="main ovf bgyxzx">
-        <div class="w1000 clearfix">
+        <div class="yxzxbanner"></div>
+        <div class="w1000">
             <div class="xy28_bc tzbox">
                 <div class="titbox">
-                    <div class="title">加拿大幸运28-2.0倍</div>
+                    <div class="title">加拿大幸运28-2.5倍</div>
                     <div class="select25">
-                        <select id="rid" class="mr10" name="rid" onchange="location.href='/game/canada'+$(this).val();">
+                        <select id="rid" class="mr10" name="rid"
+                                onchange="location.href='/game/canada'+$(this).val();">
                             <option value="v28">2.8倍场</option>
-                            <option value="v25">2.5倍场</option>
-                            <option value="" selected="selected">2.0倍场</option>
+                            <option value="v25" selected="selected">2.5倍场</option>
+                            <option value="">2.0倍场</option>
                         </select>
                     </div>
                     <div class="dnq qihaoHD"></div>
                 </div>
                 <div class="clear"></div>
-                <div class="kjdjs_box">
+                <div class="kjdjs_box"
+                     style="background: #fff url(/themes/simplebootx/Public/images/kjdjs_box_new.png) no-repeat  292px 20px;">
                     <div class="kjdjs">
                         <div class="num timeHD1"></div>
                         <div class="num timeHD2"></div>
                         <div class="num timeHD3"></div>
                         <div class="name timeHD4"></div>
                     </div>
-                    <div class="xxdd" id="lottshow1" style="display: none;">
-                        <div class="num FCnum01"></div>
+                    <div class="xxdd" id="lottshow1" style="margin-left:57px;width:382px;">
+                        <div class="num FCnum01" style="margin-left:50px;"></div>
                         <div class="num FCnum02"></div>
                         <div class="num FCnum03"></div>
                         <div class="num end FCnum04"></div>
-                        <div class="name">
+                        <div class="name" id="nameb1">
                             <div class="tips FCnum06"></div>
                             <div class="tips FCnum07"></div>
-                            <div class="tips FCnum05" style="margin-right:0px;"></div>
+                            <div class="tips FCnum05"></div>
+                            <div class="tips FCnum09" style="margin-right:0px;"></div>
                         </div>
                     </div>
-                    <div class="xxdd" id="lottshow2" style="display: none;">
+                    <div class="xxdd" id="lottshow2" style="display: none;" style="margin-left:57px;width:382px;">
+                        <div class="num" style="margin-left:-15px;"></div>
                         <div class="num"></div>
                         <div class="num"></div>
-                        <div class="num"></div>
-                        <div class="num end "></div>
-                        <div class="name">
-                            <div class="tips"></div>
-                            <div class="tips"></div>
-                            <div class="tips" style="margin-right:0px;"></div>
-                        </div>
-                        <p align="center">正在等待开奖，请稍后 ···</p>
+                        <div class="num end"></div>
+                        <div class="clear"></div>
+                        <p align="center">
+                            <br/>正在等待开奖，请稍后 ···</p>
                     </div>
-                    <div class="yx_btn"><a href="javascript:void(0)"
-                                           onclick="document.getElementById('lightyxgz').style.display='block';document.getElementById('fadeyxgz').style.display='block'"
-                                           class="yxgz">游戏规则</a> <a
-                                href="{{ route('canadaPlay') }}"
-                                class="ingame">进入游戏</a></div>
+                    <div class="yx_btn" style="margin-left:84px;"><a href="javascript:void(0)"
+                                                                     onclick="document.getElementById('lightyxgz').style.display='block';document.getElementById('fadeyxgz').style.display='block'"
+                                                                     class="yxgz">游戏规则</a> <a
+                                href="{{ route('canadav25Play') }}" class="ingame">进入游戏</a></div>
                 </div>
                 <div class="d55445 txtScroll-top">
                     <div class="hd btn"><a class="next shang" href="javascript:nextgetopencode();"></a> <a
@@ -91,6 +88,7 @@
                                 <div class="dx FMnum06"></div>
                                 <div class="dx FMnum07"></div>
                                 <div class="dx FMnum05"></div>
+                                <div class="dx FMnum09"></div>
                             </li>
                         </ul>
                     </div>
@@ -104,10 +102,9 @@
                 <div class="notice">
                     <div class="tab-hd" id="tab-hd">
                         <ul>
-                            <li onclick="get_tab_list(1,v,page, '{{ $game_id }}')">投注方案</li>
-                            <li onclick="get_tab_list(2,v,page, '{{ $game_id }}')">往期开奖</li>
-                            <li onclick="get_tab_list(3,v,page, '{{ $game_id }}')">反水申请</li>
-                            <li onclick="get_tab_list(4,v,page, '{{ $game_id }}')">开奖走势</li>
+                            <li onclick="get_tab_list(1,v,page,{{ $game_id }})">投注方案</li>
+                            <li onclick="get_tab_list(2,v,page,{{ $game_id }})">往期开奖</li>
+                            <li onclick="get_tab_list(4,v,page,{{ $game_id }})">开奖走势</li>
                         </ul>
                     </div>
                     <div class="tab-bd">
@@ -126,21 +123,24 @@
                                                                             class="yxgzgbbtn"></a></div>
         <div class="lyxgzcon">
             <p>
-                <br/>【2.0倍场规则】
-                <br/> 　　大小单双：2.0倍（含本金）
-                <br/> 　　组合：小单、大双、4.7倍（含本金）
-                <br/> 　　组合：小双、大单、4.2倍（含本金）
-                <br/> 　　极大极小：10倍（含本金）
-                <br/> 　　数字：10倍（含本金）
-                <br/> 　　1.买小或单，开奖结果为13总下注小于或等于1000：1.6倍（含本金）
-                <br/> 　　2.买大或双，开奖结果为14总下注小于或等于1000：1.6倍（含本金）
-                <br/> 　　3.下注小单开，13中奖了回本（含总注）
-                <br/> 　　4.下注大双开，14中奖了回本（含总注）
-                <br/> 　　下注封顶额度：总注最高100000
-                <br/> 　　大小单双:60000封顶
-                <br/> 　　组合：10000封顶
-                <br/> 　　极大极小：5000封顶
-                <br/> 　　数字：5000封顶
+                <br/>【2.5倍场规则】
+                <br/> 1、买组合（大,小,单,双）：2.5倍（含本金）
+                <br/>2、买组合（小单）：5.0倍（含本金）
+                <br/>3、买极值：（极小，极大）：11.0倍（含本金）
+                <br/>4、买数字：（0-27）：11.0倍（含本金）
+                <br/>5、买小单，开奖结果为13：回本
+                <br/>6、买大双，开奖结果为14：回本
+                <br/>7、买小或单，开奖结果为13，总下注大于1000：1.2倍（含本金）
+                <br/>8、买小或单，开奖结果为13，总下注小于等于1000：2.5倍（含本金）
+                <br/>9、买大或双，开奖结果为14，总下注大于1000：1.2倍（含本金）
+                <br/>10、买大或双，开奖结果为14，总下注小于等于1000：2.5倍（含本金）
+                <br/>11、豹子：50.0倍（含本金）
+                <br/>12、顺子：12.0倍（含本金）
+                <br/>13、对子：3.0倍（含本金）
+                <br/>14、开奖开出对子，顺子，豹子。中单注，组合回本：回本
+                <br/>15、买组合（大单）：5.0倍（含本金）
+                <br/>16、买组合（小双）：5.0倍（含本金）
+                <br/>17、买组合（大双）：5.0倍（含本金）
                 <br/>
                 <font style="color:#ff0000;">（必读公告有详细说明）</font>
                 <br/></p>
@@ -171,6 +171,7 @@
     <div id="fadeyxgz" class="black_overlaybyxgz"></div>
     <!--游戏规则弹窗 end-->
 
+
 @endsection
 
 
@@ -185,7 +186,7 @@
                 "cid": "1",
                 "ac": "3",
                 "value": "9001723",
-                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=7770992&amp;site=qq&amp;menu=yes",
+                "url": "http:\/\/wpa.qq.com\/msgrd?v=3&amp;uin=9001723&amp;site=qq&amp;menu=yes",
                 "img": "",
                 "status": "1",
                 "remark": "",
@@ -197,7 +198,7 @@
                 "name": "\u4ea4\u6d41\u7fa4\u2460",
                 "cid": "1",
                 "ac": "4",
-                "value": "111590831",
+                "value": "591811597",
                 "url": "",
                 "img": "",
                 "status": "1",
@@ -205,7 +206,10 @@
                 "sort": "0"
             }]
         };
-        var appdownload = null;
-        bwmain({{ $game_id }});
+        var appdownload = null
+        var game_id = {{ $game_id }}
+        bwmain({{ $game_id }})
     </script>
+
+
 @endpush

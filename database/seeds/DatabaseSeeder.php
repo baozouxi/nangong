@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             ['name' => \App\Game\Pc28::NAME],
             ['name' => \App\Game\Pc28v25::NAME],
             ['name' => \App\Game\Canada::NAME],
+            ['name' => \App\Game\Canadav25::NAME],
         ];
 
         array_map(function ($game) {
@@ -25,7 +26,6 @@ class DatabaseSeeder extends Seeder
 
         $bank_list = [
             '支付宝',
-            '微信',
             '工商银行',
             '建设银行',
             '招商银行',

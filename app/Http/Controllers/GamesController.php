@@ -30,6 +30,47 @@ class GamesController extends Controller
     }
 
 
+    public function canadaPlay()
+    {
+        $game = Game::where('name', self::CANADA20)->firstOrFail();
+
+        return view('game.canadaPlay', ['game_id' => $game->id]);
+    }
+
+
+
+    //加拿大2.5倍
+    public function canadav25()
+    {
+        $game = Game::where('name', self::CANADA25)->firstOrFail();
+
+        return view('game.canadav25', ['game_id' => $game->id]);
+    }
+
+
+    public function canadav25Play()
+    {
+        $game = Game::where('name', self::CANADA25)->firstOrFail();
+
+        return view('game.canadav25Play', ['game_id' => $game->id]);
+    }
+
+
+    public function canadav28()
+    {
+        $game = Game::where('name', self::CANADA28)->firstOrFail();
+
+        return view('game.canadav28', ['game_id' => $game->id]);
+    }
+
+    public function canadav28Play()
+    {
+        $game = Game::where('name', self::CANADA28)->firstOrFail();
+
+        return view('game.canadav28Play', ['game_id' => $game->id]);
+    }
+
+
     /**
      * pc28
      * 游戏展示页面
@@ -289,17 +330,13 @@ class GamesController extends Controller
     //开奖结果
     public function getLastCodes(Game $game, int $code_id)
     {
-        $gameModel = $game->load([
-            'openCodes' => function ($query) use ($code_id) {
-                return $query->where('actionNo', $code_id);
-            },
-        ]);
+        $gameModel = $game;
 
         //获取游戏对象
         $game = app()->make(Game\Game::class);
 
 
-        $codes = $gameModel->openCodes->first();
+        $codes =OpenCode::where('game_id',$gameModel->id)->where('actionNo',$code_id)->first();
 
         if ($codes == null) {
             return ['sign' => 'false'];
@@ -374,6 +411,8 @@ class GamesController extends Controller
 
             $remainTime = strtotime("$lastOpen->open_time + 3 minutes 30 seconds") - time();
         }
+
+
 
 
 

@@ -54,12 +54,20 @@
                         class="en">28 game</span></a>
             <div class="ssnav">
                 <div class="h14"></div>
-                <dd><a href="javascript:;" onclick="hbgame();">北京快乐8</a></dd>
+                <dd><a href="{{ route('pc28') }}">2.0倍场</a></dd>
+                <dd><a href=" {{ route('pc28v25') }}">2.5倍场</a></dd>
+            </div>
+        </li>
+        <li><a href="javascript:;"><i class="navicon3"></i><span class="cn">加拿大28</span><span
+                        class="en">28 game</span></a>
+            <div class="ssnav">
+                <div class="h14"></div>
+                <dd><a href="{{ route('canada20') }}">2.0倍场</a></dd>
+                <dd><a href="{{ route('canada25') }}">2.5倍场</a></dd>
+                <dd><a href="{{ route('canada28') }}">2.8倍场</a></dd>
                 {{--<dd><a href="javascript:;" onclick="cakenogame();">加拿大28</a></dd>--}}
             </div>
         </li>
-        <li><a href="javascript:;"><i class="navicon2"></i><span class="cn" style="color:#999">彩票游戏</span><span
-                        class="en" style="color:#999">lottery</span></a></li>
         <li><a href="javascript:;"><i class="navicon2"></i><span class="cn" style="color:#999">香港六合彩</span><span
                         class="en" style="color:#999">games</span></a></li>
         <li><a href="{{ route('account.user') }}"><i class="navicon5"></i><span class="cn">账户管理</span><span class="en">account</span></a>
