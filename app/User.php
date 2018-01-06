@@ -62,4 +62,18 @@ class User extends Authenticatable
     }
 
 
+
+    //用户是否为代理 表为 agents
+    public function agent()
+    {
+        return $this->hasOne('App\Agent');
+    }
+
+
+    //上线 表为 agent_user
+    public function leader()
+    {
+        return $this->belongsToMany('App\Agent');
+    }
+
 }

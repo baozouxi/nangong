@@ -66,6 +66,7 @@ function checkreg(the)
     //data+="&imgcode="+encodeURIComponent($.trim(the.imgcode.value));
     data+="&puid="+encodeURIComponent($.trim(form.find('input[name=puid]').val()));
 	data+="&ast="+encodeURIComponent($.trim(form.find('#ltagent').val()))
+	data+="&agent="+encodeURIComponent($.trim(form.find('input[name=agent]').val()))
     $.ajax({
         type:"post",
         cache:false,

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\Ad;
 use App\Admin;
+use App\Agent;
+use App\AgentMoney;
 use App\Article;
 use App\Bet;
 use App\Capital;
@@ -23,7 +25,7 @@ use Illuminate\Validation\Rule;
 class AdminController extends Controller
 {
 
-    Const PAGE_SIZE  = 10;
+    Const PAGE_SIZE = 10;
 
     public function login()
     {
@@ -42,10 +44,10 @@ class AdminController extends Controller
             'username' => 'required|string|exists:admins',
             'password' => 'required|min:6',
         ], [
-            'username.reqired' => '请输入用户名',
-            'username.exists' => '该用户不存在',
+            'username.reqired'  => '请输入用户名',
+            'username.exists'   => '该用户不存在',
             'password.required' => '请输入密码',
-            'password.min' => '密码格式错误',
+            'password.min'      => '密码格式错误',
         ]);
 
 
@@ -76,6 +78,7 @@ class AdminController extends Controller
     public function users()
     {
         $users = User::with([
+            'agent',
             'capital',
             'cards',
             'bankName',
@@ -106,24 +109,57 @@ class AdminController extends Controller
 
                 $capital = $user->capital;
 
-                $capital->money =  $capital->money + $money;
+
+                $capital->money = $capital->money + $money;
                 $capital->save();
 
                 CapitalLog::create([
-                    'money' => $money,
+                    'money'      => $money,
                     'capital_id' => $capital->id,
-                    'user_id' => $user->id,
-                    'type' => CapitalLog::RECHARGE,
-                    'ok' => 1,
+                    'user_id'    => $user->id,
+                    'type'       => CapitalLog::RECHARGE,
+                    'ok'         => 1,
                 ]);
+
+                //代理
+                $leader = $user->leader;
+
+                if (!$leader->isEmpty()) {
+                    $agent = $leader->first();
+
+                    //是否启用
+                    if ($agent->enable) {
+                        $profit = bcmul($money, $agent->point);
+                        $profit = bcdiv($profit, 100);
+                        $agent->money += $profit;
+                        $agent->save();
+
+                        AgentMoney::create([
+                            'user_id'  => $user->id,
+                            'agent_id' => $agent->id,
+                            'point'    => $agent->point,
+                            'money'    => $money,
+                            'profit'   => $profit,
+                        ]);
+
+                        $leader_user = $agent->user;
+                        //给用户充值
+                        $user_capital = $leader_user->capital;
+                        $user_capital->money += $profit;
+                        $user_capital->save();
+
+                    }
+                }
+
 
                 $result['status'] = 1;
                 $result['money'] = $capital->money;
 
+
             });
 
         } catch (\Throwable $e) {
-            Log::error('充值失败：' . $e->getMessage());
+            Log::error('充值失败：'.$e->getMessage());
         }
 
         return $result;
@@ -152,7 +188,7 @@ class AdminController extends Controller
                 'nullable',
                 Rule::in([0, 1]),
             ],
-            'phone' => [
+            'phone'  => [
                 'nullable',
                 'min:11',
                 'regex:/^1\d{1}\d{1}\d{8}/',
@@ -227,11 +263,11 @@ class AdminController extends Controller
                 $capital->save();
 
                 $user->capitalLogs()->create([
-                    'type' => CapitalLog::WITHDRAW,
-                    'money' => $withdraw->money,
-                    'user_id' => $user->id,
+                    'type'       => CapitalLog::WITHDRAW,
+                    'money'      => $withdraw->money,
+                    'user_id'    => $user->id,
                     'capital_id' => $capital->id,
-                    'ok' => 1,
+                    'ok'         => 1,
                 ]);
 
                 $result['status'] = 1;
@@ -239,7 +275,7 @@ class AdminController extends Controller
 
             });
         } catch (\Throwable $exception) {
-            Log::error('提现失败：' . $exception->getMessage());
+            Log::error('提现失败：'.$exception->getMessage());
         }
 
 
@@ -280,15 +316,17 @@ class AdminController extends Controller
         }
 
 
-        return view('admin.bets', ['bets' => $result, 'game_id' => $game->id, 'bet_obj'=>$bets]);
+        return view('admin.bets',
+            ['bets' => $result, 'game_id' => $game->id, 'bet_obj' => $bets]);
 
     }
 
 
-
     public function userBetsList(User $user)
     {
-        $bets = Bet::where('user_id', $user->id)->with(['game', 'user'])->orderBy('created_at', 'desc')->paginate(self::PAGE_SIZE);
+        $bets = Bet::where('user_id', $user->id)->with(['game', 'user'])
+            ->orderBy('created_at', 'desc')->paginate(self::PAGE_SIZE);
+
         return view('admin.user-bets-list', compact('bets'));
     }
 
@@ -313,7 +351,7 @@ class AdminController extends Controller
 
             $result[$bet->user_id]['money'] += $bet->money;
             $result[$bet->user_id]['profit'] += $bet->profit;
-            $result[$bet->user_id]['codes'] .= $bet->code . ',';
+            $result[$bet->user_id]['codes'] .= $bet->code.',';
             $result[$bet->user_id]['username'] = $bet->user->username;
             $result[$bet->user_id]['actionNo'] = $bet->actionNo;
         }
@@ -342,13 +380,13 @@ class AdminController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|string',
-            'body' => 'required|string',
+            'body'  => 'required|string',
         ]);
 
 
         if (Article::create([
             'title' => $request['title'],
-            'body' => $request['body'],
+            'body'  => $request['body'],
         ])
         ) {
             return redirect(route('admin.articles'));
@@ -408,7 +446,7 @@ class AdminController extends Controller
     public function kefuSubmit(Request $request)
     {
         $this->validate($request, [
-            'way' => 'required|string',
+            'way'  => 'required|string',
             'type' => 'required|in:1,2',
         ]);
 
@@ -427,7 +465,7 @@ class AdminController extends Controller
     public function kefuUpdate(Kefu $kefu, Request $request)
     {
         $this->validate($request, [
-            'way' => 'required|string',
+            'way'  => 'required|string',
             'type' => 'required|in:1,2',
         ]);
 
@@ -470,10 +508,10 @@ class AdminController extends Controller
     public function accountSubmit(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|',
-            'tips' => 'nullable|string',
+            'name'   => 'required|string|',
+            'tips'   => 'nullable|string',
             'number' => 'required|string',
-            'way' => 'required|string',
+            'way'    => 'required|string',
         ]);
 
         if (Account::create($request->all())) {
@@ -492,10 +530,10 @@ class AdminController extends Controller
     public function accountUpdateSubmit(Account $account, Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|',
-            'tips' => 'nullable|string',
+            'name'   => 'required|string|',
+            'tips'   => 'nullable|string',
             'number' => 'required|string',
-            'way' => 'required|string',
+            'way'    => 'required|string',
         ]);
 
         if ($account->update($request->all())) {
@@ -547,7 +585,7 @@ class AdminController extends Controller
     public function changaPass(Request $request)
     {
         $this->validate($request, [
-            'oldpass' => 'required|string|min:6',
+            'oldpass'  => 'required|string|min:6',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
@@ -564,6 +602,7 @@ class AdminController extends Controller
 
         if (!Hash::check($request['oldpass'], $admin->password)) {
             $result['info'] = '原密码错误';
+
             return $result;
         }
 
@@ -573,6 +612,7 @@ class AdminController extends Controller
         if (!$admin->update($request->all())) {
             $result['info'] = '修改失败，请联系管理员';
             Log::error('管理员密码修改失败：');
+
             return $result;
 
         }
@@ -582,6 +622,41 @@ class AdminController extends Controller
 
         return $result;
 
+    }
+
+
+    public function agents()
+    {
+        $agents = Agent::with(['user'])->withCount('followers')->get();
+
+
+        return view('admin.agents', compact('agents'));
+    }
+
+    public function agentsStore(User $user, Request $request)
+    {
+        $this->validate($request, [
+            'point' => 'required|numeric|min:0',
+            'tips'  => 'nullable|string',
+        ]);
+
+
+        if (Agent::where('user_id', $user->id)->first() != null) {
+            return ['status' => 'error', 'info' => '该用户已经为代理'];
+        }
+
+
+        if (Agent::create([
+            'user_id' => $user->id,
+            'point'   => $request['point'],
+            'tips'    => $request['tips'],
+        ])
+        ) {
+            return ['status' => 'ok'];
+        }
+
+
+        return ['status' => 'error', 'info' => '创建失败'];
 
 
     }

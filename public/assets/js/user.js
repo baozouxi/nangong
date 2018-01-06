@@ -2,7 +2,11 @@ const RECHARGE_URL = '/admin/users/{user}/capital';
 
 const USER_UPDATE_URL = '/admin/users/{user}';
 
+const AGENT_POST_URL = '/admin/users/{user}/agent';
+
 /**
+ *
+ *
  * 充值函数
  * @param user_id
  * @param money
@@ -41,8 +45,6 @@ function frozen(user_id, obj) {
         obj.text('冻结');
         alert('冻结成功');
     }, 'json');
-
-
 }
 
 
@@ -79,8 +81,29 @@ function updateMoney(user_id, money, obj) {
         obj.text(data.money);
 
     }, 'json');
+}
+
+
+
+function agent(user_id, data, obj)
+{
+    var url =AGENT_POST_URL.replace('{user}', user_id);
+    var _data = {point:data[0], tips:data[1]};
+
+
+    $.post(url, _data, function(data){
+        if (data.status == 'error') {
+            alert(data.info);
+            return;
+        }
+
+        alert('添加成功');
+        obj.remove();
+    }, 'json');
 
 }
+
+
 
 
 $(function () {
@@ -128,6 +151,24 @@ $(function () {
             },
         });
     });
+
+
+    $('.agent').click(function () {
+        var user_id = 0;
+        var _this = $(this);
+        var username = $(this).parents('td').siblings('.username').text();
+        user_id = $(this).attr('data-id');
+        var money_obj = $(this).parents('td').siblings('.money');
+        $('#agent span.username').text(username);
+        $('#agent').modal({
+            relatedTarget: this,
+            onConfirm: function (e) {
+                agent(user_id, e.data, _this);
+            },
+        });
+    });
+
+
 
 
 });

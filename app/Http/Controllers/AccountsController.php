@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Agent;
 use App\Bank;
 use App\BankName;
 use App\Bet;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 
 /**
  * 账户控制器
@@ -171,14 +173,30 @@ class AccountsController extends Controller
     }
 
     //代理中心
-    public function agency()
+    public function agency(Request $request)
     {
+
         $user_id = \Auth::user()->id;
         $login = new Login();
         $lastLogin = $login->lastLogin($user_id);
         $capital = Capital::where('user_id', $user_id)->first();
+        $agent = Agent::where('user_id', $user_id)->withCount('followers')->first();
 
-        return view('account.agency', compact('lastLogin', 'capital'));
+
+//        dd($agent);
+
+        //代理
+        $url = '';
+        $money = 0;
+        $user_count = 0;
+        if ($agent != null) {
+            $user_count = $agent->followers_count;
+            $url =route('register', ['agent'=>$agent->id]);
+            $money = $agent->money;
+        }
+
+
+        return view('account.agency', compact('lastLogin', 'capital', 'url', 'money', 'user_count'));
     }
 
 

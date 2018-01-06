@@ -120,6 +120,10 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
     Route::get('/kefu/create', 'AdminController@kefuCreate')->name('admin.kefuCreate');
     Route::put('/password', 'AdminController@changaPass')->name('admin.changaPass');
 
+
+    Route::get('/agents', 'AdminController@agents')->name('admin.agents'); //代理中心
+    Route::post('/users/{user}/agent', 'AdminController@agentsStore')->name('admin.agentsStore'); //添加代理
+
     Route::get('/users/{user}/bets', 'AdminController@userBetsList')->name('userBetsList');
 
 });

@@ -77,7 +77,7 @@
                         href="{{ route('account.agency') }}">代理中心</a> <a href="{{ route('account.safe') }}">安全中心</a>
             </div>
         </li>
-        <li><a href="#"><i class="navicon6"></i><span class="cn">团队代理</span><span
+        <li><a href="{{ route('account.agency') }}"><i class="navicon6"></i><span class="cn">团队代理</span><span
                         class="en">team</span></a></li>
         <li><a href="#"><i class="navicon7"></i><span class="cn">系统公告</span><span class="en">discount</span></a>
             <div class="ssnav">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Agent;
 use App\Capital;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -56,6 +57,7 @@ class RegisterController extends Controller
             'username' => 'required|string|max:255|unique:users',
             //            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'agent' => 'nullable|numeric|exists:agents,id',
             'phone'    => [
                 'required',
                 'min:11',
@@ -92,9 +94,19 @@ class RegisterController extends Controller
                     'money' => 0.00,
                 ]);
 
-                return $user;
+                if ($data['agent']) {
+                    $agent =  Agent::find($data['agent']);
+                    $agent->followers()->attach([
+                        'user_id' => $user->id,
+                    ]);
+                }
 
+
+                return $user;
             });
+
+
+
 
             return $user;
         } catch (\Exception $exception) {

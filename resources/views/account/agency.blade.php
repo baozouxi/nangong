@@ -19,9 +19,6 @@
 @endpush
 
 
-
-
-
 @section('main')
 
     <div class="banner_hyzx">
@@ -55,12 +52,12 @@
                     <li class="clearfix">
                         <div class="title">玩家人数</div>
                         <i class="dlzhicon"></i>
-                        <div class="text">0 人</div>
+                        <div class="text">{{ $user_count }} 人</div>
                     </li>
                     <li class="clearfix">
                         <div class="title">推广链接</div>
                         <i class="tgljicon"></i>
-                        <div class="text" id="tgurl"></div>
+                        <div class="text" id="tgurl">{{ $url }}</div>
                         <a href="javascript:;" class="fzlj"><span id="d_clip_button"
                                                                   data-clipboard-target="tgurl">复制链接</span></a></li>
                     <li class="clearfix">
@@ -71,7 +68,7 @@
                     <li style="border:none;height:38px;" class="clearfix">
                         <div class="title">累计收入</div>
                         <i class="ljsricon"></i>
-                        <div class="text">¥0.00 元</div>
+                        <div class="text">¥{{ number_format($money , 2) }} 元</div>
                     </li>
                 </div>
             </div>
@@ -81,19 +78,7 @@
     <div class="main">
         <div class="w1000">
             <div class="dlzx_tab" style="border:none;">
-                <div class="notice">
-                    <div class="tab-hd" id="tab-hd">
-                        <ul>
-                            <li onclick="get_myagent_list(1,d,page,'')">PC蛋蛋</li>
-                            <li onclick="get_myagent_list(2,d,page,'')">网站玩家</li>
-                            <!--li  onclick="get_myagent_list(3,d,page,'')">QQ玩家</li-->
-                            <!--li  onclick="get_myagent_list(4,d,page,'')">代理账务</li-->
-                            <!--li  onclick="get_myagent_list(5,d,page,'')">彩票代理</li-->
-                        </ul>
-                    </div>
-                    <div class="tab-bd" id="tab-bd"></div>
-                    <div class="clear"></div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -115,42 +100,7 @@
             get_myagent_list(tsort, d, page, keyWord);
         }
 
-        function get_myagent_list(t, d, page, keyword) {
-            var url, data;
-            tsort = t;
-            url = "/user/profile/get_myagent_list/t/" + t + "/d/" + d + "/page/" + page;
-            if (keyword != '') {
-                url += "/kw/" + encodeURIComponent(keyword);
-            }
-            $("#tab-hd li").removeClass("on");
-            var i = t > 2 ? t - 2 : t - 1;
-            $("#tab-hd li").eq(i).addClass("on");
-            $.ajax({
-                type: "post",
-                cache: false,
-                url: url,
-                datatype: "json",
-                error: function (data) {
-                    $.message({type: "error", content: '网络超时，请刷新页面后重试', time: 3000});
-                },
-                beforeSend: function () {
-                    $("#yx_list").html("<li class='loading'><span>正在加载数据, 请稍等......</span></li>");
-                },
-                success: function (data) {
-                    var count = Math.ceil(data.count / data.pageSize);
-                    $("#tab-bd").html(data.list);
-                    $(".pagination").pager({
-                        pagenumber: data.page,
-                        pagecout: count,
-                        buttonClickCallback: function (page) {
-                            get_myagent_list(t, d, page, keyword);
-                        }
-                    });
 
-                }
-            });
-
-        }
 
         $(function () {
             $(".navlist li a:eq(2)").addClass("current");

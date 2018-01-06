@@ -53,6 +53,10 @@
                             <button type="button" class="yzmbt" id="zphone">发送验证码</button>
                             <div class="tips">请输入手机收到的验证码</div>
                         </li>--}}
+
+
+                        <input type="hidden" name="agent" value="{{ \Illuminate\Support\Facades\Request::has('agent')? \Illuminate\Support\Facades\Request::input('agent')  :  ''}}">
+
                         <li>
                             <input type="password" placeholder="请输入密码" class="c_password" value="" id="mmzh-pass"
                                    name="password">

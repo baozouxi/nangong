@@ -77,6 +77,13 @@
                                                     <span class="am-icon-pencil-square-o"></span>编辑余额
                                                 </button>
 
+                                                @if($user->agent == null)
+
+                                                <button type="button" data-id="{{ $user->id }}"
+                                                        class="am-btn am-btn-default am-btn-xs am-text-secondary agent">
+                                                    <span class="am-icon-pencil-square-o"></span>生成代理
+                                                </button>
+                                                @endif
                                                 @if($user->enable)
 
                                                     <button type="button"
@@ -150,6 +157,20 @@
         </div>
     </div>
 
+    <div class="am-modal am-modal-prompt" tabindex="-1" id="agent">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">提升用户为代理</div>
+            <div class="am-modal-bd">
+                您正在将用户名为：<span class="username" style="color: red;"></span> 的账户提升为代理
+                <br>提成点数(%)： <input type="number" name="point" class="am-modal-prompt-input">
+                <br>备注： <input type="text" name="tips" class="am-modal-prompt-input">
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+            </div>
+        </div>
+    </div>
 
 
     <div class="am-modal am-modal-prompt" tabindex="-1" id="changeMoney">
