@@ -105,7 +105,7 @@
                         <ul>
                             <li onclick="get_tab_list(1,v,page, '{{ $game_id }}')">投注方案</li>
                             <li onclick="get_tab_list(2,v,page, '{{ $game_id }}')">往期开奖</li>
-                            <li onclick="get_tab_list(3,v,page, '{{ $game_id }}')">反水申请</li>
+                            {{--<li onclick="get_tab_list(3,v,page, '{{ $game_id }}')">反水申请</li>--}}
                             <li onclick="get_tab_list(4,v,page, '{{ $game_id }}')">开奖走势</li>
                         </ul>
                     </div>
