@@ -58,8 +58,9 @@
                         <div class="title">推广链接</div>
                         <i class="tgljicon"></i>
                         <div class="text" id="tgurl">{{ $url }}</div>
-                        <a href="javascript:;" class="fzlj"><span id="d_clip_button"
-                                                                  data-clipboard-target="tgurl">复制链接</span></a></li>
+                        {{--<a href="javascript:;" class="fzlj"><span id="d_clip_button"--}}
+                                                                  {{--data-clipboard-target="tgurl">复制链接</span></a>--}}
+                    </li>
                     <li class="clearfix">
                         <div class="title">充值人数</div>
                         <i class="wdxxicon"></i>
