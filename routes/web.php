@@ -122,6 +122,8 @@ Route::group(['middleware'=>'admin.auth', 'prefix'=>'/admin'],function(){
 
 
     Route::get('/agents', 'AdminController@agents')->name('admin.agents'); //代理中心
+    Route::get('/agents/{agent}/edit', 'AdminController@agentsEdit')->name('admin.agentsEdit'); //修改代理中心
+    Route::PUT('/agents/{agent}', 'AdminController@agentsUpdate')->name('admin.agentsUpdate'); //更新代理中心
     Route::post('/users/{user}/agent', 'AdminController@agentsStore')->name('admin.agentsStore'); //添加代理
 
     Route::get('/users/{user}/bets', 'AdminController@userBetsList')->name('userBetsList');

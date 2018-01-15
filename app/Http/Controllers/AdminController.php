@@ -658,6 +658,31 @@ class AdminController extends Controller
 
         return ['status' => 'error', 'info' => '创建失败'];
 
+    }
+
+
+
+    public function agentsEdit(Agent $agent)
+    {
+        return view('admin.agentEdit', ['agent'=>$agent]);
+    }
+
+
+    public function agentsUpdate(Request $request, Agent $agent)
+    {
+        $this->validate($request, [
+            'point' => 'required|numeric|min:0',
+            'tips' => 'nullable|string'
+        ]);
+
+        if($agent->update($request->all())){
+            return redirect(route('admin.agents'));
+        }
+
+        return '修改失败';
+
+
 
     }
+
 }
